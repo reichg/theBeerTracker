@@ -1,0 +1,78 @@
+package gabe.beertracker.theBeerTracker.models;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+public class Beer {
+    @Id
+    @GeneratedValue
+    private int id;
+
+    @NotNull
+    @Size(min=3, max=25)
+    private String name;
+
+    @NotNull
+    private LocalDateTime dateOfCreation;
+
+    @OneToMany
+    @JoinColumn(name ="beer_id")
+    private List<BeerFeedback> beerFeedbacks = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name ="beer_id")
+    private List<BeerDrink> beerDrinks = new ArrayList<>();
+
+    @ManyToMany
+    private List<BeerTag> tags;
+
+    @ManyToMany(mappedBy = "favoriteBeers")
+    private List<User> users;
+
+    @ManyToMany
+    private List<Location> locations;
+
+    public Beer() {
+        this.dateOfCreation = LocalDateTime.now();
+        List<Location> locations = new ArrayList<>();
+        this.locations = locations;
+
+    }
+
+    public Beer(String name, List<BeerTag> tags, List<Location> locations) {
+        this();
+        this.name = name;
+        this.tags = tags;
+        this.locations = locations;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Location> getLocations() {
+        return locations;
+    }
+
+    public Beer(String name, List<BeerTag> tags, Location location) {
+        this();
+       // List<Location> locations = new ArrayList<>();
+        this.locations.add(location);
+        this.name = name;
+        this.tags = tags;
+      //  this.locations = locations;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<BeerTag> getTags() {
+        return tags;
+    }
+}
