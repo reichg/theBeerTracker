@@ -7,38 +7,38 @@
 <body>
 <nav th:replace="fragments :: navigation"></nav>
 <br/>
-
-<form method="POST">
-    <table class="login">
-
+<form method="post">
+    <table>
         <tr>
+            <td>Username</td>
             <td>
-                <p>Username</p>
-            </td>
-            <td>
-                <input name="username" type="text"/>
+                <input name="username"/>
             </td>
         </tr>
-
         <tr>
-            <td>
-                <p>Password</p>
-            </td>
+            <td>Password</td>
             <td>
                 <input name="password" type="password"/>
             </td>
-
+        </tr>
+        <tr>
+            <td>Verify Password</td>
+            <td>
+                <input name="verify" type="password"/>
+            </td>
         </tr>
 
-
     </table>
-    <input type="submit" value="Login"/>
-
-
-
+    <br/>
+    <input type="submit" value="Register"/>
 
 
 </form>
+
+
+
+
+
 
 </body>
 </html>
