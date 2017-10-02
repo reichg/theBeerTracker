@@ -39,4 +39,10 @@ public class BeerTag {
         this.name = name;
         this.beers = beers;
     }
+
+
+    public String getName() {
+        return name;
+    }
+
 }

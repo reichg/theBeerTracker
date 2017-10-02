@@ -68,4 +68,34 @@ public class User {
         this.userName = userName;
 
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+
 }

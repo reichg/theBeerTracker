@@ -75,4 +75,18 @@ public class Beer {
     public List<BeerTag> getTags() {
         return tags;
     }
+
+    @Override
+    public String toString() {
+       StringBuilder rez = new StringBuilder();
+       rez.append(this.name);
+       for(BeerTag tag : tags)
+       {
+           rez.append(" ");
+           rez.append(tag.getName());
+       }
+
+        return rez.toString();
+    }
+
 }
