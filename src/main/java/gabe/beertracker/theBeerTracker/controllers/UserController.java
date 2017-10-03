@@ -30,12 +30,6 @@ public class UserController {
         return "register";
     }
 
-    @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String provessRegister(@ModelAttribute @Valid User newUser, Model model) {
-
-        userDao.save(newUser);
-        return "index";
-    }
 
     @RequestMapping(value = "login")
     public String displayLogin() {
@@ -43,11 +37,11 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping(value = "login")
-    public String processLogin() {
+    /*@RequestMapping(value = "login", method = RequestMethod.POST)
+    public String Login() {
 
         return "index";
-    }
+    }*/
 
     @RequestMapping(value = "home")
     public String home(Model model) {
