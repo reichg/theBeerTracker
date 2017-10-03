@@ -5,6 +5,7 @@ import gabe.beertracker.theBeerTracker.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,11 +25,22 @@ public class UserController {
         return "index";
     }
 
-    @RequestMapping(value = "register")
-    public String Register() {
-
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String dsiplayRegister(Model model) {
+        model.addAttribute("title", "Register");
+        model.addAttribute(new User());
+        //model.addAttribute("categories", categoryDao.findAll());
         return "register";
     }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public String processRegister(@ModelAttribute @Valid User newUser,
+                                  Errors errors, Model model) {
+        userDao.save(newUser);
+        return "redirect:";
+
+    }
+
 
 
     @RequestMapping(value = "login")
@@ -43,13 +55,13 @@ public class UserController {
         return "index";
     }*/
 
-    @RequestMapping(value = "home")
+    /*@RequestMapping(value = "home")
     public String home(Model model) {
 
 
-        model.addAttribute("title", "Hello User" );
+        model.addAttribute("welcome", "Hello: " + userDao.findOne(userName));
         return "home";
     }
-
+*/
 
 }
