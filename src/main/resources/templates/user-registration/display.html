@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<form method="post" style="max-width:600px;" th:object="${user}">
+    <div class="form-group">
+        <lable th:for="name">Username</lable>
+        <input class="form-control" th:field="*{userName}"/>
+        <span th:errors="*{userName}" class="error"></span>
+    </div>
+</form>
+</body>
+</html>
