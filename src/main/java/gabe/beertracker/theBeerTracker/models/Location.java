@@ -38,18 +38,18 @@ public class Location {
     private String postalCode;*/
 
     @NotNull
-    private LocalDateTime dateOfCreation;
+    private transient LocalDateTime dateOfCreation;
 
     @OneToMany
     @JoinColumn(name ="location_id")
-    private List<LocationFeedback> locationFeedbacks = new ArrayList<>();
+    private transient List<LocationFeedback> locationFeedbacks = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name ="location_id")
-    private List<BeerDrink> beerDrinks = new ArrayList<>();
+    private transient List<BeerDrink> beerDrinks = new ArrayList<>();
 
     @ManyToMany(mappedBy = "locations")
-    private List<Beer> beers;
+    private transient List<Beer> beers;
 
     public Location() {
         dateOfCreation = LocalDateTime.now();
@@ -66,5 +66,44 @@ public class Location {
     public Location(String name) {
         this();
         this.name = name;
+    }
+
+    public Location(String name, double latitude, double longtitude) {
+        this();
+        this.name = name;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
+    }
+
+    public LocalDateTime getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public List<LocationFeedback> getLocationFeedbacks() {
+        return locationFeedbacks;
+    }
+
+    public List<BeerDrink> getBeerDrinks() {
+        return beerDrinks;
+    }
+
+    public List<Beer> getBeers() {
+        return beers;
     }
 }
