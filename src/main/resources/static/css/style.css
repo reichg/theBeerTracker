@@ -1,8 +1,12 @@
 body {
-    color: red;
-    padding-top: 50px;
+    color: red; /* temp */
  }
- .starter-template {
-    padding: 40px 15px;
-    text-align: center;
-}
+ .navbar-brand {
+    font-size: 1.8rem;
+ }
+ .navbar-toggler:hover {
+    cursor: pointer;
+ }
+ .container {
+    padding-top: 80px;
+ }

@@ -2,19 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
     <meta charset="UTF-8"/>
-    <title>My Cheeses</title>
-
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />-->
-    <!--<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <title>Title</title>
 
 </head>
 <body>
 
-<nav th:fragment="navigation">
-    <a href="/home">Home</a> |
-    <a href="/register">Register</a> |
-    <a href="/login">Login</a>
-</nav>
+    <nav th:fragment="navigation" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="/">theBeerTracker</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-link"><a href="/login">Login</a></li>
+                <li class="nav-link"><a href="/register">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<!--<nav th:fragment="navigation">-->
+    <!--<a href="/home">Home</a> |-->
+    <!--<a href="/register">Register</a> |-->
+    <!--<a href="/login">Login</a>-->
+<!--</nav>-->
 
 </body>
 </html>
