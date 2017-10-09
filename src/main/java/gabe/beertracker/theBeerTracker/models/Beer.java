@@ -37,6 +37,10 @@ public class Beer {
     @ManyToMany
     private List<Location> locations;
 
+    private String description;
+
+    private float abv; //Alcohol By Volume
+
     public Beer() {
         this.dateOfCreation = LocalDateTime.now();
         List<Location> locations = new ArrayList<>();
@@ -89,4 +93,19 @@ public class Beer {
         return rez.toString();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getAbv() {
+        return abv;
+    }
+
+    public void setAbv(float abv) {
+        this.abv = abv;
+    }
 }
