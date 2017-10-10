@@ -167,4 +167,14 @@ public class CsvDataLoader {
         }
         return false;
     }
+    public String trimString(String mystring){
+        if ( mystring!= null){
+            if (mystring.length()>255)
+                return mystring.substring(0, Math.min(mystring.length(), 255));
+            else return mystring;
+        }
+            return null;
+
+    }
+
 }

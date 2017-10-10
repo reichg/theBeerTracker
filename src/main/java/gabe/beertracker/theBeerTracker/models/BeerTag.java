@@ -18,7 +18,7 @@ public class BeerTag {
     private int id;
 
     @NotNull
-    @Size(min = 3, max = 45)
+   // @Size(min = 3, max = 45)
     private String name;
 
     @NotNull

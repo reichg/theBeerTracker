@@ -25,13 +25,6 @@ import static java.time.Month.APRIL;
 @RequestMapping(value = "")
 public class TestController {
 
-/*
-    @Controller
-    @ResponseBody
-    public String index(){
-        return "Test!";
-
-    } */
     @Autowired
     private BeerDao beerDao;
     @Autowired
@@ -119,8 +112,10 @@ public class TestController {
 
     private Location addNewBrewery(String breweryId){
         String breweryName = findByColumnAndValue("id", breweryId, "name", breweries);
-        double latitude = parseDouble(findByColumnAndValue("brewery_id", breweryId, "latitude", geo));
-        double longitude = parseDouble(findByColumnAndValue("brewery_id", breweryId, "longitude", geo));
+        double latitude = 0;
+        double longitude =0;
+        if (findByColumnAndValue("brewery_id", breweryId, "latitude", geo)!="") {latitude = parseDouble(findByColumnAndValue("brewery_id", breweryId, "latitude", geo));}
+        if (findByColumnAndValue("brewery_id", breweryId, "longitude", geo)!="") longitude = parseDouble(findByColumnAndValue("brewery_id", breweryId, "longitude", geo));
         Iterable<Location> currentLocs = locationDao.findAll();
         for (Location currentLoc: currentLocs)
         {
@@ -128,6 +123,7 @@ public class TestController {
                 return currentLoc;
             }
         }
+        CsvDataLoader loader = new CsvDataLoader();
         Location aLocn = new Location(breweryName, latitude, longitude);
         aLocn.setAdministrativeAreaLevel1(findByColumnAndValue("id", breweryId, "state", breweries));
         aLocn.setAdministrativeAreaLevel2(findByColumnAndValue("id", breweryId, "name", breweries));
@@ -137,10 +133,22 @@ public class TestController {
         aLocn.setCountry(findByColumnAndValue("id", breweryId, "country", breweries));
         aLocn.setPhone(findByColumnAndValue("id", breweryId, "phone", breweries));
         aLocn.setWebSite(findByColumnAndValue("id", breweryId, "website", breweries));
-        aLocn.setDescription(findByColumnAndValue("id", breweryId, "descript", breweries));
+        aLocn.setDescription(loader.trimString(findByColumnAndValue("id", breweryId, "descript", breweries)));
         locationDao.save(aLocn);
         return aLocn;
     }
+
+    private BeerTag addNewTag (String name) {
+        Iterable<BeerTag> tags = beerTagDao.findAll();
+
+        for (BeerTag tag : tags) {
+            if (tag.getName().equalsIgnoreCase(name))
+                return tag;
+        }
+        BeerTag newTag = new BeerTag(name);
+        return newTag;
+    }
+
 
     private ArrayList<BeerTag> addNewCatAndStyle(String catId, String styleId){
             ArrayList <BeerTag> tags = new ArrayList<>();
@@ -159,8 +167,32 @@ public class TestController {
                     tagWords.add(styleWord);
                 }
 
-            Iterable<BeerTag> currentTags = beerTagDao.findAll();
-            //Change to Array
+        //    Iterable<BeerTag> begTags = beerTagDao.findAll();
+       //     ArrayList<String> curTags = new ArrayList<>(); //a map of DB
+            for(String tagWord : tagWords){
+                tags.add(addNewTag(tagWord));
+            }
+
+
+       /*     for(String tagWord : tagWords){
+                int cycleNb = 0;
+                boolean myflag = true;
+                while (cycleNb < curTags.size()){
+                    if(curTags.get(cycleNb).equalsIgnoreCase(tagWord)){
+                        myflag = false;
+                     //   tags.add(newTag)
+                        break;
+                    }
+                    cycleNb ++;
+                }
+                BeerTag newTag = new BeerTag(tagWord);
+                tags.add(newTag);
+                if (myflag){
+                    curTags.add(tagWord);
+                    beerTagDao.save(newTag);
+                }
+            }*/
+/*
             for(String tagWord : tagWords){
                 boolean myflag = true;
                 for(BeerTag currentTag: currentTags){
@@ -176,7 +208,8 @@ public class TestController {
 
                     }
                 }
-            }
+            }*/
+
         return tags;
     }
 
@@ -235,6 +268,7 @@ public class TestController {
             String beerCat = row.get("cat_id");
             String styleId = row.get("style_id");
             String abv = row.get("abv");
+            //String beerDesc = loader.trimString(row.get("descript"));
             String beerDesc = row.get("descript");
             if (isBeerNameUniq(beerName)) {
                 if (findByColumnAndValue("id", breweryId, "state", breweries).equalsIgnoreCase("washington")) { //only our state
