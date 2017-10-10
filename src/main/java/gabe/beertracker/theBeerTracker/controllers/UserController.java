@@ -6,14 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 
 @Controller
+@SessionAttributes("userName")
 public class UserController {
 
     @Autowired
@@ -29,6 +30,7 @@ public class UserController {
     public String dsiplayRegister(Model model) {
         model.addAttribute("title", "Register");
         model.addAttribute(new User());
+
         //model.addAttribute("categories", categoryDao.findAll());
         return "register";
     }
@@ -36,32 +38,22 @@ public class UserController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute @Valid User newUser,
                                   Errors errors, Model model) {
-        userDao.save(newUser);
-        return "redirect:";
+        if (errors.hasErrors()) {
+            return "register";
+        }
 
+
+
+            userDao.save(newUser);
+            return "redirect:/login";
+        }
+
+    @RequestMapping(value = "userhome", method = RequestMethod.GET)
+    public String displayUserHome() {
+
+
+        return "userhome";
     }
 
-
-
-    @RequestMapping(value = "login")
-    public String displayLogin() {
-
-        return "login";
-    }
-
-    /*@RequestMapping(value = "login", method = RequestMethod.POST)
-    public String Login() {
-
-        return "index";
-    }*/
-
-    /*@RequestMapping(value = "home")
-    public String home(Model model) {
-
-
-        model.addAttribute("welcome", "Hello: " + userDao.findOne(userName));
-        return "home";
-    }
-*/
 
 }

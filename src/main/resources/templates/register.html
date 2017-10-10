@@ -13,35 +13,7 @@
         <nav th:replace="fragments :: navigation"></nav>
         <br/>
         <div class="container">
-            <!--
-            <form method="post">
-                <table>
-                    <tr>
-                        <td>Username</td>
-                        <td>
-                            <input name="username"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td>
-                            <input name="password" type="password"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Verify Password</td>
-                        <td>
-                            <input name="verify" type="password"/>
-                        </td>
-                    </tr>
 
-                </table>
-                <br/>
-                <input type="submit" value="Register"/>
-
-
-            </form>
-            -->
 
             <form method="post" style="max-width:600px;" th:object="${user}">
                 <div class="form-group">
@@ -54,6 +26,11 @@
                     <input class="form-control" th:field="*{hash}" />
                     <span th:errors="*{hash}" class="error"></span>
                 </div>
+                <!--<div class="form-group">
+                    <label th:for="matchHash">Verify Password</label>
+                    <input class="form-control" th:field="*{matchHash}" />
+                    <span th:errors="*{matchHash}" class="error"></span>
+                </div>-->
 
 
                 <input type="submit" value="Register" />

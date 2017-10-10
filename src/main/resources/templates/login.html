@@ -13,31 +13,15 @@
         <br/>
 
         <div class="container">
-            <form method="POST">
-                <table class="login">
+            <p th:text="${errorMessage}" class="error"></p>
+            <form method="post" style="max-width:600px;">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="userName"/>
 
-                    <tr>
-                        <td>
-                            <p>Username</p>
-                        </td>
-                        <td>
-                            <input name="username" type="text"/>
-                        </td>
-                    </tr>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="password"/>
 
-                    <tr>
-                        <td>
-                            <p>Password</p>
-                        </td>
-                        <td>
-                            <input name="password" type="password"/>
-                        </td>
-
-                    </tr>
-
-
-                </table>
-                <input type="submit" value="Login"/>
+                <input type="submit" value="Login" />
             </form>
 
         </div><!--End container-->
