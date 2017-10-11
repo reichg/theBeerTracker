@@ -17,9 +17,10 @@
 
             <form method="post" style="max-width:600px;" th:object="${user}">
                 <div class="form-group">
-                    <label th:for="userName">Name</label>
+                    <label th:for="userName">Username</label>
                     <input class="form-control" th:field="*{userName}" />
                     <span th:errors="*{userName}" class="error"></span>
+                    <span th:text="${existingUsername}" class="error"></span>
                 </div>
                 <div class="form-group">
                     <label th:for="hash">Password</label>
