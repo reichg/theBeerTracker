@@ -13,13 +13,15 @@
         <br/>
 
         <div class="container">
-            <p th:text="${errorMessage}" class="error"></p>
+
             <form method="post" style="max-width:600px;">
                 <label><b>Username</b></label>
                 <input type="text" placeholder="Enter Username" name="userName"/>
+                <p th:text="${unameError}" class="error"></p>
 
                 <label><b>Password</b></label>
                 <input type="password" placeholder="Enter Password" name="password"/>
+                <p th:text="${pwdError}" class="error"></p>
 
                 <input type="submit" value="Login" />
             </form>
