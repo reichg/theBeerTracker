@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import static java.lang.Math.*;
 
 @Entity
 public class Location {
@@ -81,6 +82,28 @@ public class Location {
         this.longitude = longitude;
     }
 
+    public Double getDistanceKm(Location point){
+        double lon2 = toRadians(this.getLongitude());
+        double lon1 = toRadians(point.getLongitude());
+        double lat1 = toRadians(this.getLatitude());
+        double lat2 = toRadians(point.getLatitude());
+        double dlon= lon2 - lon1;
+        double dlat= lat2 - lat1;
+        double a = pow(sin(dlat/2),2) + cos(lat1) * cos(lat2) * pow(sin(dlon/2),2);
+        double c = 2 * atan2(sqrt(a),sqrt(1-a));
+        double minLatpoint = min(abs(this.getLatitude()), abs(point.getLatitude()));
+        double maxLatpoint = max(abs(this.getLatitude()), abs(point.getLatitude()));
+        double midlepoint = (minLatpoint + maxLatpoint)/2;
+        //double r = 6371 ;//  6,353 km to 6,384
+        double r =  (90 - midlepoint) * 31/90 + 6353;
+        return r*c;
+    }
+
+    public Double getDistanceMi(Location point){
+        return this.getDistanceKm( point)/1.60934;
+    }
+
+
     public LocalDateTime getDateOfCreation() {
         return dateOfCreation;
     }
@@ -91,6 +114,10 @@ public class Location {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getLatitude() {

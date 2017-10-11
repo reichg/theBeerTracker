@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import static gabe.beertracker.theBeerTracker.models.data.dataTools.DataTools.filterLocationsByDistanceWithDistance;
 
 
 @Controller
@@ -38,7 +39,7 @@ public class TestController2 {
     private  ArrayList<HashMap<String, String>> geo;
     private  ArrayList<HashMap<String, String>> categories;
     private  ArrayList<HashMap<String, String>> styles;
-    private DataTools loader = new DataTools();
+    //private DataTools loader = new DataTools();
 
     @RequestMapping(value = "test2")
 
@@ -74,6 +75,17 @@ public class TestController2 {
 
         return "test/index2";
     }
+    @RequestMapping(value = "test/map2")
+    public String distance(Model model){
+        int radius = 50; //radius of search
+        Location currentLoc = new Location("Space Needle", 47.6205, -122.3493); //Space Needle
+        Iterable <Location> dbLocations = locationDao.findAll();
+        model.addAttribute("locations", filterLocationsByDistanceWithDistance(dbLocations, currentLoc, 50 ));
+       // model.addAttribute("distance", loc1.getDistanceMi(loc2));
+        return  "test/map2";
+    }
+
+
 
     @RequestMapping(value = "test/map")
     public String map(Model model){

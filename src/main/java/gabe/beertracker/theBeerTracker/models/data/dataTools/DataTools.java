@@ -5,12 +5,11 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.*;
 
-import gabe.beertracker.theBeerTracker.models.BeerTag;
-import gabe.beertracker.theBeerTracker.models.data.BeerTagDao;
+import gabe.beertracker.theBeerTracker.models.Location;
+import gabe.beertracker.theBeerTracker.models.LocationAndDistance;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class DataTools {
 
@@ -232,6 +231,26 @@ public class DataTools {
                 attempt++;
             }
         }
+        return rez;
+    }
+    public static ArrayList<Location> filterLocationsByDistance(Iterable<Location> allLoc, Location point, double distance){
+        ArrayList<Location> rez = new ArrayList<>();
+        for (Location curLoc : allLoc){
+            if (curLoc.getDistanceMi(point) <= distance)
+                rez.add(curLoc);
+        }
+        return rez;
+    }
+
+    public static ArrayList<LocationAndDistance> filterLocationsByDistanceWithDistance(Iterable<Location> allLoc, Location point, double distance){
+        ArrayList<LocationAndDistance> rez = new ArrayList<>();
+    //    LocationAndDistance loc = new LocationAndDistance(point, distance);
+        for (Location curLoc : allLoc){
+            if (curLoc.getDistanceMi(point) <= distance) {
+                    LocationAndDistance loc = new LocationAndDistance(curLoc, curLoc.getDistanceMi(point));
+                    rez.add(loc);
+                }
+            }
         return rez;
     }
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+
+
+
+<ul th:each="location : ${locations}">
+    <li th:text="${location.name}"></li>
+    <li th:text="${location.administrativeAreaLevel2}"></li>
+    <!--<li th:text="${locality}"></li>-->
+    <li th:text="${location.streetNumber}"></li>
+    <li th:text="${location.phone}"></li>
+    <li th:text="${location.webSite}"></li>
+    <li >distance: </li>
+    <li th:text="${location.distance}"></li>
+
+
+
+
+
+
+</ul>
+
+                <!--<p th:text="${distance}"> tag </p>-->
+
+
+
+
+
+
+
+
+</body>
+</html>
