@@ -35,4 +35,36 @@ public class BeerDrink {
         this.user = user;
         this.location = location;
     }
+
+    public LocalDateTime getDateOfDrinking() {
+        return dateOfDrinking;
+    }
+
+    public void setDateOfDrinking(LocalDateTime dateOfDrinking) {
+        this.dateOfDrinking = dateOfDrinking;
+    }
+
+    public Beer getBeer() {
+        return beer;
+    }
+
+    public void setBeer(Beer beer) {
+        this.beer = beer;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }

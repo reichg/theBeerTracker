@@ -192,4 +192,12 @@ public class Location {
     public void setWebSite(String webSite) {
         this.webSite = webSite;
     }
+
+    public void setBeerDrinks(List<BeerDrink> beerDrinks) {
+        this.beerDrinks = beerDrinks;
+    }
+
+    public void setBeers(List<Beer> beers) {
+        this.beers = beers;
+    }
 }

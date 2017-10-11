@@ -12,7 +12,7 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class CsvDataLoader {
+public class DataTools {
 
     private static String DATA_FILE_BEER = "resources/beers2.csv";
     private static String DATA_FILE_BREWERIES = "resources/breweries2.csv";
@@ -140,7 +140,7 @@ public class CsvDataLoader {
     }
 
     //Splits any text into words
-    public ArrayList<String> splitString(String text) {
+    public static ArrayList<String> splitString(String text) {
         ArrayList<String> arrayList = new ArrayList<String>(Arrays.asList(text.split("[^a-zA-Z]+")));
         return arrayList;
     }
@@ -158,7 +158,7 @@ public class CsvDataLoader {
         return list;
     }
 //Checks given string  in an arraylist
-    public boolean containsString (ArrayList<String> myArL, String value){
+    public static boolean containsString (ArrayList<String> myArL, String value){
        for (String record : myArL){
             if (value.equalsIgnoreCase(record))
             {
@@ -167,14 +167,71 @@ public class CsvDataLoader {
         }
         return false;
     }
-    public String trimString(String mystring){
+    public static String trimString(String mystring, int length){
         if ( mystring!= null){
-            if (mystring.length()>255)
-                return mystring.substring(0, Math.min(mystring.length(), 255));
+            if (mystring.length()>length)
+                return mystring.substring(0, Math.min(mystring.length(), length));
             else return mystring;
         }
             return null;
 
     }
+    /**
+     * A filter for CsvToDbController
+     * wa -- only Washington
+     * all -- several additional states
+     */
+    public static boolean isGoodState(String state, String choise ){
+        if (choise == "wa"){
+            if (state.equalsIgnoreCase("washington"))
+            {return true;}
+        }
+        if (choise == "all"){
+            if (state.equalsIgnoreCase("washington")||state.equalsIgnoreCase("oregon")||state.equalsIgnoreCase("idaho")||
+        state.equalsIgnoreCase("california") || state.equalsIgnoreCase("montana") || state.equalsIgnoreCase("British Columbia")
+                || state.equalsIgnoreCase("nevada")    )
+            {return true;}
+        }
+           if (state.equalsIgnoreCase("washington"))
+        {return true;}
+        return false;
+    }
 
+
+
+    public static boolean searchStringIC(String myString,String value)
+    {
+        int max_iter = myString.length()-value.length();
+        if (max_iter>=0)
+        {
+            for (int i = 0;i <= max_iter;i++)
+            {
+                if (value.equalsIgnoreCase(myString.substring(i,i+value.length())))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //It searches a value in a given column and returns a value from lcolumn in the same row
+    public static String findByColumnAndValue(String column, String value, String lcolumn, ArrayList<HashMap<String, String>> data, int attempts) {
+
+        String rez = "";
+        int attempt =1;
+        for (HashMap<String, String> row : data) {
+
+            String aValue = row.get(column);
+
+            if (searchStringIC(aValue,value))
+            {
+                if (attempt >= attempts)
+                    return row.get(lcolumn);
+                rez = row.get(lcolumn);
+                attempt++;
+            }
+        }
+        return rez;
+    }
 }

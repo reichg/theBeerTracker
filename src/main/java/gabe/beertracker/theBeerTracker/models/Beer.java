@@ -39,7 +39,7 @@ public class Beer {
 
     private String description;
 
-    private float abv; //Alcohol By Volume
+    private String abv; //Alcohol By Volume
 
     public Beer() {
         this.dateOfCreation = LocalDateTime.now();
@@ -101,11 +101,11 @@ public class Beer {
         this.description = description;
     }
 
-    public float getAbv() {
+    public String getAbv() {
         return abv;
     }
 
-    public void setAbv(float abv) {
+    public void setAbv(String abv) {
         this.abv = abv;
     }
 }
