@@ -9,20 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
 @Controller
-@RequestMapping(value = "test")
-public class TestController {
+@RequestMapping(value = "")
+public class TestDataController {
 
-/*
-    @Controller
-    @ResponseBody
-    public String index(){
-        return "Test!";
-
-    } */
     @Autowired
     private BeerDao beerDao;
     @Autowired
@@ -38,18 +32,23 @@ public class TestController {
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "")
-  //  @ResponseBody
-    public String index
-     //       ()
-           (Model model)
-    {
+    private ArrayList<HashMap<String, String>> beers;
+    private ArrayList<HashMap<String, String>> breweries;
+    private ArrayList<HashMap<String, String>> geo;
+    private ArrayList<HashMap<String, String>> categories;
+    private ArrayList<HashMap<String, String>> styles;
 
-        BeerTag newBeerTag1 = new BeerTag("tag1 light");
+    @RequestMapping(value = "test")
+    //  @ResponseBody
+    public String index
+        //       ()
+    (Model model) {
+
+       BeerTag newBeerTag1 = new BeerTag("tag1 light");
         beerTagDao.save(newBeerTag1);
         BeerTag newBeerTag2 = new BeerTag("tag2 dark");
         beerTagDao.save(newBeerTag2);
-        Location newLocation = new Location("location1");
+        Location newLocation = new Location("location1", -25.363, 131.044);
         locationDao.save(newLocation);
         List<BeerTag> listBeerTags = new ArrayList<>();
         listBeerTags.add(newBeerTag1);
@@ -66,11 +65,8 @@ public class TestController {
         beerDrinkDao.save(newBeerDrink);
         model.addAttribute("beers", beerDao.findAll());
 
-
-
+        model.addAttribute("beers", beerDao.findAll());
 
         return "test/index";
     }
-
-
 }

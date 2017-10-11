@@ -97,5 +97,35 @@ public class User {
         this.userName = userName;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public LocalDateTime getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<BeerDrink> getBeerDrinks() {
+        return beerDrinks;
+    }
+
+    public void setBeerDrinks(List<BeerDrink> beerDrinks) {
+        this.beerDrinks = beerDrinks;
+    }
+
+    public List<Beer> getFavoriteBeers() {
+        return favoriteBeers;
+    }
+
+    public void setFavoriteBeers(List<Beer> favoriteBeers) {
+        this.favoriteBeers = favoriteBeers;
+    }
 }

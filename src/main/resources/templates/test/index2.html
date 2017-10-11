@@ -10,9 +10,9 @@
 
 
     <tr th:each="beer : ${beers}">
-        <td th:text="${beer}"></td>
-        <td th:each="tag : ${beer.tags}"></td>
-        <td th:text="${tag}"></td>
+        <td th:text="${beer.name}"></td>
+            <td th:each="tag : ${beer.tags}"></td>
+                <td th:text="${tag?.name}"> tag </td>
     </tr>
 
 </table>
@@ -20,8 +20,8 @@
 <table class="table">
 
 
-    <tr th:each="tag : ${tags}">
-        <td th:text="${tag.name}"></td>
+    <tr th:each="tag1 : ${tags}">
+        <td th:text="${tag1.name}"></td>
 
 
     </tr>
