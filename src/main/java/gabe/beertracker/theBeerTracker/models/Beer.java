@@ -14,7 +14,7 @@ public class Beer {
     private int id;
 
     @NotNull
-    @Size(min=3, max=25)
+    //@Size(min=3, max=25)
     private String name;
 
     @NotNull
@@ -28,7 +28,7 @@ public class Beer {
     @JoinColumn(name ="beer_id")
     private List<BeerDrink> beerDrinks = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(cascade=CascadeType.ALL)
     private List<BeerTag> tags;
 
     @ManyToMany(mappedBy = "favoriteBeers")
@@ -36,6 +36,10 @@ public class Beer {
 
     @ManyToMany
     private List<Location> locations;
+
+    private String description;
+
+    private String abv; //Alcohol By Volume
 
     public Beer() {
         this.dateOfCreation = LocalDateTime.now();
@@ -89,4 +93,19 @@ public class Beer {
         return rez.toString();
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAbv() {
+        return abv;
+    }
+
+    public void setAbv(String abv) {
+        this.abv = abv;
+    }
 }
