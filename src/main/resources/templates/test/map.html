@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/mvc">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> </meta>
+    <meta charset="utf-8"> </meta>
+    <title>Simple markers</title>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<!--<input type="hidden" id="jsonMarkers" value='${jsonMarkers}'/>-->
+<!--<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}" ></script>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script>
+    $(document).ready(function() {
+
+        var list = ["List A","List B","List C","List D","List E"];
+        $.each(list, function( index, value ) {
+            alert( index + ": " + value );
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+
+        var list = ${location};
+        $.each(list, function( index, value ) {
+            alert( index + ": " + value );
+        });
+
+    });
+</script>
+
+<!--<script type="text/javascript" th:src="@{/js/test_map.js}"></script>
+<script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap">
+</script>-->
+</body>
+</html>
