@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser,
+    public String processRegister(@ModelAttribute @Valid User newUser, @RequestParam String userName,
                                   Errors errors, Model model) {
 
         Iterable<User> allUsers = userDao.findAll();
@@ -62,14 +62,15 @@ public class UserController {
         else{
             if (!userNameExists) {
                 if (!passwordExists) {
-                    model.addAttribute("registerSuccess", "You have successfully registered, please login");
+                    model.addAttribute("userName", userName);
+                    //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                     userDao.save(newUser);
-                    return "redirect:/login";
+                    return "redirect:/userhome";
                 }
-
-                model.addAttribute("registerSuccess", "You have successfully registered, please login");
+                model.addAttribute("userName", userName);
+                //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                 userDao.save(newUser);
-                return "redirect:/login";
+                return "redirect:/userhome";
             }
 
             model.addAttribute("existingUsername", "Great minds think alike, username already exists");
