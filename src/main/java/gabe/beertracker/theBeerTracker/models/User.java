@@ -62,12 +62,14 @@ public class User {
        // this.dateOfBirth = LocalDateTime.now();
     }
 
+
     public User(String hash, String userName) {
         this();
         this.hash = hash;
         this.userName = userName;
 
     }
+
 
     public int getId() {
         return id;
@@ -97,5 +99,7 @@ public class User {
         this.userName = userName;
     }
 
-
+    public List<BeerDrink> getBeerDrinks() {
+        return beerDrinks;
+    }
 }
