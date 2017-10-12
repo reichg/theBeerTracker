@@ -8,7 +8,7 @@ body {
     cursor: pointer;
 }
 .nav-round-links {
-    border: 1px solid #fff;
+    /* border: 1px solid #fff; */
     border-radius: 30px;
     padding: 10px 30px;
     margin-left: .65rem;
@@ -19,6 +19,15 @@ body {
 }
 .nav-round-links:hover {
     background-color: rgba(255,255,255,0.1);
+}
+.parallax {
+        background-image: url("/img/beer-assortment.jpeg");
+        opacity: 0.4;
+        min-height: 600px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
 }
 .container {
     padding-top: 80px;
