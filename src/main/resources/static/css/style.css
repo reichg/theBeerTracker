@@ -4,6 +4,9 @@ body {
 .navbar-brand {
     font-size: 1.8rem;
 }
+.navbar-brand > img {
+    width: 50px;
+}
 .navbar-toggler:hover {
     cursor: pointer;
 }
