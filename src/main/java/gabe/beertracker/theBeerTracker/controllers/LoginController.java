@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @SessionAttributes("userName")
@@ -26,7 +25,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLogin(Model model, @RequestParam String userName, @RequestParam String password) {
+    public String processLogin(Model model, @ModelAttribute User theUser, @RequestParam String userName, @RequestParam String password) {
 
         Iterable<User> allUsers = userDao.findAll();
         boolean userNameSuccess = false;
@@ -50,7 +49,9 @@ public class LoginController {
                 return "login";
             }
             model.addAttribute("userName", userName);
-            return "redirect:/userhome";
+            User currentUser = userDao.findOne(theUser.getId());
+            return "redirect:/userhome/" +currentUser.getId();
+            //return "redirect:/userhome";
         }
         model.addAttribute("unameError", "That username does not exist! Please try again!");
         return "login";
