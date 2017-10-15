@@ -1,5 +1,10 @@
+html,
 body {
-
+    height: 100%;
+}
+#page-wrapper {
+    position: relative;
+    min-height: 100%;
 }
 .bottle-background {
     background-image: url("/img/beer-assortment.jpeg");
@@ -69,12 +74,11 @@ body {
 
 }
 .footer .navbar-nav .nav-item {
-
+    width: 12em;
 }
 .footer .navbar-nav .nav-item .nav-link {
-    padding-left: 1rem;
-    padding-right: 1rem;
     color: rgba(255,255,255,.5);
+    font-size: 0.85em;
 }
 .footer .navbar-nav .nav-item .nav-link:hover {
     color: rgba(255,255,255,1);
@@ -110,4 +114,18 @@ body {
 }
 .form-control {
     color: #222629;
+}
+
+@media only screen and (max-width: 767px) {
+    .navbar-brand > img {
+        width: 35px;
+    }
+    .footer .navbar-nav .nav-item {
+        text-align: center;
+        width: 100%;
+    }
+    .footer .navbar-nav .nav-item .nav-link {
+        font-size: 0.85em;
+        line-height: 0;
+    }
 }
