@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -108,4 +109,49 @@ public class Beer {
     public void setAbv(String abv) {
         this.abv = abv;
     }
+
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateOfCreation(LocalDateTime dateOfCreation) {
+        this.dateOfCreation = dateOfCreation;
+    }
+
+    public void setBeerFeedbacks(List<BeerFeedback> beerFeedbacks) {
+        this.beerFeedbacks = beerFeedbacks;
+    }
+
+    public void setBeerDrinks(List<BeerDrink> beerDrinks) {
+        this.beerDrinks = beerDrinks;
+    }
+
+    public void setTags(List<BeerTag> tags) {
+        this.tags = tags;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    public LocalDateTime getDateOfCreation() {
+        return dateOfCreation;
+    }
+
+    public List<BeerFeedback> getBeerFeedbacks() {
+        return beerFeedbacks;
+    }
+
+    public List<BeerDrink> getBeerDrinks() {
+        return beerDrinks;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.springframework.org/schema/mvc">
+<!--<html xmlns:th="http://www.springframework.org/schema/mvc">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> </meta>
     <meta charset="utf-8"> </meta>
@@ -19,35 +20,31 @@
     </style>
 </head>
 <body>
+<input type="hidden" th:value="${location}" id="location" />
 <div id="map"></div>
-<!--<input type="hidden" id="jsonMarkers" value='${jsonMarkers}'/>-->
-<!--<script th:src="@{/webjars/jquery/3.2.1/jquery.min.js}" ></script>-->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-<script type="text/javascript" src="jquery-3.2.1.js"></script>
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 <script>
-    $(document).ready(function() {
-
-        var list = ["List A","List B","List C","List D","List E"];
-        $.each(list, function( index, value ) {
-            alert( index + ": " + value );
-        });
-
-    });
+    /*   $(document).ready(function() {
+            var obj = JSON.parse($("#location").val())
+            var list = ["List D",obj.name];
+            $.each(list, function( index, value ) {
+                alert( index + ": " + value );
+            });
+        });*/
 </script>
 
-<script>
-    $(document).ready(function() {
 
+<!--<script>
+    $(document).ready(function() {
         var list = ${location};
         $.each(list, function( index, value ) {
             alert( index + ": " + value );
         });
-
     });
-</script>
-
-<!--<script type="text/javascript" th:src="@{/js/test_map.js}"></script>
-<script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap">
 </script>-->
+
+<script type="text/javascript" th:src="@{/js/test_map.js}"></script>
+<script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap">
+</script>
 </body>
 </html>

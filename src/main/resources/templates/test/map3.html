@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.springframework.org/schema/mvc">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"> </meta>
+    <meta charset="utf-8"> </meta>
+    <title>Simple markers</title>
+    <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            /*height: 100%;*/
+            height:400px;
+            width: 500px;
+        }
+        #br {
+            /*height: 100%;*/
+            height:20px;
+            width: 50px;
+        }
+        /* Optional: Makes the sample page fill the window. */
+/*       html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }*/
+    </style>
+</head>
+<body>
+<div>
+
+</div>
+<div class="container">
+
+    <!--<div id="main" class="container">-->
+    <div id ="navi"></div>
+    <div id ="userTagsFilterMap">
+        <div id = "userTagsFilter"  class="d-inline-block">
+            <div id ="userProfile" >
+                <h2 th:text="${title}">Default Title</h2>
+            </div>
+            <div id ="tags">
+
+                   <div th:each="prefTag : ${prefTags}">
+                         <div th:text="${prefTag.name}">
+                             <!--<div class="d-inline-block">d-inline-block</div>-->
+
+                        </div>
+                   </div>
+
+
+
+            </div> <!--tags;"-->
+
+            <div id ="filter"></div>
+                <form method="post" style="max-width:600px;" >
+                    <div class="form-group">
+                        <label th:for="tagId">Tag</label>
+                        <select name="tagId">
+                            <option th:each="allTag : ${allTags}"
+                                    th:text="${allTag.name}"
+                                    th:value="${allTag.id}"></option>
+                        </select>
+
+                    </div>
+                    <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
+                    <input type="submit" value="Add tag" />
+<!--                    <div class="form-group">
+                        <label th:for="name">Name</label>
+                        <input class="form-control" th:field="*{name}" />
+                        <span th:errors="*{name}" class="error"></span>
+                    </div>
+                    <div class="form-group">
+                        <label th:for="description">Description</label>
+                        <input class="form-control" th:field="*{description}" />
+                        <span th:errors="*{description}" class="error"></span>
+                    </div>-->
+
+
+
+
+            </form>
+        </div> <!--"userTagsFilter;"-->
+        <div id="map" class="d-inline-block">
+            <!--style="width: 500px; height: 400px;"-->
+        </div>
+    </div> <!--"userTagsFilterMap""-->
+
+    <div id= "searchResults">
+        <table class="table">
+            <tr>
+                <th>Beer name</th>
+                <th>in:</th>
+                <th>Distance in mi.</th>
+
+            </tr>
+
+            <tr th:each="result : ${searchResults}">
+
+                <td th:text="${result.name}">  </td>
+                <td th:text="${result.location.name}">  </td>
+                <td th:text="${result.distance} + ' mi.'">  </td>
+
+            </tr>
+        </table>
+    </div>
+    <div id= "bottom"></div>
+
+
+</div> <!-- class="container"> -->
+<input type="hidden" th:value="${locations}" id="locations" />
+<input type="hidden" th:value="${userLocation}" id="userLocation" />
+<input type="hidden" th:value="${prefTags}" id="prefTags"/>
+<!--<input type="hidden" th:value="${myPosition}" name="myPosition" id="myPositio"/>-->
+
+
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script type="text/javascript" th:src="@{/js/test_map.js}"></script>
+
+<script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap">
+</script>
+</body>
+</html>

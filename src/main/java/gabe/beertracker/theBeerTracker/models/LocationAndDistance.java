@@ -2,6 +2,8 @@ package gabe.beertracker.theBeerTracker.models;
 
 import gabe.beertracker.theBeerTracker.models.Location;
 
+import java.util.Comparator;
+
 public class LocationAndDistance extends Location {
     private double distance;
 
@@ -36,4 +38,22 @@ public class LocationAndDistance extends Location {
     }
 
 
+
+    /*Comparator for sorting the list by distance*/
+    public static Comparator<LocationAndDistance> StuRollno = new Comparator<LocationAndDistance>() {
+
+        public int compare(LocationAndDistance s1, LocationAndDistance s2) {
+
+            double dist1 = s1.getDistance();
+            double dist2 = s2.getDistance();
+            if ((dist1-dist2) > 0)
+                return 1;
+            else if ((dist1-dist2) < 0)
+                return -1;
+            else return 0;
+        }};
+
 }
+
+
+

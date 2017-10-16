@@ -47,4 +47,7 @@ public class BeerTag {
         return name;
     }
 
+    public int getId() {
+        return id;
+    }
 }

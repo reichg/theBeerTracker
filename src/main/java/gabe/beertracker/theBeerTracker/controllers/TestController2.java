@@ -71,6 +71,10 @@ public class TestController2 {
         model.addAttribute("beers", beerDao.findAll());
        // model.addAttribute("divider", " tags: ");
         model.addAttribute("tags", beerTagDao.findAll());
+        User newUser1 = new User("hash3", "username3");
+        User newUser2 = new User("hash4", "username4");
+        userDao.save(newUser1);
+        userDao.save(newUser2);
 
 
         return "test/index2";
@@ -89,11 +93,11 @@ public class TestController2 {
 
     @RequestMapping(value = "test/map")
     public String map(Model model){
-        Location loc = locationDao.findOne(1);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        Location loc = locationDao.findOne(3);
+        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         //LocalDateTime dateTime = LocalDateTime.of(1986, APRIL, 8, 12, 30);
         //String formattedDateTime = dateTime.format(formatter); // "1986-04-08 12:30"
-        System.out.println("current_time: " + loc.getDateOfCreation().format(formatter) );
+        // System.out.println("current_time: " + loc.getDateOfCreation().format(formatter) );
         final Gson gson = new Gson();
         System.out.println("Original Java object : " + loc);
         String json = gson.toJson(loc);
