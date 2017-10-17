@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.controllers;
+package gabe.beertracker.theBeerTracker.Controllers;
 
 import gabe.beertracker.theBeerTracker.models.User;
 import gabe.beertracker.theBeerTracker.models.data.UserDao;
