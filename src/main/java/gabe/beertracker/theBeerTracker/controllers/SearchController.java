@@ -42,10 +42,10 @@ public class SearchController {
         Location currentLoc = locationDao.findOne(3); // a location of a user
         ArrayList<BeerTag> prefTags = new ArrayList<>();
         prefTags.add(beerTagDao.findOne(1));
-        prefTags.add(beerTagDao.findOne(2));
+        /*prefTags.add(beerTagDao.findOne(2));
         prefTags.add(beerTagDao.findOne(3));
         prefTags.add(beerTagDao.findOne(4));
-        prefTags.add(beerTagDao.findOne(5));
+        prefTags.add(beerTagDao.findOne(5));*/
 
         ArrayList<List<Beer>> filteredBeersByOneTag = new ArrayList<>();
         for (BeerTag prefTag : prefTags){
@@ -104,7 +104,24 @@ public class SearchController {
     public String searchPost(@RequestParam int tagId, @RequestParam String myPosition, Model model) {
         int userId = 1;
         float maxDistance = 500;
-        Location currentLoc = locationDao.findOne(3); // a location of a user
+        final Gson gson = new Gson();
+        System.out.println("myPosition=" + myPosition);
+
+        Location currentLoc = new Location();
+
+        if (myPosition.length()>0){
+            SimpleLocation userPosJS = new SimpleLocation();
+            userPosJS = gson.fromJson(myPosition, SimpleLocation.class);
+            System.out.println("userPosJS=" + userPosJS.getLat());
+
+            currentLoc.setLatitude(userPosJS.getLat());
+            currentLoc.setLongitude(userPosJS.getLng());
+        }
+        else {
+            currentLoc = locationDao.findOne(3);
+        }
+
+                // a location of a user
         ArrayList<BeerTag> prefTags = new ArrayList<>();
         prefTags.add(beerTagDao.findOne(1));
         prefTags.add(beerTagDao.findOne(tagId));
@@ -146,9 +163,10 @@ public class SearchController {
         Collections.sort(filteredBeers, BeerAndOneLocation.BeerDistanceComparator);
         ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
 
-        final Gson gson = new Gson();
+
         // System.out.println("Original Java object : " + mylocs);
-        System.out.println("myPosition=" + myPosition);
+
+
         String json = gson.toJson(myLocList.toArray());
         System.out.println("json : " + json);
         model.addAttribute("locations", json);

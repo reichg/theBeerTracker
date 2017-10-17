@@ -7,8 +7,8 @@ import java.util.List;
 import static java.lang.Math.toIntExact;
 
 public class BeerAndOneLocation extends Beer {
-    public Location comparatorPoint; //a point for comparing distance
-    public Location location; //One location // for more easy sorting in any list
+    private Location comparatorPoint; //a point for comparing distance
+    private Location location; //One location // for more easy sorting in any list
 
     public BeerAndOneLocation() {
     }
