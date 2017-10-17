@@ -65,12 +65,12 @@ public class UserController {
                     model.addAttribute("userName", userName);
                     //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                     userDao.save(newUser);
-                    return "redirect:/userhome";
+                    return "redirect:/userhome/" +newUser.getId();
                 }
                 model.addAttribute("userName", userName);
                 //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                 userDao.save(newUser);
-                return "redirect:/userhome";
+                return "redirect:/userhome/" +newUser.getId();
             }
 
             model.addAttribute("existingUsername", "Great minds think alike, username already exists");
@@ -78,9 +78,15 @@ public class UserController {
         }
     }
 
-    @RequestMapping(value = "userhome", method = RequestMethod.GET)
-    public String displayUserHome() {
 
+    @RequestMapping(value = "userhome/{userId}", method = RequestMethod.GET)
+    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model){
+        User user = userDao.findOne(userId);
+        //String userUrl = user.getUserName();
+        //model.addAttribute("userUrl", userUrl);
+        model.addAttribute("user", user);
+        model.addAttribute("welcome", "Welcome, " + user.getUserName());
+        //model.addAttribute("foundBeers", user.getBeerDrinks());
 
         return "userhome";
     }
