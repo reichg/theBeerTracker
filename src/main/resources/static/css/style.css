@@ -2,6 +2,35 @@ html,
 body {
     height: 100%;
 }
+/*
+Remove all blue focus glow*/
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+    border-color: rgba(126, 239, 104, 0.8);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(126, 239, 104, 0.6);
+    outline: 0 none;
+}
+.form-control:focus {
+  border-color: #FF0000;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+}
+button:focus {
+    outline: 3px auto white;
+}
 #page-wrapper {
     position: relative;
     min-height: 100%;
@@ -51,6 +80,11 @@ body {
 }
 .container {
     padding-top: 80px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: inherit;
 }
 .footer {
     display: flex;
@@ -114,6 +148,11 @@ body {
 }
 .form-control {
     color: #222629;
+}
+.section-1 {
+    width: 100%;
+
+    background-color: rgba(255,255,255,0.5);
 }
 
 @media only screen and (max-width: 767px) {
