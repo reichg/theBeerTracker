@@ -25,40 +25,19 @@ public class LoginController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLogin(Model model, @ModelAttribute User theUser, @RequestParam String userName, @RequestParam String password) {
-
-        Iterable<User> allUsers = userDao.findAll();
-        boolean userNameSuccess = false;
-        boolean passwordSuccess = false;
-        for (User user : allUsers) {
-            if (userName.equals(user.getUserName())) {
-                if (password.equals(user.getHash())) {
-                    userNameSuccess = true;
-                    passwordSuccess = true;
-                }
-                else {
-                    userNameSuccess = true;
-                    passwordSuccess = false;
-                }
-            }
+    public String processLogin(Model model, @RequestParam String userName, @RequestParam String password) {
+        User retrievedUser = userDao.getUserByUsername(userName);
+        if (retrievedUser == null){
+            model.addAttribute("unameError", "That username does not exist! Please try again!");
+            return "login";
         }
-
-        if (userNameSuccess) {
-            if (!passwordSuccess) {
-                model.addAttribute("pwdError", "Wrong password for that username! Try again.");
-                return "login";
-            }
-            model.addAttribute("userName", userName);
-            User currentUser = userDao.findOne(theUser.getId());
-            return "redirect:/userhome/" +currentUser.getId();
-            //return "redirect:/userhome";
+        else if(!password.equals(retrievedUser.getHash())){
+            model.addAttribute("pwdError", "Wrong password for that username! Try again.");
+            return "login";
         }
-        model.addAttribute("unameError", "That username does not exist! Please try again!");
-        return "login";
+        model.addAttribute("userName", userName);
+        return "redirect:/userhome/" +retrievedUser.getId();
     }
-
-
-
 
     @RequestMapping(value = "logout")
     public String logout() {
