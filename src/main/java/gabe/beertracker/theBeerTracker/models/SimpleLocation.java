@@ -1,11 +1,23 @@
 package gabe.beertracker.theBeerTracker.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class SimpleLocation {
+
+    @Id
+    @GeneratedValue
+
+    private int id;
     //@NotNull
     private double lat;
 
     //@NotNull
     private double lng;
+
+    private String name;
 
     public double getLat() {
         return lat;
@@ -25,5 +37,13 @@ public class SimpleLocation {
 
     public SimpleLocation() {
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

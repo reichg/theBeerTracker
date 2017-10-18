@@ -40,7 +40,7 @@ public class LocationAndDistance extends Location {
 
 
     /*Comparator for sorting the list by distance*/
-    public static Comparator<LocationAndDistance> StuRollno = new Comparator<LocationAndDistance>() {
+    public static Comparator<LocationAndDistance> distanceComparator = new Comparator<LocationAndDistance>() {
 
         public int compare(LocationAndDistance s1, LocationAndDistance s2) {
 

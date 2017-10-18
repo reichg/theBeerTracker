@@ -68,13 +68,13 @@ public class TestController2 {
         BeerDrink newBeerDrink = new BeerDrink(LocalDateTime.now(), newBeer, newUser2, newLocation);
         beerDrinkDao.save(newBeerDrink);*/
        // model.addAttribute("beers", beerDao.findAll());
-        model.addAttribute("beers", beerDao.findAll());
-       // model.addAttribute("divider", " tags: ");
-        model.addAttribute("tags", beerTagDao.findAll());
-        User newUser1 = new User("hash3", "username3");
-        User newUser2 = new User("hash4", "username4");
-        userDao.save(newUser1);
-        userDao.save(newUser2);
+//        model.addAttribute("beers", beerDao.findAll());
+//       // model.addAttribute("divider", " tags: ");
+//        model.addAttribute("tags", beerTagDao.findAll());
+//        User newUser1 = new User("hash3", "username3");
+//        User newUser2 = new User("hash4", "username4");
+//        userDao.save(newUser1);
+//        userDao.save(newUser2);
 
 
         return "test/index2";
@@ -84,6 +84,9 @@ public class TestController2 {
         int radius = 50; //radius of search
         Location currentLoc = new Location("Space Needle", 47.6205, -122.3493); //Space Needle
         Iterable <Location> dbLocations = locationDao.findAll();
+        model.addAttribute("beers", beerDao.getBeersTriedByUserId(1));
+        model.addAttribute("beers2", beerDao.getBeersTriedByUserName("username3"));
+
         model.addAttribute("locations", filterLocationsByDistanceWithDistance(dbLocations, currentLoc, 50 ));
        // model.addAttribute("distance", loc1.getDistanceMi(loc2));
         return  "test/map2";

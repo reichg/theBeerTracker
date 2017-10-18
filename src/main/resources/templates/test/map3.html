@@ -8,20 +8,37 @@
     <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+
+
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
     <style>
         /* Always set the map height explicitly to define the size of the div
          * element that contains the map. */
         #map {
             /*height: 100%;*/
             height:400px;
-            width: 500px;
+            width: 100%;
+        }
+
+        #userTagsFilterMap {
+            /*height: 100%;*/
+            /*height:400px;*/
+            height:200px;
+            width: 100%;
         }
         #br {
             /*height: 100%;*/
             height:20px;
             width: 50px;
         }
+        /*#search-tag-box2 {*/
+            /*!*height: 100%;*!*/
+            /*!*height:20px;*!*/
+            /*width: 100%;*/
+        /*}*/
+
         /* Optional: Makes the sample page fill the window. */
 /*       html, body {
             height: 100%;
@@ -34,24 +51,113 @@
 <div>
 
 </div>
+
 <div class="container">
 
     <!--<div id="main" class="container">-->
-    <div id ="navi"></div>
-    <div id ="userTagsFilterMap">
-        <div id = "userTagsFilter"  class="d-inline-block">
-            <div id ="userProfile" >
-                <!--<h2 th:text="${title}">Default Title</h2>-->
+    <div class="row">
+        <div id ="navi" class="col-md-12">  jJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ</div>
+        <div id ="user-profile" class="col-md-12">
+            <h2 th:text="${title}">Default Title</h2>
+        </div>
+        <div id ="forMap" class="col-md-12">
+            <div  id="map">
             </div>
-            <div id ="tags">
+        </div>
+        <div id ="filter-tags" class="col-md-12">
+            <div class="row">
+                <form method="post" style="max-width:600px;" >
+                <div id ="filter1" class="col-md-8">
+                    <label th:for="states2">Tags</label>
+                    <select class="js-example-basic-multiple" name="states2" multiple="multiple" id="states2" style="width: 100%">
+                        <option th:each="allTag : ${states2}"
+                                th:text="${allTag.name}"
+                                th:value="${allTag.id}">
+
+                        </option>
+                    </select>
+                </div> <!--id ="filter1" class="col-md-6">-->
+                <div id ="filter2" class="col-md-2">
+                    <label th:for="tagId">tried/untried</label>
+                    <select class="js-example-basic-multiple2" name="tagId" multiple="multiple" style="width: 100%" id="aaa">
+                        <option th:each="allTag : ${states2}"
+                                th:text="${allTag.name}"
+                                th:value="${allTag.id}">
+
+                        </option>
+                    </select>
+                </div> <!--id ="filter2" class="col-md-2>-->
+                <div id ="filter3" class="col-md-1">
+                    <label th:for="states3">Distance</label>
+                    <select class="js-example-basic-multiple3" name="states3" multiple="multiple" style="width: 100%">
+                        <option th:each="allTag2 : ${states2}"
+                                th:text="${allTag2.name}"
+                                th:value="${allTag2.id}">
+
+                        </option>
+                    </select>
+                </div> <!--id ="filter2" class="col-md-1>-->
+                <div id ="button" class="col-md-1">
+
+                        <label>  </label>
+                        <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
+                        <input type="hidden" th:value="${allTag}" name="tagId" id="tagId"/>
+                        <input type="hidden" th:value="${tags}" name="tags" id="tags"/>
+                        <input type="submit" value="Search" id="search"/>
+
+
+                </div> <!--id ="filter2" class="col-md-1>-->
+                </form>
+            </div>
+        </div>
+
+        </div> <!--class="row"-->
+
+
+    <div id ="userFilterMapSresults">
+        <div id ="userTagsFilterMap">
+
+
+        <!--<div id = "userTagsFilter"  class="d-inline-block">-->
+
+
+            <div id ="tags" >
+
+<!--
+                <div id="search-tag-box" class="w-50 d-inline-block">
+                    <label th:for="states2">Tag</label>
+                    <select class="js-example-basic-multiple" name="states2" multiple="multiple" style="width: 100%">
+                        &lt;!&ndash;<option value="AL">Alabama</option>&ndash;&gt;
+                        &lt;!&ndash;<option value="WY">Wyoming</option>&ndash;&gt;
+                        <option th:each="allTag : ${states2}"
+                                th:text="${allTag.name}"
+                                th:value="${allTag.id}">
+
+                        </option>
+                    </select>
+                </div>
+
+                <div id="search-tag-box2" class="w-25 d-inline-block">
+                    <label th:for="states3">Tag</label>
+                    <select class="js-example-basic-multiple" name="states3" multiple="multiple" style="width: 50%">
+                    &lt;!&ndash;<select class="js-example-basic-multiple" name="states3" multiple="multiple" style="width: 30%">&ndash;&gt;
+                        &lt;!&ndash;<option value="AL">Alabama</option>&ndash;&gt;
+                        &lt;!&ndash;<option value="WY">Wyoming</option>&ndash;&gt;
+                        <option th:each="allTag : ${states2}"
+                                th:text="${allTag.name}"
+                                th:value="${allTag.id}">
+
+                        </option>
+                    </select>
+                </div>-->
+
+
 
                    <div th:each="prefTag : ${prefTags}">
                          <div th:text="${prefTag.name}">
                              <!--<div class="d-inline-block">d-inline-block</div>-->
-
                         </div>
                    </div>
-
 
 
             </div> <!--tags;"-->
@@ -67,7 +173,7 @@
                         </select>
 
                     </div>
-                    <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
+
                     <input type="submit" value="Add tag" />
 <!--                    <div class="form-group">
                         <label th:for="name">Name</label>
@@ -84,13 +190,14 @@
 
 
             </form>
-        </div> <!--"userTagsFilter;"-->
-        <div id="map" class="d-inline-block">
-            <!--style="width: 500px; height: 400px;"-->
-        </div>
+
+
+
+        <!--</div> &lt;!&ndash;"userTagsFilter;"&ndash;&gt;-->
+
     </div> <!--"userTagsFilterMap""-->
 
-    <div id= "searchResults">
+        <div id= "searchResults">
         <table class="table">
             <tr>
                 <th>Beer name</th>
@@ -108,6 +215,7 @@
             </tr>
         </table>
     </div>
+    </div> <!--"userFilterMapSresults"-->
     <div id= "bottom"></div>
 
 
@@ -116,12 +224,39 @@
 <input type="hidden" th:value="${userLocation}" id="userLocation" />
 <input type="hidden" th:value="${prefTags}" id="prefTags"/>
 <!--<input type="hidden" th:value="${myPosition}" name="myPosition" id="myPositio"/>-->
-
-
+<!--<script src="https://unpkg.com/vue-multiselect@2.0.0"></script>-->
 <script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
+
 <script type="text/javascript" th:src="@{/js/test_map.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+        var myData3 = [1, 2]; //It works for default setup of tags;
+        $('.js-example-basic-multiple').val(myData3).trigger('change');
+
+    });
+
+    $('#search').click(function(e) {
+        $('#tagId').val(1);
+
+        $('#tags').val($('#states2').select2('val'));
+        var myData = $('#states2').select2('data');
+//        alert(myData[1].id);
+//        alert(myData[1].text);
+       // alert($('#states2').select2('data'));
+       // alert($('#states2').val(arrayArea));
+    });
+
+
+
+</script>
+<script>
+
+</script>
 
 <script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap">
 </script>
+
 </body>
 </html>

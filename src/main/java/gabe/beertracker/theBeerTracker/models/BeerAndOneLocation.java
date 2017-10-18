@@ -67,7 +67,7 @@ public class BeerAndOneLocation extends Beer {
     }
 
     public static ArrayList<Location> locationsExtract (ArrayList<BeerAndOneLocation> beers){
-        ArrayList<Location> myloc = new ArrayList();
+        ArrayList<Location> myloc = new ArrayList<Location>();
         for (BeerAndOneLocation beer: beers){
             myloc.add(beer.getLocation());
         }

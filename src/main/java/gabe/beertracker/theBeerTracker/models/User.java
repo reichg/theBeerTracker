@@ -13,12 +13,12 @@ public class User {
     @GeneratedValue
     private int id;
 
-   // @NotNull
-    @Size(min=3, max=25)
+    //@NotNull
+    //@Size(min=3, max=25)
     private String firstName;
 
-  //  @NotNull
-    @Size(min=3, max=25)
+    //@NotNull
+    //@Size(min=3, max=25)
     private String lastName;
 
     @NotNull
@@ -31,7 +31,7 @@ public class User {
 
     private LocalDateTime dateOfBirth;
 
-    @NotNull
+ //   @NotNull
     private LocalDateTime dateOfCreation;
 
     @OneToMany
@@ -46,8 +46,20 @@ public class User {
     @JoinColumn(name ="user_id")
     private List<BeerDrink> beerDrinks = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name ="user_id")
+    private List<UserKnownLocations> userKnownLocations = new ArrayList<>();
+
+    @OneToMany
+    @JoinColumn(name ="user_id")
+    private List<UserPreferredTags> userPreferredTags = new ArrayList<>();
+
     @ManyToMany
     private List<Beer> favoriteBeers;
+
+    //private List<BeerTag> preferencesForSearch;
+
+
 
     public User() {
         dateOfCreation = LocalDateTime.now();
@@ -128,4 +140,20 @@ public class User {
     public void setFavoriteBeers(List<Beer> favoriteBeers) {
         this.favoriteBeers = favoriteBeers;
     }
+
+/*    public List<UserKnownLocations> getUserKnownLocations() {
+        return userKnownLocations;
+    }
+
+    public void setUserKnownLocations(List<UserKnownLocations> userKnownLocations) {
+        this.userKnownLocations = userKnownLocations;
+    }*/
+
+/*    public List<UserPreferredTags> getUserPreferredTags() {
+        return userPreferredTags;
+    }
+
+    public void setUserPreferredTags(List<UserPreferredTags> userPreferredTags) {
+        this.userPreferredTags = userPreferredTags;
+    }*/
 }

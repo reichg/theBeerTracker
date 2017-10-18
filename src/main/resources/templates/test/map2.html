@@ -30,7 +30,17 @@
 
 </ul>
 
-                <!--<p th:text="${distance}"> tag </p>-->
+<ul th:each="beer : ${beers}">
+    <li th:text="${beer.name}"></li>
+
+
+</ul>
+
+<ul th:each="beer2 : ${beers2}">
+    <li th:text="${beer2.name}"></li>
+
+
+</ul>            <!--<p th:text="${distance}"> tag </p>-->
 
 
 

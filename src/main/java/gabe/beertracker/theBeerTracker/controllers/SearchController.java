@@ -38,48 +38,16 @@ public class SearchController {
     @RequestMapping(value = "test5", method = RequestMethod.GET)
     public String searchDisplay(Model model) {
         int userId = 1;
-        float maxDistance = 500;
+        float maxDistance = 20;
         Location currentLoc = locationDao.findOne(3); // a location of a user
         ArrayList<BeerTag> prefTags = new ArrayList<>();
         prefTags.add(beerTagDao.findOne(1));
-        /*prefTags.add(beerTagDao.findOne(2));
-        prefTags.add(beerTagDao.findOne(3));
-        prefTags.add(beerTagDao.findOne(4));
-        prefTags.add(beerTagDao.findOne(5));*/
 
         ArrayList<List<Beer>> filteredBeersByOneTag = new ArrayList<>();
         for (BeerTag prefTag : prefTags){
             filteredBeersByOneTag.add(beerDao.getBeersByTag(prefTag.getName()));
         }
-
-
-        ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
-
-        for (Beer beer : filteredBeersByOneTag.get(0)){
-            boolean rez = true;
-            for (int i = 1; i < filteredBeersByOneTag.size(); i++){
-
-                if (!filteredBeersByOneTag.get(i).contains(beer)){
-                    rez = false;
-                    break;
-                }
-            }
-            if (rez) {
-            //    ArrayList<Location> allLocations = new ArrayList<>();
-                for (Location location : beer.getLocations()){
-
-                    if (location.getDistanceMi(currentLoc) <= maxDistance){
-                        //allLocations.add(currentLoc);
-                        BeerAndOneLocation aBeerAndOneLocation = new BeerAndOneLocation(beer, currentLoc, location);
-                       // aBeerAndOneLocation.getLocation().getDistanceMi(aBeerAndOneLocation.getComparatorPoint());
-                        filteredBeers.add(aBeerAndOneLocation);
-
-                    }
-                }
-
-            }
-        }
-
+        ArrayList<BeerAndOneLocation> filteredBeers = getBeersByTagsAndDistance(filteredBeersByOneTag, currentLoc, maxDistance);
         Location loc = locationDao.findOne(3);
         Collections.sort(filteredBeers, BeerAndOneLocation.BeerDistanceComparator);
         ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
@@ -96,14 +64,15 @@ public class SearchController {
         model.addAttribute("title", "search results for " + userDao.findOne(userId).getUserName());
         model.addAttribute("prefTags", prefTags);
         model.addAttribute("allTags", beerTagDao.findAll());
+        model.addAttribute("states2", beerTagDao.findAll());
         model.addAttribute("allTag", beerTagDao.findAll());
         return "test/map3";
     }
 
     @RequestMapping(value = "test5", method = RequestMethod.POST)
-    public String searchPost(@RequestParam int tagId, @RequestParam String myPosition, Model model) {
+    public String searchPost(@RequestParam int tagId, @RequestParam String myPosition, @RequestParam String tags, Model model) {
         int userId = 1;
-        float maxDistance = 500;
+        float maxDistance = 200;
         final Gson gson = new Gson();
         System.out.println("myPosition=" + myPosition);
 
@@ -125,19 +94,35 @@ public class SearchController {
         ArrayList<BeerTag> prefTags = new ArrayList<>();
         prefTags.add(beerTagDao.findOne(1));
         prefTags.add(beerTagDao.findOne(tagId));
-       // prefTags.add(beerTagDao.findOne(5));
+
 
         ArrayList<List<Beer>> filteredBeersByOneTag = new ArrayList<>();
         for (BeerTag prefTag : prefTags){
             filteredBeersByOneTag.add(beerDao.getBeersByTag(prefTag.getName()));
         }
 
-        ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
+        ArrayList<BeerAndOneLocation> filteredBeers = getBeersByTagsAndDistance(filteredBeersByOneTag, currentLoc, maxDistance);
+        Location loc = locationDao.findOne(3);
+        Collections.sort(filteredBeers, BeerAndOneLocation.BeerDistanceComparator);
+        ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
+        String json = gson.toJson(myLocList.toArray());
+        System.out.println("json : " + json);
+        System.out.println("tags : " + tags);
+        model.addAttribute("locations", json);
+        model.addAttribute("userLocation",gson.toJson(currentLoc));
+        model.addAttribute("searchResults", filteredBeers);
+        model.addAttribute("title", "search results for " + userDao.findOne(userId).getLastName());
+        model.addAttribute("prefTags", prefTags);
+        model.addAttribute("states2", beerTagDao.findAll());
+        model.addAttribute("allTags", beerTagDao.findAll());
+        return "test/map3";
+    }
 
+    private  ArrayList<BeerAndOneLocation> getBeersByTagsAndDistance( ArrayList<List<Beer>> filteredBeersByOneTag, Location currentLoc, float maxDistance){
+        ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
         for (Beer beer : filteredBeersByOneTag.get(0)){
             boolean rez = true;
             for (int i = 1; i < filteredBeersByOneTag.size(); i++){
-
                 if (!filteredBeersByOneTag.get(i).contains(beer)){
                     rez = false;
                     break;
@@ -158,28 +143,7 @@ public class SearchController {
 
             }
         }
-
-        Location loc = locationDao.findOne(3);
-        Collections.sort(filteredBeers, BeerAndOneLocation.BeerDistanceComparator);
-        ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
-
-
-        // System.out.println("Original Java object : " + mylocs);
-
-
-        String json = gson.toJson(myLocList.toArray());
-        System.out.println("json : " + json);
-        model.addAttribute("locations", json);
-
-        model.addAttribute("userLocation",gson.toJson(currentLoc));
-
-        model.addAttribute("searchResults", filteredBeers);
-        model.addAttribute("title", "search results for " + userDao.findOne(userId).getLastName());
-        model.addAttribute("prefTags", prefTags);
-        model.addAttribute("allTags", beerTagDao.findAll());
-        return "test/map3";
+        return filteredBeers;
     }
-
-
 
 }

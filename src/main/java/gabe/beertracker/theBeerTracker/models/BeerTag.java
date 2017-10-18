@@ -2,10 +2,7 @@ package gabe.beertracker.theBeerTracker.models;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -17,15 +14,19 @@ public class BeerTag {
     @GeneratedValue
     private int id;
 
-    @NotNull
+
    // @Size(min = 3, max = 45)
     private String name;
 
-    @NotNull
+   // @NotNull
     private LocalDateTime dateOfCreation;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany (mappedBy = "tags")
     private List<Beer> beers;
+
+  //  @ManyToOne
+  //  private UserPreferredTags userPreferredTags;
+
 
     public BeerTag() {
         dateOfCreation = LocalDateTime.now();
