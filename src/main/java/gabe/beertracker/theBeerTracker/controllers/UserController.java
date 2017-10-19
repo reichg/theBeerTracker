@@ -66,17 +66,17 @@ public class UserController {
                 if (!passwordExists) {
                     model.addAttribute("userName", userName);
                     HttpSession session = request.getSession(true);   // the boolean makes it create a new one if it's missing
-                    session.setAttribute("newUser", newUser); //should put newUser attributes into session
+                    session.setAttribute("loggedInUser", newUser); //should put newUser attributes into session
                     //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                     userDao.save(newUser);
-                    return "redirect:/userhome/" +newUser.getId();
+                    return "redirect:/userhome";
                 }
                 model.addAttribute("userName", userName);
                 HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
                 session.setAttribute("loggedInUser", newUser); //should add the newUser to the session
                 //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                 userDao.save(newUser);
-                return "redirect:/userhome/" +newUser.getId();
+                return "redirect:/userhome";
             }
 
             model.addAttribute("existingUsername", "Great minds think alike, username already exists");
@@ -85,14 +85,17 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "userhome/{userId}")
-    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model , HttpServletRequest request){
-        HttpSession session = request.getSession();
-        String storedData = (String)session.getAttribute("loggedInUser"); //should retrieve the stored session?
-        User user = userDao.findOne(userId);
+    @RequestMapping(value = "userhome")
+    public String displayHome(Model model , HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/login";
+        }
+        User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
+        User user = userDao.findOne(storedData.getId());
         //String userUrl = user.getUserName();
         //model.addAttribute("userUrl", userUrl);
-        model.addAttribute("user", user);
+        model.addAttribute("userName", user.getUserName());
         model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
         //model.addAttribute("foundBeers", user.getBeerDrinks());

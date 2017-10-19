@@ -43,7 +43,7 @@ public class LoginController {
         }
         model.addAttribute("userName", userName);
         session.setAttribute("loggedInUser", retrievedUser);  //**should be adding retrievedUser in the session**
-        return "redirect:/userhome/" + retrievedUser.getId();
+        return "redirect:/userhome";
     }
 
     @RequestMapping(value = "logout",  method = RequestMethod.GET)
