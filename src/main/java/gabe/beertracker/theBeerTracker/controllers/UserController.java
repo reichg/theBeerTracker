@@ -1,6 +1,9 @@
 package gabe.beertracker.theBeerTracker.controllers;
 
+import gabe.beertracker.theBeerTracker.models.Beer;
 import gabe.beertracker.theBeerTracker.models.User;
+import gabe.beertracker.theBeerTracker.models.data.BeerDao;
+import gabe.beertracker.theBeerTracker.models.data.BeerDrinkDao;
 import gabe.beertracker.theBeerTracker.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,12 @@ import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 @Controller
 @SessionAttributes("userName")
 public class UserController {
+
+    @Autowired
+    private BeerDrinkDao beerDrinkDao;
+
+    @Autowired
+    private BeerDao beerDao;
 
     @Autowired
     private UserDao userDao;
@@ -80,13 +89,15 @@ public class UserController {
 
 
     @RequestMapping(value = "userhome/{userId}", method = RequestMethod.GET)
-    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model){
+    public String displayHome(@PathVariable("userId") int userId, Model model, Beer beer){
+        Iterable<Beer> beerList = beerDao.getBeersTriedByUserId(userId);
         User user = userDao.findOne(userId);
-        //String userUrl = user.getUserName();
-        //model.addAttribute("userUrl", userUrl);
+
+        model.addAttribute("beer", beer);
+        model.addAttribute("beerList", beerList);
         model.addAttribute("user", user);
         model.addAttribute("welcome", "Welcome, " + user.getUserName());
-        //model.addAttribute("foundBeers", user.getBeerDrinks());
+
 
         return "userhome";
     }

@@ -21,7 +21,26 @@
                 <div class="container">
                     <div class="section-1">
 
-                        <h1 class="text-center">Welcome Back, <span th:text="${userName}"></span>!</h1>
+                        <h1 class="text-center">Welcome Home, <span th:text="${userName}"></span>!</h1>
+                        <h2>Beers You've Tried</h2>
+                        <p th:unless="${beerList} and ${beerList.size()}">You need to drink some beer!</p>
+
+
+                        <table class="table" style="max-width: 400px">
+
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>ABV</th>
+                            </tr>
+
+                            <tr th:each="beer : ${beerList}">
+                                <td th:text="${beer.name}"></td>
+                                <td th:text="${beer.description}"></td>
+                                <td th:text="${beer.abv}"></td>
+                            </tr>
+
+                        </table>
 
                     </div>
 
