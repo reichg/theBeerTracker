@@ -16,6 +16,7 @@ public class UserPreferredTags {
     @JoinColumn(name ="user_preferred_tags_id")
     private List<BeerTag> recordedPreferredTags;
 
+
     @ManyToOne
     private User user;
 

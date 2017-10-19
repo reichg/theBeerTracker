@@ -99,10 +99,13 @@
                 </div> <!--id ="filter2" class="col-md-1>-->
                 <div id ="button" class="col-md-1">
 
-                        <label>  </label>
+                        <!--<label type="hidden">  </label>-->
                         <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
                         <input type="hidden" th:value="${allTag}" name="tagId" id="tagId"/>
                         <input type="hidden" th:value="${tags}" name="tags" id="tags"/>
+                        <input type="hidden" th:value="${prefTagsv2}" name="prefTagsv2" id="prefTagsv2"/>
+                        <input type="hidden" th:value="${tagsForSearch}" name="tagsForSearch" id="tagsForSearch"/>
+                        <input type="hidden" th:value="${tagsForSearch2}" name="tagsForSearch2" id="tagsForSearch2"/>
                         <input type="submit" value="Search" id="search"/>
 
 
@@ -232,8 +235,11 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
-        var myData3 = [1, 2]; //It works for default setup of tags;
+       // var myData3 = [1, 2]; //It works for default setup of tags;
+        var myData3 = JSON.parse($("#prefTagsv2").val());
         $('.js-example-basic-multiple').val(myData3).trigger('change');
+
+
 
     });
 
@@ -242,6 +248,11 @@
 
         $('#tags').val($('#states2').select2('val'));
         var myData = $('#states2').select2('data');
+        $('#tagsForSearch').val((myData));
+        $('#tagsForSearch2').val(JSON.stringify(myData));
+
+
+        //alert(obj);
 //        alert(myData[1].id);
 //        alert(myData[1].text);
        // alert($('#states2').select2('data'));

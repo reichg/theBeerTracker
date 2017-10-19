@@ -31,6 +31,8 @@ public class TestDataController {
     private LocationFeedbackDao locationFeedbackDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserPreferredTagsDao userPreferredTagsDao;
 
     private ArrayList<HashMap<String, String>> beers;
     private ArrayList<HashMap<String, String>> breweries;
@@ -63,6 +65,11 @@ public class TestDataController {
         userDao.save(newUser2);
         BeerDrink newBeerDrink = new BeerDrink(LocalDateTime.now(), newBeer, newUser2, newLocation);
         beerDrinkDao.save(newBeerDrink);
+        ArrayList<BeerTag> arrayOfTags= new ArrayList<BeerTag>();
+        arrayOfTags.add(beerTagDao.findOne(1));
+        arrayOfTags.add(beerTagDao.findOne(2));
+        UserPreferredTags userPreferredTags = new UserPreferredTags(arrayOfTags, userDao.findOne(1));
+        userPreferredTagsDao.save(userPreferredTags);
         model.addAttribute("beers", beerDao.findAll());
 
         model.addAttribute("beers", beerDao.findAll());

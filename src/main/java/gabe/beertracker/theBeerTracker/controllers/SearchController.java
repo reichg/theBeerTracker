@@ -34,6 +34,10 @@ public class SearchController {
     private LocationFeedbackDao locationFeedbackDao;
     @Autowired
     private UserDao userDao;
+  @Autowired
+    private UserPreferredTagsDao userPreferredTagsDao;
+    @Autowired
+    private UserKnownLocationsDao userKnownLocationsDao;
 
     @RequestMapping(value = "test5", method = RequestMethod.GET)
     public String searchDisplay(Model model) {
@@ -41,6 +45,7 @@ public class SearchController {
         float maxDistance = 20;
         Location currentLoc = locationDao.findOne(3); // a location of a user
         ArrayList<BeerTag> prefTags = new ArrayList<>();
+        UserPreferredTags prefTagsv2 = userPreferredTagsDao.findOne(userId);
         prefTags.add(beerTagDao.findOne(1));
 
         ArrayList<List<Beer>> filteredBeersByOneTag = new ArrayList<>();
@@ -66,15 +71,27 @@ public class SearchController {
         model.addAttribute("allTags", beerTagDao.findAll());
         model.addAttribute("states2", beerTagDao.findAll());
         model.addAttribute("allTag", beerTagDao.findAll());
+        List<BeerTag> tojson2 = prefTagsv2.getRecordedPreferredTags();
+        ArrayList<String> tagsNames = new ArrayList<String>();
+        ArrayList<Integer> tagsIds = new ArrayList<Integer>();
+        for (BeerTag name : tojson2)
+            tagsIds.add(name.getId());
+        //System.out.println(gson.toJson(tagsNames.toArray()));
+        model.addAttribute("prefTagsv2", gson.toJson(tagsIds.toArray()));
         return "test/map3";
     }
 
     @RequestMapping(value = "test5", method = RequestMethod.POST)
-    public String searchPost(@RequestParam int tagId, @RequestParam String myPosition, @RequestParam String tags, Model model) {
+    public String searchPost(@RequestParam int tagId, @RequestParam String myPosition, @RequestParam String tags
+           , @RequestParam String tagsForSearch , @RequestParam String tagsForSearch2, Model model) {
         int userId = 1;
         float maxDistance = 200;
         final Gson gson = new Gson();
         System.out.println("myPosition=" + myPosition);
+        System.out.println("tagsForSearch=" + tagsForSearch);
+        System.out.println("tagsForSearch2=" + tagsForSearch2);
+        int[] a = gson.fromJson(tagsForSearch2, int[].class);
+        System.out.println("tagsForSearchAfterJson=" + a.toString());
 
         Location currentLoc = new Location();
 
