@@ -39,7 +39,7 @@ public class UserController {
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute @Valid User newUser, @RequestParam String userName,
-                                  Errors errors, Model model/*, HttpServletRequest request*/) {
+                                  Errors errors, Model model, HttpServletRequest request) {
 
         Iterable<User> allUsers = userDao.findAll();
         boolean userNameExists = false;
@@ -65,15 +65,15 @@ public class UserController {
             if (!userNameExists) {
                 if (!passwordExists) {
                     model.addAttribute("userName", userName);
-                    /*HttpSession session = request.getSession(true);   // the boolean makes it create a new one if it's missing
-                    session.setAttribute("newUser", newUser);*/ //should put newUser attributes into session
+                    HttpSession session = request.getSession(true);   // the boolean makes it create a new one if it's missing
+                    session.setAttribute("newUser", newUser); //should put newUser attributes into session
                     //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                     userDao.save(newUser);
                     return "redirect:/userhome/" +newUser.getId();
                 }
                 model.addAttribute("userName", userName);
-                /*HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
-                session.setAttribute("loggedInUser", newUser);*/ //should add the newUser to the session
+                HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
+                session.setAttribute("loggedInUser", newUser); //should add the newUser to the session
                 //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                 userDao.save(newUser);
                 return "redirect:/userhome/" +newUser.getId();
@@ -86,9 +86,9 @@ public class UserController {
 
 
     @RequestMapping(value = "userhome/{userId}")
-    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model /*, HttpServletRequest request*/){
-        /*HttpSession session = request.getSession();
-        String storedData = (String)session.getAttribute("loggedInUser"); should retrieve the stored session? */
+    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model , HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String storedData = (String)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(userId);
         //String userUrl = user.getUserName();
         //model.addAttribute("userUrl", userUrl);
