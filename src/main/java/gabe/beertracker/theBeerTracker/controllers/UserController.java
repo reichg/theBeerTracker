@@ -8,13 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
 @Controller
-@SessionAttributes("userName")
+//@SessionAttributes("userName")
 public class UserController {
 
     @Autowired
@@ -37,7 +39,7 @@ public class UserController {
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String processRegister(@ModelAttribute @Valid User newUser, @RequestParam String userName,
-                                  Errors errors, Model model) {
+                                  Errors errors, Model model, HttpServletRequest request) {
 
         Iterable<User> allUsers = userDao.findAll();
         boolean userNameExists = false;
@@ -63,11 +65,15 @@ public class UserController {
             if (!userNameExists) {
                 if (!passwordExists) {
                     model.addAttribute("userName", userName);
+                    HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
+                    session.setAttribute("newUser", newUser);
                     //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                     userDao.save(newUser);
                     return "redirect:/userhome/" +newUser.getId();
                 }
                 model.addAttribute("userName", userName);
+                HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
+                session.setAttribute("newUser", newUser);
                 //model.addAttribute("registerSuccess", "You have successfully registered, please login");
                 userDao.save(newUser);
                 return "redirect:/userhome/" +newUser.getId();
@@ -79,17 +85,23 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "userhome/{userId}", method = RequestMethod.GET)
-    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model){
+    @RequestMapping(value = "userhome/{userId}")
+    public String displayHome(@PathVariable("userId") /*String use/rUrl,*/ int userId, Model model/*, HttpServletRequest request*/){
+
         User user = userDao.findOne(userId);
         //String userUrl = user.getUserName();
         //model.addAttribute("userUrl", userUrl);
         model.addAttribute("user", user);
         model.addAttribute("welcome", "Welcome, " + user.getUserName());
+
         //model.addAttribute("foundBeers", user.getBeerDrinks());
 
         return "userhome";
+
     }
 
 
 }
+
+
+
