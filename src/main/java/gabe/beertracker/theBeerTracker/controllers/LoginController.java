@@ -28,12 +28,12 @@ public class LoginController {
 
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String processLogin(Model model, @RequestParam String userName, @RequestParam String password, HttpServletRequest request) {
+    public String processLogin(Model model, @RequestParam String userName, @RequestParam String password /*, HttpServletRequest request*/) {
         User retrievedUser = userDao.getUserByUsername(userName);
-        HttpSession session = request.getSession(true);   // the boolean makes it create a new one if it's missing
+        /*HttpSession session = request.getSession(false);    the boolean doesn't auto create, but I can check if null then create session below
         if(session == null) {
             session = request.getSession();
-        }
+        }*/
         if (retrievedUser == null){
             model.addAttribute("unameError", "That username does not exist! Please try again!");
             return "login";
@@ -43,14 +43,14 @@ public class LoginController {
             return "login";
         }
         model.addAttribute("userName", userName);
-        session.setAttribute("loggedInUser", retrievedUser);
+        //session.setAttribute("loggedInUser", retrievedUser);  **should be adding retrievedUser in the session**
         return "redirect:/userhome/" + retrievedUser.getId();
     }
 
     @RequestMapping(value = "logout",  method = RequestMethod.GET)
-    public String logout(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        session.invalidate();
+    public String logout(/*HttpServletRequest request*/) {
+        //HttpSession session = request.getSession();  **should get current session**
+        //session.invalidate();  **should remove all attributes from session**
 
 
         return "redirect:/login";
