@@ -102,4 +102,18 @@ public class TestBeerDrinkController {
         return "test/index3";
     }
 
+    @RequestMapping(value = "test6")
+    public String test6  (Model model) {
+        int userId = 1; //You should have userID before. I use it only for test
+        User currentUser = userDao.findOne(userId); //Get user object
+        List<Beer>  notTriedBeers = beerDao.getBeersNotTriedByUserName(currentUser.getUserName());
+        List<Beer>  notTriedBeers2 = beerDao.getBeersNotTriedByUserId(currentUser.getId());
+
+            model.addAttribute("drunkbeers", notTriedBeers); // here we already should have a list of drunk beers
+            model.addAttribute("drunkbeers2", notTriedBeers2); // here we already should have a list of drunk beers
+
+
+        return "test/index3";
+    }
+
 }

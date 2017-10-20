@@ -105,7 +105,7 @@
                         <input type="hidden" th:value="${tags}" name="tags" id="tags"/>
                         <input type="hidden" th:value="${prefTagsv2}" name="prefTagsv2" id="prefTagsv2"/>
                         <input type="hidden" th:value="${tagsForSearch}" name="tagsForSearch" id="tagsForSearch"/>
-                        <input type="hidden" th:value="${tagsForSearch2}" name="tagsForSearch2" id="tagsForSearch2"/>
+                        <!--<input type="hidden" th:value="${tagsForSearch2}" name="tagsForSearch2" id="tagsForSearch2"/>-->
                         <input type="submit" value="Search" id="search"/>
 
 
@@ -247,9 +247,14 @@
         $('#tagId').val(1);
 
         $('#tags').val($('#states2').select2('val'));
-        var myData = $('#states2').select2('data');
-        $('#tagsForSearch').val((myData));
-        $('#tagsForSearch2').val(JSON.stringify(myData));
+        var myval = $('#states2').select2('val');
+       // var myData = $('#states2').select2('data');
+
+      //  $('#tagsForSearch2').val(myData);
+
+
+        $('#tagsForSearch').val(JSON.stringify(myval));
+       // $('#tagsForSearch2').val(JSON.stringify(myData));
 
 
         //alert(obj);

@@ -16,6 +16,17 @@
     </tr>
 
 </table>
+<H1> beers from the second list</H1>
+<table class="table">
+
+
+    <tr th:each="beer : ${drunkbeers2}">
+        <td th:text="${beer.name}"></td>
+        <!--<td th:each="tag : ${beer.tags}"></td>-->
+        <!--<td th:text="${tag?.name}"> tag </td>-->
+    </tr>
+
+</table>
 
 </body>
 </html>

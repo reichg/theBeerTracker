@@ -33,6 +33,8 @@ public class TestController2 {
     private LocationFeedbackDao locationFeedbackDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserPreferredTagsDao userPreferredTagsDao;
 
     private  ArrayList<HashMap<String, String>> beers;
     private  ArrayList<HashMap<String, String>> breweries;
@@ -75,6 +77,13 @@ public class TestController2 {
 //        User newUser2 = new User("hash4", "username4");
 //        userDao.save(newUser1);
 //        userDao.save(newUser2);
+        ArrayList<BeerTag> prefTags = new ArrayList<BeerTag>();
+        User user = userDao.findOne(1);
+        prefTags.add(beerTagDao.findOne(1));
+        prefTags.add(beerTagDao.findOne(2));
+        prefTags.add(beerTagDao.findOne(3));
+        UserPreferredTags userPreferredTags = new UserPreferredTags(prefTags, user);
+        userPreferredTagsDao.save(userPreferredTags);
 
 
         return "test/index2";
