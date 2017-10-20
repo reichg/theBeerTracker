@@ -80,7 +80,8 @@ public class TestBeerDrinkController {
         BeerDrink newBeerDrink5= new BeerDrink(LocalDateTime.now(), beerDao.findOne(6), userDao.findOne(1), locationDao.findOne(3));
         beerDrinkDao.save(newBeerDrink5);
 
-        return "test/index3";
+  //      return "test/index3";
+        return "login";
 
     }
 
@@ -100,6 +101,7 @@ public class TestBeerDrinkController {
         }
 
         return "test/index3";
+
     }
 
     @RequestMapping(value = "test6")
@@ -117,3 +119,4 @@ public class TestBeerDrinkController {
     }
 
 }
+

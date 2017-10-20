@@ -1,7 +1,6 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
-
 ### STS ###
 .apt_generated
 .classpath
@@ -23,3 +22,4 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/main/java/gabe/beertracker/theBeerTracker/servlets/

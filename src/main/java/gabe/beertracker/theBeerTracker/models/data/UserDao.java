@@ -12,4 +12,7 @@ import javax.transaction.Transactional;
 @Transactional
 public interface UserDao extends CrudRepository<User, Integer> {
 
+    @Query(value="SELECT * FROM user WHERE user_name=:foobar LIMIT 1", nativeQuery = true)
+    public User getUserByUsername(@Param(value="foobar") String somePassedUsername);
+
 }

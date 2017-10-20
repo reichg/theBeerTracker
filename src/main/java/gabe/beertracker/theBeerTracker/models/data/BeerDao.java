@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
-import java.util.List;
 
 @Repository
 @Transactional
@@ -32,4 +31,5 @@ public interface BeerDao extends CrudRepository<Beer, Integer> {
 //SELECT DISTINCT * FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` = 1)
 ////SELECT * FROM `beer` WHERE `id` IN (SELECT `beers_id` FROM `beer_tags` WHERE `tags_id` = (SELECT `id` FROM `beer_tag` WHERE `name` = "North"))
 //SELECT `id`, `abv`, `date_of_creation`, `description`, `name` FROM (SELECT * from `beer` AS b LEFT OUTER JOIN (SELECT DISTINCT `id` AS b_id FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` = (SELECT `id` FROM user WHERE `user_name` = 'username3' LIMIT 1))) AS bt ON b.`id` = bt.`b_id` WHERE `b_id` IS NULL) AS mytable
+
 }

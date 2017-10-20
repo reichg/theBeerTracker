@@ -8,12 +8,16 @@
 <body>
 
     <nav th:fragment="navigation" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="/">theBeerTracker</a>
+        <a class="navbar-brand" href="/">
+            <img src="/img/Beer.ico" />
+            <!--<i class="fa fa-beer" aria-hidden="true"></i>-->
+            theBeerTracker
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse justify-content-end">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link nav-round-links" href="/login">LOG IN</a>
@@ -21,33 +25,36 @@
                 <li class="nav-item">
                     <a class="nav-link nav-round-links" href="/register">REGISTER</a>
                 </li>
+                <li>
+                    <a class="nav-link nav-round-links" href="/logout">LOGOUT</a>
+                </li>
             </ul>
         </div>
     </nav>
 
     <footer th:fragment="footer" class="footer">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/reichg/theBeerTracker" target="_blank">
-                    <i class="fa fa-github" aria-hidden="true"></i> theBeerTracker
-                </a>
-            </li>
-            <li class="nav-item">
+        <ul class="navbar-nav row">
+            <!--<li class="nav-item col-md-2 col-sm-12 col-xs-12">-->
+                <!--<a class="nav-link" href="https://github.com/reichg/theBeerTracker" target="_blank">-->
+                    <!--<i class="fa fa-github" aria-hidden="true"></i> theBeerTracker-->
+                <!--</a>-->
+            <!--</li>-->
+            <li class="nav-item col-md-3 col-sm-12 col-xs-12">
                 <a class="nav-link" href="https://github.com/mikleg" target="_blank">
                     <i class="fa fa-github" aria-hidden="true"></i> Mikle Gorbunov
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item col-md-3 col-sm-12 col-xs-12">
                 <a class="nav-link" href="https://github.com/loveomlet" target="_blank">
                     <i class="fa fa-github" aria-hidden="true"></i> Stephan Jones
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item col-md-3 col-sm-12 col-xs-12">
                 <a class="nav-link" href="https://github.com/reichg" target="_blank">
                     <i class="fa fa-github" aria-hidden="true"></i> Gabe Reichenberger
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item col-md-3 col-sm-12 col-xs-12">
                 <a class="nav-link" href="https://github.com/Robert1GA" target="_blank">
                     <i class="fa fa-github" aria-hidden="true"></i> Robert Spears
                 </a>

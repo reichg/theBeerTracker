@@ -22,11 +22,12 @@ public class User {
     private String lastName;
 
     @NotNull
-    @Size(min=3, max=25)
+    @Size(min=3, max=25, message = "Password must contain between 3 and 25 characters")
     private String hash; //we will implement hash later. Use like  a string password now.
+    private String matchHash;
 
     @NotNull
-    @Size(min=3, max=25)
+    @Size(min=3, max=25, message = "Name must contain between 3 and 25 characters")
     private String userName;
 
     private LocalDateTime dateOfBirth;
@@ -77,7 +78,12 @@ public class User {
     public User(String hash, String userName) {
         this();
         this.hash = hash;
+        //this.matchHash = matchHash;
         this.userName = userName;
+
+    }
+
+    public User(String username) {
 
     }
 
@@ -93,6 +99,8 @@ public class User {
         return hash;
     }
 
+    public String getMatchHash() { return matchHash; }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -104,6 +112,8 @@ public class User {
     public void setHash(String hash) {
         this.hash = hash;
     }
+
+    public void setMatchHash(String matchHash) { this.matchHash = matchHash; }
 
     public void setUserName(String userName) {
         this.userName = userName;
@@ -124,6 +134,7 @@ public class User {
     public void setDateOfBirth(LocalDateTime dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+
 
     public List<BeerDrink> getBeerDrinks() {
         return beerDrinks;
