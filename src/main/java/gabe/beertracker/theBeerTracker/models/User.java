@@ -1,5 +1,9 @@
 package gabe.beertracker.theBeerTracker.models;
 
+//import org.hibernate.annotations.Cascade;
+//import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Cascade;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -35,27 +39,28 @@ public class User {
  //   @NotNull
     private LocalDateTime dateOfCreation;
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name ="user_id")
+  //  @Cascade(value = { CascadeType., CascadeType.DELETE })
     private List<BeerFeedback> beerFeedbacks = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name ="user_id")
     private List<LocationFeedback> locationFeedbacks = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name ="user_id")
     private List<BeerDrink> beerDrinks = new ArrayList<>();
 
     @OneToMany
     @JoinColumn(name ="user_id")
-    private List<UserKnownLocations> userKnownLocations = new ArrayList<>();
+    private List<UserKnownLocation> userKnownLocations = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany()
     @JoinColumn(name ="user_id")
     private List<UserPreferredTags> userPreferredTags = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany()
     private List<Beer> favoriteBeers;
 
     //private List<BeerTag> preferencesForSearch;
@@ -152,19 +157,19 @@ public class User {
         this.favoriteBeers = favoriteBeers;
     }
 
-/*    public List<UserKnownLocations> getUserKnownLocations() {
+    public List<UserKnownLocation> getUserKnownLocations() {
         return userKnownLocations;
     }
 
-    public void setUserKnownLocations(List<UserKnownLocations> userKnownLocations) {
+    public void setUserKnownLocations(List<UserKnownLocation> userKnownLocations) {
         this.userKnownLocations = userKnownLocations;
-    }*/
+    }
 
-/*    public List<UserPreferredTags> getUserPreferredTags() {
+    public List<UserPreferredTags> getUserPreferredTags() {
         return userPreferredTags;
     }
 
     public void setUserPreferredTags(List<UserPreferredTags> userPreferredTags) {
         this.userPreferredTags = userPreferredTags;
-    }*/
+    }
 }

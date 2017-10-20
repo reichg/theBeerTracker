@@ -1,42 +1,40 @@
 package gabe.beertracker.theBeerTracker.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
 @Entity
-public class UserKnownLocations {
+public class UserKnownLocation {
 
     @Id
     @GeneratedValue
     private int id;
 
-    //private SimpleLocation simpleLocation;
+    @OneToOne(mappedBy = "userKnownLocation", cascade = CascadeType.ALL)
+    private SimpleLocation simpleLocation;
 
     private LocalDateTime dateOfCreation;
 
      @ManyToOne
      private User user;
 
-    public UserKnownLocations() {
+    public UserKnownLocation() {
     }
 
-    public UserKnownLocations( String aa) {
+    public UserKnownLocation(String aa) {
       //  this.simpleLocation = simpleLocation;
         this.dateOfCreation = LocalDateTime.now();
        // this.user = user;
     }
 
-/*    public SimpleLocation getSimpleLocation() {
+    public SimpleLocation getSimpleLocation() {
         return simpleLocation;
     }
 
     public void setSimpleLocation(SimpleLocation simpleLocation) {
         this.simpleLocation = simpleLocation;
-    }*/
+    }
 
     public int getId() {
         return id;
@@ -46,11 +44,13 @@ public class UserKnownLocations {
         return dateOfCreation;
     }
 
-/*    public User getUser() {
+    public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
+
+
 }
