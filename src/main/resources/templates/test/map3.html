@@ -67,48 +67,53 @@
         <div id ="filter-tags" class="col-md-12">
             <div class="row">
 
-                <div id ="filter1" class="col-md-8">
-                    <label th:for="states2">Tags</label>
-                    <select class="js-example-basic-multiple" name="states2" multiple="multiple" id="states2" style="width: 100%">
-                        <option th:each="allTag : ${states2}"
+                <div id ="filter1" class="col-md-7">
+                    <label th:for="allBeerTags">Tags</label>
+                    <select class="js-example-basic-multiple" name="allBeerTags" multiple="multiple" id="multiple-tags-box" style="width: 100%">
+                        <option th:each="allTag : ${allBeerTags}"
                                 th:text="${allTag.name}"
                                 th:value="${allTag.id}">
 
                         </option>
                     </select>
                 </div> <!--id ="filter1" class="col-md-6">-->
-
                     <div id ="filter2" class="col-md-2">
-                    <label th:for="tagId">tried/untried</label>
-                    <select class="js-example-basic-multiple2" name="tagId" multiple="multiple" style="width: 100%" id="aaa">
-                        <option th:each="allTag : ${states2}"
-                                th:text="${allTag.name}"
-                                th:value="${allTag.id}">
-
-                        </option>
+                    <label >tried/untried</label>
+                    <select class="js-example-basic-single" name="tried" style="width: 100%" id="tried-select">
+                        <option value="tried">tried</option>
+                        <option value="not tried">not tried</option>
+                        <option value="all">all</option>
                     </select>
                 </div>
 
-                <div id ="filter3" class="col-md-1">
-                    <label th:for="states3">Distance</label>
-                    <select class="js-example-basic-multiple3" name="states3" multiple="multiple" style="width: 100%">
-                        <option th:each="allTag2 : ${states2}"
-                                th:text="${allTag2.name}"
-                                th:value="${allTag2.id}">
-
-                        </option>
+                <div id ="filter3" class="col-md-2">
+                    <label >Distance</label>
+                    <select class="js-example-basic-single" name="distance-select" style="width: 100%" id="distance-select">
+                        <option value="1">1 mile</option>
+                        <option value="2">2 miles</option>
+                        <option value="5">5 miles</option>
+                        <option value="10">10 miles</option>
+                        <option value="20">20 miles</option>
+                        <option value="50">50 miles</option>
+                        <option value="500">500 miles</option>
+                        <option value="20000">all</option>
                     </select>
                 </div> <!--id ="filter2" class="col-md-1>-->
-                <form method="post" style="max-width:600px;" >
-                <div id ="button" class="col-md-1">
 
+
+                <div id ="button" class="col-md-1">
+                    <form method="post" style="max-width:600px;" >
+                    <label > </label>
+                    <label > </label>
                         <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
                         <input type="hidden" th:value="${prefTags}" name="prefTags" id="prefTags"/>
                         <input type="hidden" th:value="${tagsForSearch}" name="tagsForSearch" id="tagsForSearch"/>
-                        <input type="submit" value="Search" id="search"/>
-
+                        <input type="hidden" th:value="${tried}" name="tried" id="tried"/>
+                        <input type="hidden" th:value="${distance}" name="distance" id="distance"/>
+                        <input type="submit" class="btn btn-info" value="Search" id="search"/>
+                    </form>
                 </div> <!--id ="filter2" class="col-md-1>-->
-                </form>
+
             </div>
         </div>
 
@@ -150,53 +155,50 @@
 </div> <!-- class="container"> -->
 <input type="hidden" th:value="${locations}" id="locations" />
 <input type="hidden" th:value="${userLocation}" id="userLocation" />
-<!--<input type="hidden" th:value="${prefTags}" id="prefTags"/>-->
-<!--<input type="hidden" th:value="${myPosition}" name="myPosition" id="myPositio"/>-->
-<!--<script src="https://unpkg.com/vue-multiselect@2.0.0"></script>-->
-<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 
+<script type="text/javascript" th:src="@{/js/jquery-3.2.1.js}"></script>
 <script type="text/javascript" th:src="@{/js/test_map.js}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-      //  $('.js-example-basic-multiple').select2();
-
-        $(".js-example-basic-multiple").select2({
+        $("#multiple-tags-box").select2({
             placeholder: "Select search terms",
             allowClear: false
         });
 
+        $("#tried-select").select2({
+
+        });
+
+        $("#distance-select").select2({
+
+        });
+
         var myData = JSON.parse($("#prefTags").val());
-        $('.js-example-basic-multiple').val(myData).trigger('change');
+        $('#multiple-tags-box').val(myData).trigger('change');
 
     });
 
-    $(".js-example-basic-multiple").change(
+    $("#multiple-tags-box").change(
         function(e) {
-            if ($('#states2').select2('val').length == 0){
+            if ($('#multiple-tags-box').select2('val').length == 0){
                 $('#search').attr('type', 'hidden');
             }
             else $('#search').attr('type', 'submit');
-
         });
 
 
     $('#search').click(function(e) {
-      //  $('#tagId').val(1);
-        $('#tags').val($('#states2').select2('val'));
-        var myval = $('#states2').select2('val');
-       // var myData = $('#states2').select2('data');
-      //  $('#tagsForSearch2').val(myData);
+        $('#tags').val($('#multiple-tags-box').select2('val'));
+        var myval = $('#multiple-tags-box').select2('val');
         $('#tagsForSearch').val(JSON.stringify(myval));
-       // $('#tagsForSearch2').val(JSON.stringify(myData));
+        $('#tried').val($('#tried-select').select2('val'));
+        $('#distance').val($('#distance-select').select2('val'));
         //alert(obj);
 
     });
 
 
-
-</script>
-<script>
 
 </script>
 

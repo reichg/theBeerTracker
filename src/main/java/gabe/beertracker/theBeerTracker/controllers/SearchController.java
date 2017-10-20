@@ -53,16 +53,19 @@ public class SearchController {
         model.addAttribute("userLocation",gson.toJson(currentLoc));
         model.addAttribute("searchResults", filteredBeers);
         model.addAttribute("title", "search results for " + userDao.findOne(userId).getUserName());
-        model.addAttribute("states2", beerTagDao.findAll());
+        model.addAttribute("allBeerTags", beerTagDao.findAll());
         model.addAttribute("prefTags", transformPrefTagsForModel(prefTags)); // Serialise tags for JS
         return "test/map3";
     }
 
     @RequestMapping(value = "test5", method = RequestMethod.POST)
-    public String searchPost(@RequestParam String myPosition, @RequestParam String tagsForSearch, Model model) {
+    public String searchPost(@RequestParam String myPosition, @RequestParam String tagsForSearch
+         ,@RequestParam String tried  ,@RequestParam String distance , Model model) {
         int userId = 1;
-        float maxDistance = 500;
+        float maxDistance = Float.parseFloat(distance);
         final Gson gson = new Gson();
+        System.out.println("tried = " + tried);
+        System.out.println("distance = " + distance);
         Location currentLoc = getCurrentLocationOfUser(myPosition);
         ArrayList<BeerTag> prefTags =  getCurrentPrefTagsAndUpdate(tagsForSearch, userId);
         ArrayList<List<Beer>> filteredBeersByOneTag = new ArrayList<>();
@@ -77,7 +80,7 @@ public class SearchController {
         model.addAttribute("userLocation",gson.toJson(currentLoc));
         model.addAttribute("searchResults", filteredBeers);
         model.addAttribute("title", "search results for " + userDao.findOne(userId).getUserName());
-        model.addAttribute("states2", beerTagDao.findAll());
+        model.addAttribute("allBeerTags", beerTagDao.findAll());
         model.addAttribute("prefTags", transformPrefTagsForModel(prefTags));
         return "test/map3";
     }
