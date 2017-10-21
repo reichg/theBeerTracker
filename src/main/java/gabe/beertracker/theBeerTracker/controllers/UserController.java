@@ -113,6 +113,26 @@ public class UserController {
         return "userhome";
 
     }
+
+    @RequestMapping(value = "wheresmybeer")
+    public String displayGame(HttpServletRequest request, Model model, Beer beer){
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/login";
+        }
+        User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
+        User user = userDao.findOne(storedData.getId());
+
+        Iterable<Beer> beerList = beerDao.getBeersTriedByUserId(storedData.getId());
+
+        model.addAttribute("beer", beer);
+        model.addAttribute("beerList", beerList);
+        model.addAttribute("userName", storedData.getUserName());
+//        model.addAttribute("welcome", "Welcome, " + user.getUserName());
+
+        return "wheresmybeer";
+
+    }
 }
 
 
