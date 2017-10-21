@@ -33,7 +33,7 @@ dependencies {
 	compile 'org.apache.commons:commons-csv:1.5'
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-
+	compile('org.mariadb.jdbc:mariadb-java-client')
 }
 
 bootRun {
