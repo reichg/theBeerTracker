@@ -187,12 +187,17 @@ button:focus {
 .beer-frame {
     width: 24em;
     border: 2px solid black;
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 .beer-image-container {
     background-color: grey;
     display: inline-block;
-    width: inherit;
+    width: 100%;
     text-align: center;
+    overflow: hidden;
+    border-bottom: 2px solid black;
 
 }
 .beer-frame img {
@@ -201,6 +206,9 @@ button:focus {
 }
 .beer-frame .beer-details h3 {
     text-align: center;
+}
+.beer-details {
+    padding: 10px;
 }
 
 @media only screen and (max-width: 767px) {
