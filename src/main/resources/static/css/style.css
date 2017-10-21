@@ -2,6 +2,9 @@ html,
 body {
     height: 100%;
 }
+.clearfix {
+    clear: both;
+}
 /*
 Remove all blue focus glow*/
 /*textarea:focus,
@@ -40,6 +43,7 @@ button:focus {
 #page-wrapper {
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 .bottle-background {
     background-image: url("/img/beer-assortment.jpeg");
@@ -97,7 +101,6 @@ button:focus {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    bottom: 0;
     width: 100%;
     min-height: 60px;
     padding: .5rem 1rem;
@@ -181,14 +184,23 @@ button:focus {
 
     background-color: rgba(255,255,255,0.5);
 }
+.beer-frame {
+    width: 24em;
+    border: 2px solid black;
+}
 .beer-image-container {
     background-color: grey;
     display: inline-block;
+    width: inherit;
+    text-align: center;
 
 }
 .beer-frame img {
     height: 245px;
     margin: 40px;
+}
+.beer-frame .beer-details h3 {
+    text-align: center;
 }
 
 @media only screen and (max-width: 767px) {
