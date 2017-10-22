@@ -89,13 +89,14 @@ button:focus {
     background-size: cover;
 }
 .container {
+    width: 100%;
     flex: 1 0 auto;
     padding-top: 80px;
     padding-left: 0;
     padding-right: 0;
     margin-left: 0;
     margin-right: 0;
-    /* max-width: inherit;*/
+    max-width: inherit;
 }
 .footer {
     display: flex;
@@ -191,7 +192,13 @@ button:focus {
     margin-left: 40px;
     margin-right: 40px;
 }
-.beer-image-container {
+.beer-frame-sm {
+    width: 10em;
+    margin-top: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+.beer-frame .beer-image-container {
     background-color: grey;
     display: inline-block;
     width: 100%;
@@ -200,15 +207,40 @@ button:focus {
     border-bottom: 2px solid black;
 
 }
+.beer-frame-sm .beer-image-container {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+
+}
 .beer-frame img {
-    height: 245px;
-    margin: 40px;
+    height: 15.3em;
+    margin: 2.5em;
+}
+.beer-frame-sm img {
+    height: 6.3em;
+    margin: 1.5em;
 }
 .beer-frame .beer-details h3 {
     text-align: center;
 }
-.beer-details {
+.beer-frame .beer-details {
     padding: 10px;
+}
+.beer-frame-sm .beer-details {
+    padding: 10px;
+}
+.map {
+    width: 40em;
+    height: 400px;
+    margin-top: 40px;
+    margin-left: 20px;
+    float: left;
+}
+.map img {
+    width: inherit;
+    height: inherit;
 }
 
 @media only screen and (max-width: 767px) {
