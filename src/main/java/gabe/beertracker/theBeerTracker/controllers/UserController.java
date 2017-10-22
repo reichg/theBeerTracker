@@ -114,8 +114,8 @@ public class UserController {
 
     }
 
-    @RequestMapping(value = "wheresmybeer")
-    public String displayGame(HttpServletRequest request, Model model, Beer beer){
+    @RequestMapping(value = "gameplay")
+    public String gameplay(HttpServletRequest request, Model model, Beer beer){
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/login";
@@ -130,7 +130,7 @@ public class UserController {
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
-        return "wheresmybeer";
+        return "gameplay";
 
     }
 

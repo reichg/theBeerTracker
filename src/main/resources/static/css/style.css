@@ -139,7 +139,7 @@ button:focus {
     min-width: 6rem;
     text-align: center;
     background-color: #aaa;
-    transition: all ease 0.3s;
+    transition: transform ease 0.3s;
 }
 .login-button:hover,
 .beer-game-btn {
