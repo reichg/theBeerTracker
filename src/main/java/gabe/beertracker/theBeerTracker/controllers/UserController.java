@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 
@@ -123,12 +126,47 @@ public class UserController {
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(storedData.getId());
 
-        Iterable<Beer> beerList = beerDao.getBeersTriedByUserId(storedData.getId());
+        Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId()); //found beers list
 
         model.addAttribute("beer", beer);
-        model.addAttribute("beerList", beerList);
+        model.addAttribute("beerList", userBeerList);
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
+
+
+
+
+
+        //Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
+        Iterable<Beer> allBeers = beerDao.findAll();
+
+
+        ArrayList<Integer> allBeerIds = new ArrayList();
+        ArrayList<Integer> notTriedBeersIds = new ArrayList();
+        Integer randomBeerId = 0;
+
+        //create list of all beer Ids
+        for (Beer beers : allBeers) {
+            allBeerIds.add(beers.getId());
+
+        }
+
+        //create a list of all beers' id the user has found.
+        for (Beer foundBeer : userBeerList) {
+            //getting beer IDs that the user has not tried yet.
+            if (allBeerIds.contains(foundBeer.getId())) {
+                allBeerIds.remove(foundBeer.getId());
+            }
+        }
+
+        for (Integer beerId : allBeerIds) {
+
+            notTriedBeersIds.add(beerId);
+        }
+
+        randomBeerId = notTriedBeersIds.get(new Random().nextInt(notTriedBeersIds.size()));
+        Beer randomBeer = beerDao.findOne(randomBeerId);
+        model.addAttribute("randomBeer", randomBeer.getName());
 
         return "gameplay";
 
@@ -144,10 +182,10 @@ public class UserController {
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(storedData.getId());
 
-        Iterable<Beer> beerList = beerDao.getBeersTriedByUserId(storedData.getId());
+        Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
 
         model.addAttribute("beer", beer);
-        model.addAttribute("beerList", beerList);
+        model.addAttribute("beerList", userBeerList);
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 

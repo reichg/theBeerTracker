@@ -24,7 +24,7 @@
                 <img src="/img/beer-example.png" />
             </div>
             <div class="beer-details">
-                <h3><a class="nounderline" href="#">Name of beer</a></h3>
+                <h3><a class="nounderline" href="#" th:text="${randomBeer}"></a></h3>
                 <p>
                     Lorem ipsum dolor sit amet, cu est consul aperiam, ut qui numquam complectitur.
                     In probatus atomorum quo, fabellas disputando eu eum. Pro ne erat inimicus.
@@ -35,9 +35,16 @@
 
         <div class="beer-decision float-md-left">
             <h3>Do you want this beer?</h3>
-            <input class="beer-game-btn yes-btn" type="submit" value="Yes! Beer Me!" />
-            <input class="beer-game-btn no-btn" type="submit" value="I want another one." />
-            <input class="beer-game-btn found-btn" type="submit" value="I found it already." />
+            <form action="/locations">
+                <input class="beer-game-btn yes-btn" type="submit" value="Yes! Beer Me!" />
+            </form>
+            <form action="/gameplay">
+                <input class="beer-game-btn no-btn"  type="submit" value="I want another one." />
+            </form>
+            <form action="/userhome">
+                <input class="beer-game-btn found-btn" type="submit" value="I found it already." />
+            </form>
+
         </div>
 
     </div><!-- /.container -->
