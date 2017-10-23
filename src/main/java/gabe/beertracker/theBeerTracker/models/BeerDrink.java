@@ -24,6 +24,10 @@ public class BeerDrink {
     @ManyToOne
     private Location location;
 
+    @OneToOne
+    @JoinColumn(name = "user_game_id")
+    private UserGame userGame;
+
     public BeerDrink() {
         this.dateOfCreation = LocalDateTime.now();
     }
@@ -67,4 +71,14 @@ public class BeerDrink {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public UserGame getUserGame() {
+        return userGame;
+    }
+
+    public void setUserGame(UserGame userGame) {
+        this.userGame = userGame;
+    }
+
+
 }

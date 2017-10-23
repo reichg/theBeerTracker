@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,36 +48,9 @@ public class TestController2 {
 
     public String index
         //       ()
-    (Model model)
+    (HttpServletRequest request, Model model)
     {
 
-/*        BeerTag newBeerTag1 = new BeerTag("tag3 light2");
-        beerTagDao.save(newBeerTag1);
-        BeerTag newBeerTag2 = new BeerTag("tag4 dark2");
-        beerTagDao.save(newBeerTag2);
-        Location newLocation = new Location("location2", -25.363, 131.044);
-        locationDao.save(newLocation);
-        List<BeerTag> listBeerTags = new ArrayList<>();
-        listBeerTags.add(newBeerTag1);
-        Beer newBeer = new Beer("beer3",listBeerTags,newLocation);
-        beerDao.save(newBeer);
-        listBeerTags.add(newBeerTag2);
-        Beer newBeer2 = new Beer("beer4",listBeerTags,newLocation);
-        beerDao.save(newBeer2);
-        User newUser1 = new User("hash3", "username3");
-        User newUser2 = new User("hash4", "username4");
-        userDao.save(newUser1);
-        userDao.save(newUser2);
-        BeerDrink newBeerDrink = new BeerDrink(LocalDateTime.now(), newBeer, newUser2, newLocation);
-        beerDrinkDao.save(newBeerDrink);*/
-       // model.addAttribute("beers", beerDao.findAll());
-//        model.addAttribute("beers", beerDao.findAll());
-//       // model.addAttribute("divider", " tags: ");
-//        model.addAttribute("tags", beerTagDao.findAll());
-//        User newUser1 = new User("hash3", "username3");
-//        User newUser2 = new User("hash4", "username4");
-//        userDao.save(newUser1);
-//        userDao.save(newUser2);
         ArrayList<BeerTag> prefTags = new ArrayList<BeerTag>();
         User user = userDao.findOne(1);
         prefTags.add(beerTagDao.findOne(1));
@@ -86,8 +60,22 @@ public class TestController2 {
         userPreferredTagsDao.save(userPreferredTags);
 
 
+
+
+
+          /*  if (request != null){
+                String param1 = (String) request.getAttribute("param1");
+                if (param1 == "auto"){
+                    request.setAttribute("param1", "auto");
+                    return "forward:/test7";
+                }
+
+            }*/
+
+
         return "test/index2";
     }
+
     @RequestMapping(value = "test/map2")
     public String distance(Model model){
         int radius = 50; //radius of search
@@ -119,4 +107,7 @@ public class TestController2 {
         //System.out.println("Reconverted Java object : " + loc);
         return  "test/map";
     }
+
+
+
 }

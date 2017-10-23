@@ -2,10 +2,8 @@ package gabe.beertracker.theBeerTracker.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -37,6 +35,10 @@ public class Beer {
 
     @ManyToMany
     private List<Location> locations;
+
+    @OneToMany
+    @JoinColumn(name ="beer_id")
+    private List<UserGame> userGame;
 
     private String description;
 
@@ -154,4 +156,11 @@ public class Beer {
         return users;
     }
 
+    public List<UserGame> getUserGame() {
+        return userGame;
+    }
+
+    public void setUserGame(List<UserGame> userGame) {
+        this.userGame = userGame;
+    }
 }

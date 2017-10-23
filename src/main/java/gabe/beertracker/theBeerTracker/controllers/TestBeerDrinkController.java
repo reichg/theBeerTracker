@@ -1,14 +1,13 @@
 package gabe.beertracker.theBeerTracker.controllers;
 
-import gabe.beertracker.theBeerTracker.models.Beer;
-import gabe.beertracker.theBeerTracker.models.BeerDrink;
-import gabe.beertracker.theBeerTracker.models.User;
+import gabe.beertracker.theBeerTracker.models.*;
 import gabe.beertracker.theBeerTracker.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,42 +32,28 @@ public class TestBeerDrinkController {
     private LocationFeedbackDao locationFeedbackDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserGameDao userGameDao;
 
 
     @RequestMapping(value = "test3")
 
     public String test
         //       ()
-    (Model model) {
+    (HttpServletRequest request, Model model)
+    {
 
-/*        BeerTag newBeerTag1 = new BeerTag("tag3 light2");
-        beerTagDao.save(newBeerTag1);
-        BeerTag newBeerTag2 = new BeerTag("tag4 dark2");
-        beerTagDao.save(newBeerTag2);
-        Location newLocation = new Location("location2", -25.363, 131.044);
-        locationDao.save(newLocation);
-        List<BeerTag> listBeerTags = new ArrayList<>();
-        listBeerTags.add(newBeerTag1);
-        Beer newBeer = new Beer("beer3",listBeerTags,newLocation);
-        beerDao.save(newBeer);
-        listBeerTags.add(newBeerTag2);
-        Beer newBeer2 = new Beer("beer4",listBeerTags,newLocation);
-        beerDao.save(newBeer2);
-        User newUser1 = new User("hash3", "username3");
-        User newUser2 = new User("hash4", "username4");
-        userDao.save(newUser1);
-        userDao.save(newUser2);
-        BeerDrink newBeerDrink = new BeerDrink(LocalDateTime.now(), newBeer, newUser2, newLocation);
-        beerDrinkDao.save(newBeerDrink);*/
-        // model.addAttribute("beers", beerDao.findAll());
 
-        model.addAttribute("beers", beerDao.findAll());
-        // model.addAttribute("divider", " tags: ");
+
+
         User newUser1 = new User("hash3", "username3");
         User newUser2 = new User("hash4", "username4");
         userDao.save(newUser1);
         userDao.save(newUser2);
         model.addAttribute("tags", beerTagDao.findAll());
+        add10BeersTo10Locations();
+     //   Location aLocation =locationDao.findOne(9);
+
         BeerDrink newBeerDrink = new BeerDrink(LocalDateTime.now(), beerDao.findOne(3), userDao.findOne(1), locationDao.findOne(3));
         beerDrinkDao.save(newBeerDrink);
         BeerDrink newBeerDrink2 = new BeerDrink(LocalDateTime.now(), beerDao.findOne(3), userDao.findOne(1), locationDao.findOne(3));
@@ -80,10 +65,24 @@ public class TestBeerDrinkController {
         BeerDrink newBeerDrink5= new BeerDrink(LocalDateTime.now(), beerDao.findOne(6), userDao.findOne(1), locationDao.findOne(3));
         beerDrinkDao.save(newBeerDrink5);
 
+        UserGame userGame = new UserGame(beerDao.findOne(10), userDao.findOne(1));
+        userGameDao.save(userGame);
+
+        if (request != null){
+            String param1 = (String) request.getAttribute("param1");
+            if (param1 == "auto"){
+                request.setAttribute("param1", "auto");
+                return "forward:/test2";
+            }
+
+        }
+
+        model.addAttribute("beers", beerDao.findAll());
   //      return "test/index3";
         return "login";
 
     }
+
 
 
     @RequestMapping(value = "test4")
@@ -117,6 +116,28 @@ public class TestBeerDrinkController {
 
         return "test/index3";
     }
+    @RequestMapping(value = "load-test-data")
+    public String allTestDataSet
+    (HttpServletRequest request) {
+        request.setAttribute("param1", "auto");
+        return "forward:/loadwa";
+
+    }
+
+    private void add10BeersTo10Locations(){
+
+        for (int i =7; i< 17; i++){
+            Beer aBeer = beerDao.findOne(i);
+            for (int j = 10; j<20; j++){
+                if (!aBeer.getLocations().contains(locationDao.findOne(j))){
+                    aBeer.getLocations().add(locationDao.findOne(j));
+                }
+            }
+            beerDao.save(aBeer);
+        }
+
+    }
+
 
 }
 

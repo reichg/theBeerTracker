@@ -11,7 +11,8 @@ public class UserKnownLocation {
     @GeneratedValue
     private int id;
 
-    @OneToOne(mappedBy = "userKnownLocation", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "simple_location_id")
     private SimpleLocation simpleLocation;
 
     private LocalDateTime dateOfCreation;
