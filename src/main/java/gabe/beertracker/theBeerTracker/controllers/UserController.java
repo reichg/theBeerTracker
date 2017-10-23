@@ -1,9 +1,10 @@
 package gabe.beertracker.theBeerTracker.controllers;
 
-import gabe.beertracker.theBeerTracker.models.Beer;
-import gabe.beertracker.theBeerTracker.models.User;
+import com.google.gson.Gson;
+import gabe.beertracker.theBeerTracker.models.*;
 import gabe.beertracker.theBeerTracker.models.data.BeerDao;
 import gabe.beertracker.theBeerTracker.models.data.BeerDrinkDao;
+import gabe.beertracker.theBeerTracker.models.data.LocationDao;
 import gabe.beertracker.theBeerTracker.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private LocationDao locationDao;
 
     @RequestMapping(value = "")
     public String index() {
@@ -103,6 +107,10 @@ public class UserController {
         if (session == null) {
             return "redirect:/login";
         }
+
+        Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
+        if(userPosition == null) userPosition = locationDao.findOne(3);
+      //  System.out.println("userPosition.getLatitude()=" + userPosition.getLatitude());
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(storedData.getId());
 
@@ -111,9 +119,15 @@ public class UserController {
         model.addAttribute("beer", beer);
         model.addAttribute("beerList", beerList);
         model.addAttribute("userName", storedData.getUserName());
+        ArrayList<BeerAndOneLocation> filteredBeers = getBeersWithOneLocation(storedData.getId(), userPosition);
+        model.addAttribute("searchResults", filteredBeers);
+        ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
+        final Gson gson = new Gson();
+        model.addAttribute("userLocation",gson.toJson(userPosition));
+        model.addAttribute("locations", gson.toJson(myLocList.toArray()));
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
-        return "userhome";
+        return "userhome_draft_map";
 
     }
 
@@ -193,6 +207,15 @@ public class UserController {
 
     }
 
+        private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation){
+        ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
+        ArrayList<BeerDrink> beerDrinks = beerDrinkDao.getUniqueBeerDrinksByUserId(userId);
+        for (BeerDrink beerDrink : beerDrinks){
+            BeerAndOneLocation beerAndOneLocation = new BeerAndOneLocation(beerDrink.getBeer(), userLocation, beerDrink.getLocation() );
+            filteredBeers.add(beerAndOneLocation);
+        }
+        return (filteredBeers);
+    }
 }
 
 

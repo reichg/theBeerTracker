@@ -15,11 +15,11 @@ function initMap() {
     for (i = 0; i < obj.length; i++) {
         var curMarker = {lat: obj[i].latitude, lng: obj[i].longitude};
         marker = new google.maps.Marker({
-          //  position: new google.maps.LatLng(obj[i].latitude, obj[i].longitude),
+            //  position: new google.maps.LatLng(obj[i].latitude, obj[i].longitude),
             position: curMarker,
             map: map
         });
-       // alert( marker.position);
+        // alert( marker.position);
         markers.push(marker);
 
         var infoWindow = new google.maps.InfoWindow({map: map});
@@ -53,22 +53,22 @@ function initMap() {
             'Error: Your browser doesn\'t support geolocation.');
 
 
-/*        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infowindow.setContent(locations[i][0]);
-                infowindow.open(map, marker);
-            }
-        })(marker, i));*/
+        /*        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infowindow.setContent(locations[i][0]);
+                        infowindow.open(map, marker);
+                    }
+                })(marker, i));*/
     }
 
 
 
 
-/*
-    var marker3 = new google.maps.Marker({
-        position: myLatLng3,
-        map: map,
-        title: 'Location1'
-    });*/
+    /*
+        var marker3 = new google.maps.Marker({
+            position: myLatLng3,
+            map: map,
+            title: 'Location1'
+        });*/
 
 }
