@@ -18,7 +18,7 @@ public class SimpleLocation {
     private String name;
 
     @OneToOne
-    @JoinColumn(name = "simple_location_id")
+    (mappedBy = "simpleLocation", cascade = CascadeType.ALL)
     private UserKnownLocation userKnownLocation;
 
     public double getLat() {

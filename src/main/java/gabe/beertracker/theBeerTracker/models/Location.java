@@ -235,4 +235,9 @@ public class Location {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+
+    public  void addBeer(Beer aBeer){
+        List<Beer> listBeers = this.getBeers();
+        listBeers.add(aBeer);
+    }
 }

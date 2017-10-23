@@ -63,6 +63,10 @@ public class User {
     @ManyToMany()
     private List<Beer> favoriteBeers;
 
+    @OneToMany
+    @JoinColumn(name ="user_id")
+    private List<UserGame> userGames = new ArrayList<>();
+
     //private List<BeerTag> preferencesForSearch;
 
 
@@ -172,4 +176,14 @@ public class User {
     public void setUserPreferredTags(List<UserPreferredTags> userPreferredTags) {
         this.userPreferredTags = userPreferredTags;
     }
+
+    public List<UserGame> getUserGames() {
+        return userGames;
+    }
+
+    public void setUserGames(List<UserGame> userGames) {
+        this.userGames = userGames;
+    }
+
+
 }

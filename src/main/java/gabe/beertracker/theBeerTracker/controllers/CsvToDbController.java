@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 import static gabe.beertracker.theBeerTracker.models.data.dataTools.DataTools.*;
 import static java.lang.Double.parseDouble;
@@ -49,11 +51,20 @@ public class CsvToDbController {
     @RequestMapping(value = "loadwa")
   //  @ResponseBody
     public String loadwa
-     //       ()
-           (Model model)
+
+           (HttpServletRequest request, Model model)
     {
         loadAllData();
         dataToDB("wa"); //only Washington
+        if (request != null){
+            String param1 = (String) request.getAttribute("param1");
+            if (param1 == "auto"){
+                request.setAttribute("param1", "auto");
+                return "forward:/test3";
+            }
+
+        }
+
         model.addAttribute("beers", beerDao.findAll());
 
         return "test/index";
