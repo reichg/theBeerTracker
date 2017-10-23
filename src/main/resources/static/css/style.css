@@ -8,6 +8,9 @@ html {
 body {
     font-size: 62.5%; /* 1em = 10px */
 }
+p {
+    font-size: 1.5em;
+}
 .clearfix {
     clear: both;
 }
@@ -65,6 +68,8 @@ button:focus {
 }
 #breadcrumbs {
     font-size: 1.5em;
+    margin-top: 10px;
+    margin-bottom: 40px;
 }
 .parallax {
     background-image: url("/img/beer-assortment.jpeg");
@@ -79,8 +84,8 @@ button:focus {
     width: 100%;
     flex: 1 0 auto;
     padding-top: 80px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 40px;
+    padding-right: 40px;
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
@@ -106,11 +111,11 @@ button:focus {
 
 }
 .footer .navbar-nav .nav-item {
-    width: 12em;
+    width: 21em;
 }
 .footer .navbar-nav .nav-item .nav-link {
     color: rgba(255,255,255,.5);
-    font-size: 0.85em;
+    font-size: 1.5em;
 }
 .footer .navbar-nav .nav-item .nav-link:hover {
     color: rgba(255,255,255,1);
@@ -171,6 +176,7 @@ button:focus {
     display: inline-block;
     border: 2px solid black;
     padding: 40px;
+    border-radius: 4px;
 }
 .form-control {
     color: #222629;
@@ -183,9 +189,8 @@ button:focus {
 .beer-frame {
     width: 24em;
     border: 2px solid black;
-    margin-top: 40px;
-    margin-left: 40px;
     margin-right: 40px;
+    border-radius: 4px;
 }
 .beer-frame-sm {
     width: 10em;
@@ -210,7 +215,7 @@ button:focus {
 
 }
 .beer-frame img {
-    height: 15.3em;
+    height: 275px;
     margin: 2.5em;
 }
 .beer-frame-sm img {
