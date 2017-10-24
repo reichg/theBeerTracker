@@ -127,7 +127,7 @@ public class UserController {
         model.addAttribute("locations", gson.toJson(myLocList.toArray()));
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
-        return "userhome_draft_map";
+        return "userhome";
 
     }
 

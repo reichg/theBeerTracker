@@ -252,8 +252,13 @@ button:focus {
         line-height: 0;
     }
 
-    #map {
-        height:400px;
-        width: 100%;
-    }
+}
+#map {
+    height:400px;
+    width: 100%;
+}
+#title {
+    width: 100%;
+
+    background-color: rgba(255,255,255,0.5);
 }

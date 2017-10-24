@@ -3,13 +3,13 @@ function initMap() {
     var obj2 = JSON.parse($("#userLocation").val());
     var userLocation = {lat: obj2.latitude, lng: obj2.longitude};
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 4,
+        zoom: 8,
         center: userLocation,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
     var marker, i;
     var markers = [];
-
+    //alert("i'm here");
     // var infowindow = new google.maps.InfoWindow();
 
     for (i = 0; i < obj.length; i++) {

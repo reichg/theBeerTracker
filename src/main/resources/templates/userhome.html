@@ -9,6 +9,16 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <!--      <style>
+            /* Always set the map height explicitly to define the size of the div
+             * element that contains the map. */
+            #map {
+                /*height: 100%;*/
+                height:400px;
+                width: 100%;
+            }
+        </style>-->
+
     </head>
 
     <body>
@@ -19,40 +29,70 @@
         <div id="page-wrapper">
             <div class="bottle-background">
                 <div class="container">
-                    <div class="section-1">
-
-                        <h1 class="text-center">Welcome Home, <span th:text="${userName}"></span>!</h1>
-                        <h2>Beers You've Tried</h2>
-                        <p th:unless="${beerList} and ${beerList.size()}">You need to drink some beer!</p>
-
-
-                        <table class="table" style="max-width: 400px">
-
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>ABV</th>
-                            </tr>
-
-                            <tr th:each="beer : ${beerList}">
-                                <td th:text="${beer.name}"></td>
-                                <td th:text="${beer.description}"></td>
-                                <td th:text="${beer.abv}"></td>
-                            </tr>
-
-                        </table>
-
+                    <div class="row">
+                        <div class ="col-md-12" id = "title">
+                            <h1 class="text-center">Welcome Home, <span th:text="${userName}"></span>!</h1>
+                        </div>
                     </div>
+                    <div class="row">
+                            <div class ="col-md-3">
+                              <div class="section-1">
 
+                                   <h2>Beers You've Tried</h2>
+                                    <p th:unless="${searchResults} and ${searchResults.size()}">You need to drink some beer!</p>
+
+                                    <table class="table" style="max-width: 400px">
+
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>ABV</th>
+                                      </tr>
+
+                                     <tr th:each="beer : ${searchResults}">
+                                        <td th:text="${beer.name}"></td>
+                                         <td th:text="${beer.description}"></td>
+                                         <td th:text="${beer.abv}"></td>
+                                    </tr>
+
+                                     </table>
+
+                            </div>
+                          </div> <!--class ="col-md-3"> -->
+                          <div class ="col-md-9">
+                              <div  id="big_button">
+                                  <!--<form action="/gameplay">-->
+                                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
+                                  <!--</form>-->
+                              </div>
+                          </div> <!--class ="col-md-6"> -->
+                          <!--<div class ="row">-->
+                              <div class ="col-md-12">
+                                  <div  id="map">
+                                  </div>
+                              </div> <!--class ="col-md-6"> -->
+                          <!--</div>&lt;!&ndash; row&ndash;&gt;-->
+
+
+
+                      </div>
                 </div><!--End container-->
             </div><!--End bottle-background-->
             <footer th:replace="fragments :: footer"></footer>
         </div><!--End page-wrapper-->
+        <input type="hidden" th:value="${locations}" id="locations" />
+        <input type="hidden" th:value="${userLocation}" id="userLocation" />
 
 
         <!-- Bootstrap Script Files -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script type="text/javascript" th:src="@{/js/only_map.js}"></script>
+        <script type="text/javascript" th:src="@{/js/gameplay-redirect.js}"></script>
+        <!--<script type="text/javascript" th:src="@{/js/test_map.js}"></script>-->
+        <script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap"></script>
+
+
     </body>
 </html>
