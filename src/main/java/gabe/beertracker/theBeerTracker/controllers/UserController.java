@@ -108,8 +108,9 @@ public class UserController {
             return "redirect:/login";
         }
 
-        Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
-        if(userPosition == null) userPosition = locationDao.findOne(3);
+        //Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
+     //   if(userPosition == null) userPosition = locationDao.findOne(3);
+        Location userPosition = locationDao.findOne(3);
       //  System.out.println("userPosition.getLatitude()=" + userPosition.getLatitude());
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(storedData.getId());
@@ -182,13 +183,14 @@ public class UserController {
         Beer randomBeer = beerDao.findOne(randomBeerId);
         model.addAttribute("randomBeer", randomBeer.getName());
 
+        session.setAttribute("beerId",randomBeer.getId());
         return "gameplay";
 
     }
 
     // 1
     @RequestMapping(value = "locations")
-    public String locations(HttpServletRequest request, Model model, Beer beer){
+    public String locations(HttpServletRequest request, Model model, Beer beer, @RequestParam String beerName){
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/login";
@@ -203,6 +205,8 @@ public class UserController {
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
+        Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
+        model.addAttribute("beerName", storedRandomBeer.getName());
         return "locations";
 
     }
