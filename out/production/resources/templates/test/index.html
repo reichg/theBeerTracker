@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
 <body class="container">
 
 <h1 th:text="${title}">Default Title</h1>
@@ -10,8 +17,19 @@
 
 
     <tr th:each="beer : ${beers}">
-        <td th:text="${beer.name}"></td>
-        <td th:text="${beer.tags}"></td>
+        <td th:text="${beer}"></td>
+        <td th:each="tag : ${beer.tags}"></td>
+        <td th:text="${tag}"></td>
+    </tr>
+
+</table>
+
+<table class="table">
+
+
+    <tr th:each="tag : ${tags}">
+        <td th:text="${tag.name}"></td>
+
 
     </tr>
 

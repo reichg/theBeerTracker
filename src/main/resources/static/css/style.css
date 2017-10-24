@@ -44,6 +44,7 @@ button:focus {
 .success {
     color: green;
 }
+
 .navbar-brand {
     font-size: 1.8rem;
 }
@@ -254,4 +255,14 @@ button:focus {
         font-size: 0.85em;
         line-height: 0;
     }
+
+}
+#map {
+    height:400px;
+    width: 100%;
+}
+#title {
+    width: 100%;
+
+    background-color: rgba(255,255,255,0.5);
 }
