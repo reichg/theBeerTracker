@@ -21,13 +21,16 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link nav-round-links" href="/login">LOG IN</a>
+                    <a class="nav-link nav-round-links" th:if="${userName != null}" href="/userhome">USERHOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-round-links" href="/register">REGISTER</a>
+                    <a class="nav-link nav-round-links" th:if="${userName == null}" href="/login">LOG IN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-round-links" th:if="${userName == null}" href="/register">REGISTER</a>
                 </li>
                 <li>
-                    <a class="nav-link nav-round-links" href="/logout">LOGOUT</a>
+                    <a class="nav-link nav-round-links" th:if="${userName != null}" href="/logout">LOGOUT</a>
                 </li>
             </ul>
         </div>
@@ -35,7 +38,7 @@
 
     <!-- Breakcrumbs Fragment -->
     <div id="breadcrumbs" th:fragment="breadcrumbs">
-        <a href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to your homepage</a>
+        <a href="/userhome"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to your homepage</a>
         <div class="clearfix"></div>
     </div>
 
