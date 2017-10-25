@@ -7,22 +7,53 @@ function initMap() {
         center: userLocation,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
-    var marker, i;
+
     var markers = [];
+
     //alert("i'm here");
-    // var infowindow = new google.maps.InfoWindow();
+    setMarkers();
 
-    for (i = 0; i < obj.length; i++) {
-        var curMarker = {lat: obj[i].latitude, lng: obj[i].longitude};
-        marker = new google.maps.Marker({
-            //  position: new google.maps.LatLng(obj[i].latitude, obj[i].longitude),
-            position: curMarker,
-            map: map
-        });
-        // alert( marker.position);
-        markers.push(marker);
+    function setMarkers()  {
+        var contentStrings = [];
+        var i, marker;
+        for (i = 0; i < obj.length; i++){
+            var contentString = '<div id="content">'+
+                '<div id="siteNotice">'+
+                   '</div>'+
+                      '<h6 >'+ obj[i].name +'</h6>'+
+                      '<div id="bodyContent">'+
+                        '<p>description:' + obj[i].description +  '</p>'+
+                        '<p>address:' + obj[i].streetNumber +  '</p>'+
+                        '<p>' + obj[i].route +  '</p>'+
+                        '<p>' + obj[i].postalCode +  '</p>'+
+                        '<p>' + obj[i].administrativeAreaLevel1 +  '</p>'+
+                        '<p>' + obj[i].administrativeAreaLevel2 +  '</p>'+
+                        '<p>phone:' + obj[i].phone +  '</p>'+
+                        '<p>web:' + obj[i].webSite +  '</p>'+
 
+                     '</div>'+
+                   '</div>'+
+                '</div>';
+            contentStrings.push(contentString);
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString});
+            var curMarker = {lat: obj[i].latitude, lng: obj[i].longitude};
+            marker = new google.maps.Marker({
+                //  position: new google.maps.LatLng(obj[i].latitude, obj[i].longitude),
+                position: curMarker,
+                animation: google.maps.Animation.DROP,
+                map: map,
+                title: obj[i].name,
+                infowindow: infowindow
+            });
+            marker.addListener('click', function() {
+                this.infowindow.open(map, this);
+            });
+            markers.push(marker);
         }
+
+}
+
 
 
 
