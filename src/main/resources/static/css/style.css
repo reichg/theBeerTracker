@@ -216,7 +216,8 @@ button:focus {
 }
 .beer-frame img {
     height: 275px;
-    margin: 2.5em;
+    margin: 2.5em auto;
+    /* width: inherit; */
 }
 .beer-frame-sm img {
     height: 6.3em;
