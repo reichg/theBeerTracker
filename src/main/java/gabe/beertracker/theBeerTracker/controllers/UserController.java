@@ -190,7 +190,7 @@ public class UserController {
 
     // 1
     @RequestMapping(value = "locations")
-    public String locations(HttpServletRequest request, Model model, Beer beer, @RequestParam String beerName){
+    public String locations(HttpServletRequest request, Model model, Beer beer){
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/login";
