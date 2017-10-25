@@ -55,10 +55,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser, @RequestParam String userName,
-                                  Errors errors, Model model, HttpServletRequest request) {
+    public String processRegister(@ModelAttribute @Valid User newUser,Errors errors, @RequestParam String userName
+                                  , Model model, HttpServletRequest request) {
+        if (errors.hasErrors() ) {
+            return "register";
+        }
 
-        Iterable<User> allUsers = userDao.findAll();
+              Iterable<User> allUsers = userDao.findAll();
         boolean userNameExists = false;
         boolean passwordExists = false;
         for (User user : allUsers) {
@@ -74,11 +77,7 @@ public class UserController {
                 }
             }
         }
-        if (errors.hasErrors() ) {
-            return "register";
-        }
 
-        else{
             if (!userNameExists) {
                 if (!passwordExists) {
                     model.addAttribute("userName", userName);
@@ -98,7 +97,7 @@ public class UserController {
 
             model.addAttribute("existingUsername", "Great minds think alike, username already exists");
             return "register";
-        }
+
     }
 
 
@@ -218,7 +217,7 @@ public class UserController {
         final Gson gson = new Gson();
         model.addAttribute("userLocation",gson.toJson(userPosition));
         model.addAttribute("locations", gson.toJson(myLocList.toArray()));
-        return "locations_draft_2";
+        return "locations";
 
     }
 
