@@ -55,8 +55,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser, @RequestParam String userName,
-                                  Errors errors, Model model, HttpServletRequest request) {
+    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, @RequestParam String userName, Model model, HttpServletRequest request) {
 
         Iterable<User> allUsers = userDao.findAll();
         boolean userNameExists = false;
@@ -74,7 +73,7 @@ public class UserController {
                 }
             }
         }
-        if (errors.hasErrors() ) {
+        if (errors.hasErrors()) {
             return "register";
         }
 
