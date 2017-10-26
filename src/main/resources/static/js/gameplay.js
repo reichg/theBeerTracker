@@ -6,7 +6,7 @@ $( document ).ready(function() {
         "amber-beer-bottle-square-etiquette.png",
         "amber-beer-steinie-bottle.png",
         "brown-beer-bottle.png",
-        "\img\\clear-beer-bottle.png",
+        "clear-beer-bottle.png",
         "dark-beer-bottle.png",
         "green-beer-bottle-etiquette.png",
         "green-beer-bottle-neck-foil.png",
@@ -14,5 +14,7 @@ $( document ).ready(function() {
         "lt-brown-beer-bottle.png"
     ];
 
-    document.getElementById('bottle-image').src = bottleImages[4];
+    var rand = Math.floor(Math.random() * 10);
+    console.log(rand);
+    document.getElementById('bottle-image').src = '\img\\' + bottleImages[rand];
 });
