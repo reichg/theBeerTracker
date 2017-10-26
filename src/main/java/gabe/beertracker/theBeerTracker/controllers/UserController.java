@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -192,7 +193,7 @@ public class UserController {
     }
 
     // 1
-    @RequestMapping(value = "locations")
+    @RequestMapping(value = "locations", method = RequestMethod.GET)
     public String locations(HttpServletRequest request, Model model, Beer beer, @RequestParam String beerName){
         HttpSession session = request.getSession(false);
         if (session == null) {
@@ -220,6 +221,29 @@ public class UserController {
         return "locations";
 
     }
+
+    @RequestMapping(value = "locations" , method = RequestMethod.POST)
+    public String locationsProcess(HttpServletRequest request, Model model){
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/login";
+        }
+        User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
+        User user = userDao.findOne(storedData.getId());
+        Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
+        List<Location> locations = storedRandomBeer.getLocations();
+        Location location = locations.get(0);
+        BeerDrink beerDrink = new BeerDrink(LocalDateTime.now() , storedRandomBeer, user, location);
+        beerDrinkDao.save(beerDrink);
+        return "redirect:/userhome";
+
+    }
+
+
+
+
+
+
 
         private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation){
         ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();

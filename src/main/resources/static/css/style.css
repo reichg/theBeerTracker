@@ -34,7 +34,7 @@ button:focus {
 }
 .bottle-background {
     background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.4;
+    opacity: 0.9;
     min-height: 700px;
     background-attachment: fixed;
     background-position: center;
@@ -74,7 +74,7 @@ button:focus {
 }
 .parallax {
     background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.4;
+    opacity: 0.9;
     min-height: 600px;
     background-attachment: fixed;
     background-position: center;
@@ -133,6 +133,22 @@ button:focus {
 .login-form {
     color: black;
 }
+
+#big_button:hover,
+#big_button:focus,
+#big_button:active,
+#big_button.active {
+    color: #ffffff;
+    background-color: #0046b7;
+    border-color: #285e8e;
+}
+
+.custom-bg-color {
+    background-color: #0046b7 !important;
+}
+
+
+
 .login-button,
 .beer-game-btn {
     border: none;
@@ -149,6 +165,11 @@ button:focus {
 .login-button:hover,
 .beer-game-btn {
     cursor: pointer;
+}
+
+#big_button {
+    margin-top: 70px !important;
+
 }
 .login-button:hover {
     border: 2px solid #444;
