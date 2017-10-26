@@ -183,8 +183,10 @@ button:focus {
 }
 .section-1 {
     width: 100%;
+    padding: 10px;
+    margin: 15px;
 
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255,255,255,0.9);
 }
 .beer-frame {
     width: 24em;
@@ -263,6 +265,8 @@ button:focus {
 }
 #title {
     width: 100%;
+    margin-left: 15px;
 
-    background-color: rgba(255,255,255,0.5);
+
+    background-color: rgba(255,255,255,0.9);
 }

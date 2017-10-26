@@ -25,15 +25,24 @@
             </div>
             <div class="beer-details">
                 <h5 th:text="${beerName}">Name of Beer</h5>
+
             </div>
         </div>
+        <div>
+            <form action="/userhome">
+                <input class="beer-game-btn yes-btn" type="submit" onclick="gameplay_red()" value="I Found This Beer"/>
+            </form>
+        </div>
+
         <div class="map">
             <div id="map">
 
             </div>
  <!--           &lt;!&ndash;     PLACEHOLDER FOR THE MAP    &ndash;&gt;
             <img src="/img/map-placeholder.jpg" />-->
+
         </div>
+
 
 
     </div><!-- /.container -->
