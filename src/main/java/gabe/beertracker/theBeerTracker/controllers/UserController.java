@@ -202,7 +202,8 @@ public class UserController {
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
         User user = userDao.findOne(storedData.getId());
 
-        Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
+        List<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
+
 
         model.addAttribute("beer", beer);
         model.addAttribute("beerList", userBeerList);
@@ -210,6 +211,7 @@ public class UserController {
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
         Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
+
         model.addAttribute("beerName", storedRandomBeer.getName());
         List<Location> myLocList= storedRandomBeer.getLocations();
         Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
@@ -222,7 +224,8 @@ public class UserController {
 
     }
 
-        private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation){
+
+        private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation) {
         ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
         ArrayList<BeerDrink> beerDrinks = beerDrinkDao.getUniqueBeerDrinksByUserId(userId);
         for (BeerDrink beerDrink : beerDrinks){
