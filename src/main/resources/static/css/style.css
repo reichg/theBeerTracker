@@ -174,9 +174,9 @@ button:focus {
 }
 .beer-decision {
     display: inline-block;
-    border: 2px solid black;
+    /*border: 2px solid black;
     padding: 40px;
-    border-radius: 4px;
+    border-radius: 4px;*/
 }
 .form-control {
     color: #222629;
@@ -189,6 +189,8 @@ button:focus {
     border: 2px solid black;
     margin-right: 40px;
     border-radius: 4px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
 .beer-frame-sm {
     width: 10em;
@@ -203,7 +205,6 @@ button:focus {
     text-align: center;
     overflow: hidden;
     border-bottom: 2px solid black;
-
 }
 .beer-frame-sm .beer-image-container {
     display: inline-block;
@@ -241,6 +242,27 @@ button:focus {
     width: inherit;
     height: inherit;
 }
+#map {
+    height:400px;
+    width: 100%;
+    margin-top: 2em;
+}
+#title {
+    width: 100%;
+}
+.content {
+    background-color: rgba(255,255,255,0.95);
+    padding: 1em 5em 5em 5em;
+    margin-top: 2em;
+}
+#big-button {
+    padding-bottom: 4em;
+    padding-top: 1em;
+}
+.tried-section {
+    border-right: 2px solid black;
+}
+
 
 @media only screen and (max-width: 767px) {
     .navbar-brand > img {
@@ -254,20 +276,4 @@ button:focus {
         font-size: 0.85em;
         line-height: 0;
     }
-
-}
-#map {
-    height:400px;
-    width: 100%;
-}
-#title {
-    width: 100%;
-}
-.content {
-    background-color: rgba(255,255,255,0.9);
-    padding: 1em 5em 5em 5em;
-}
-#big_button {
-    padding-bottom: 4em;
-    padding-top: 1em;
 }

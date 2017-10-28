@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>theBeerTracker</title>
-    <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>theBeerTracker</title>
+  <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
 
 <body>
@@ -16,35 +16,46 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div id="page-wrapper">
-    <div class="HIDEparallax"></div>
-    <div class="container">
-        <div th:replace="fragments :: breadcrumbs"></div>
-        <div class="beer-frame float-md-left">
-            <div class="beer-image-container">
-                <img id="bottle-image" />
-            </div>
-            <div class="beer-details">
-                <h3><a class="nounderline" href="#" th:text="${randomBeer}"></a></h3>
-                <p>
-                    Lorem ipsum dolor sit amet, cu est consul aperiam, ut qui numquam complectitur.
-                    In probatus atomorum quo, fabellas disputando eu eum. Pro ne erat inimicus.
-                    Cu ancillae evertitur vis.
-                </p>
-            </div>
-        </div>
+    <div class="bottle-background">
+        <div class="container">
+            <div class="content">
+                <div th:replace="fragments :: breadcrumbs"></div>
 
-        <div class="beer-decision float-md-left">
-            <h3>Do you want this beer?</h3>
-            <form action="/locations">
-                <input class="beer-game-btn yes-btn" type="submit" value="Yes! Beer Me!" />
-            </form>
-            <form action="/gameplay">
-                <input class="beer-game-btn no-btn"  type="submit" value="I want another one." />
-            </form>
-        </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <h3 class="col-md-4">Current Selection</h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="beer-frame col-md-3">
+                        <div class="beer-image-container">
+                            <img id="bottle-image" />
+                        </div>
+                        <div class="beer-details">
+                            <h3><a class="nounderline" href="#" th:text="${randomBeer}"></a></h3>
+                            <p>
+                                Lorem ipsum dolor sit amet, cu est consul aperiam, ut qui numquam complectitur.
+                                In probatus atomorum quo, fabellas disputando eu eum. Pro ne erat inimicus.
+                                Cu ancillae evertitur vis.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="beer-decision col-md-4">
+                        <h3>Do you want this beer?</h3>
+                        <form action="/locations">
+                            <input class="beer-game-btn yes-btn" type="submit" value="Yes! Beer Me!" />
+                        </form>
+                        <form action="/gameplay">
+                            <input class="beer-game-btn no-btn"  type="submit" value="I want another one." />
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end content -->
+        </div><!-- end container -->
+    </div><!-- end bottle-background -->
 
-    </div><!-- /.container -->
-    <footer th:replace="fragments :: footer"></footer>
+<footer th:replace="fragments :: footer"></footer>
+
 </div><!--End page-wrapper-->
 
 <!-- Bootstrap Script Files -->
