@@ -91,6 +91,13 @@ button:focus {
     margin-right: 0;
     max-width: inherit;
 }
+.content {
+    background-color: rgba(240,240,240,0.95);
+    padding: 1em 5em 5em 5em;
+    margin-top: 2em;
+    margin-bottom: 6em;
+    border-radius: 1em;
+}
 .footer {
     display: flex;
     justify-content: space-around;
@@ -187,31 +194,36 @@ button:focus {
 .beer-frame {
     width: 24em;
     border: 2px solid black;
-    margin-right: 40px;
+    margin-right: 3em;
     border-radius: 4px;
     padding-left: 0px;
     padding-right: 0px;
 }
 .beer-frame-sm {
-    width: 10em;
-    margin-top: 40px;
-    margin-left: 40px;
-    margin-right: 40px;
+  width: 24em;
+  border: 2px solid black;
+  border-radius: 4px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 .beer-frame .beer-image-container {
-    background-color: grey;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-    border-bottom: 2px solid black;
+  background-color: grey;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 2px solid black;
 }
 .beer-frame-sm .beer-image-container {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    overflow: hidden;
-
+  background-color: grey;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+  border-bottom: 2px solid black;
+}
+.beer-frame-sm .beer-image-container h4 {
+  margin-top: 0.5em;
 }
 .beer-frame img {
     height: 275px;
@@ -219,7 +231,7 @@ button:focus {
     width: inherit;
 }
 .beer-frame-sm img {
-    height: 6.3em;
+    height: 200px;
     margin: 1.5em;
 }
 .beer-frame .beer-details h3 {
@@ -229,31 +241,29 @@ button:focus {
     padding: 10px;
 }
 .beer-frame-sm .beer-details {
-    padding: 10px;
+
 }
 .map {
-    width: 40em;
+    /*width: 40em;
     height: 400px;
     margin-top: 40px;
-    margin-left: 20px;
-    float: left;
+    margin-left: 20px;*/
+    /*float: left;*/
 }
-.map img {
+/*.map img {
     width: inherit;
     height: inherit;
-}
+}*/
 #map {
     height:400px;
     width: 100%;
-    margin-top: 2em;
+}
+#map,
+.beer-frame-sm {
+  margin-top: 2em;
 }
 #title {
     width: 100%;
-}
-.content {
-    background-color: rgba(255,255,255,0.95);
-    padding: 1em 5em 5em 5em;
-    margin-top: 2em;
 }
 #big-button {
     padding-bottom: 4em;

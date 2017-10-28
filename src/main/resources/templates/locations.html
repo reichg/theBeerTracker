@@ -16,35 +16,45 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div id="page-wrapper">
-    <div class="NOparallax"></div>
-    <div class="container">
-        <div th:replace="fragments :: breadcrumbs"></div>
-        <div class="beer-frame-sm float-md-left">
-            <div class="beer-image-container">
-                <!--<img src="/img/beer-example.png" />-->
-            </div>
-            <div class="beer-details">
-                <h5 th:text="${beerName}">Name of Beer</h5>
-            </div>
-        </div>
-        <div class="map">
-            <div id="map">
+    <div class="bottle-background">
+        <div class="container">
+            <div class="content">
+                <div th:replace="fragments :: breadcrumbs"></div>
+                <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-8">
+                        <h3>Locations for <span th:text="${beerName}">Your Beer</span></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="beer-frame-sm col-md-3">
 
-            </div>
- <!--           &lt;!&ndash;     PLACEHOLDER FOR THE MAP    &ndash;&gt;
-            <img src="/img/map-placeholder.jpg" />-->
-        </div>
-        <div class="drankbeer" >
-            <form method="post" >
-                <input class="beer-game-btn yes-btn"  onclick="gameplay_red()" type="submit" value="I Drank It"/>
-            </form>
+                        <div class="beer-details">
 
-        </div>
+                        </div>
+                        <div class="beer-image-container">
+                            <h4 th:text="${beerName}">Name of Beer</h4>
+                            <img id="bottle-image" />
+                        </div>
+                            <form method="post" >
+                                <input class="beer-game-btn yes-btn"  onclick="gameplay_red()" type="submit" value="I Drank It"/>
+                            </form>
+                    </div>
 
+                    <div class="map col-md-9">
 
-    </div><!-- /.container -->
+                        <div id="map">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- end content -->
+        </div><!-- /.container -->
+    </div><!-- end bottle-background -->
     <footer th:replace="fragments :: footer"></footer>
 </div><!--End page-wrapper-->
+
 <input type="hidden" th:value="${locations}" id="locations" />
 <input type="hidden" th:value="${userLocation}" id="userLocation" />
 <!-- Bootstrap Script Files -->
@@ -53,9 +63,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/only_map.js}"></script>
 <!--<script type="text/javascript" th:src="@{/js/test_map.js}"></script>-->
+<script src="/js/gameplay.js"></script>
 <script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap"></script>
-
-
 
 </body>
 </html>
