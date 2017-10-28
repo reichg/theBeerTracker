@@ -182,7 +182,8 @@ button:focus {
     background-color: red;
 }
 .found-btn {
-
+  width: auto;
+  margin: 1em auto;
 }
 .beer-decision {
     display: inline-block;
