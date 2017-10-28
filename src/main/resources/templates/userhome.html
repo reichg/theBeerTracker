@@ -29,53 +29,51 @@
         <div id="page-wrapper">
             <div class="bottle-background">
                 <div class="container">
+                    <section class="content">
                     <div class="row">
                         <div class ="col-md-12" id = "title">
                             <h1 class="text-center">Welcome Home, <span th:text="${userName}"></span>!</h1>
                         </div>
                     </div>
+
+                    <div>
+                        <div id="big_button">
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
+                        </div>
+                    </div>
+
                     <div class="row">
-                            <div class ="col-md-3">
-                              <div class="section-1">
+                        <div class ="col-md-3">
+                            <section class="sidebar">
+                                <h2>Beers You've Tried</h2>
+                                <p th:unless="${searchResults} and ${searchResults.size()}">You need to drink some beer!</p>
 
-                                   <h2>Beers You've Tried</h2>
-                                    <p th:unless="${searchResults} and ${searchResults.size()}">You need to drink some beer!</p>
+                                <table class="table" style="max-width: 400px">
 
-                                    <table class="table" style="max-width: 400px">
+                                  <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>ABV</th>
+                                  </tr>
 
-                                      <tr>
-                                        <th>Name</th>
-                                        <th>Description</th>
-                                        <th>ABV</th>
-                                      </tr>
+                                 <tr th:each="beer : ${searchResults}">
+                                    <td th:text="${beer.name}"></td>
+                                     <td th:text="${beer.description}"></td>
+                                     <td th:text="${beer.abv}"></td>
+                                </tr>
 
-                                     <tr th:each="beer : ${searchResults}">
-                                        <td th:text="${beer.name}"></td>
-                                         <td th:text="${beer.description}"></td>
-                                         <td th:text="${beer.abv}"></td>
-                                    </tr>
-
-                                     </table>
-
-                            </div>
-                          </div> <!--class ="col-md-3"> -->
-                          <div class ="col-md-9">
-                              <div  id="big_button">
-                                  <!--<form action="/gameplay">-->
-                                    <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
-                                  <!--</form>-->
-                              </div>
-                          </div> <!--class ="col-md-6"> -->
-                          <!--<div class ="row">-->
-                              <div class ="col-md-12">
-                                  <div  id="map">
-                                  </div>
-                              </div> <!--class ="col-md-6"> -->
-                          <!--</div>&lt;!&ndash; row&ndash;&gt;-->
-
-
-
+                                 </table>
+                            </section>
                       </div>
+
+                      <!--<div class ="row">-->
+                          <div class ="col-md-9">
+                              <div  id="map">
+                              </div>
+                          </div>
+
+                    </div>
+                    </section>
                 </div><!--End container-->
             </div><!--End bottle-background-->
             <footer th:replace="fragments :: footer"></footer>

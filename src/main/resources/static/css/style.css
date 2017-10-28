@@ -181,10 +181,8 @@ button:focus {
 .form-control {
     color: #222629;
 }
-.section-1 {
+.sidebar {
     width: 100%;
-
-    background-color: rgba(255,255,255,0.5);
 }
 .beer-frame {
     width: 24em;
@@ -264,6 +262,12 @@ button:focus {
 }
 #title {
     width: 100%;
-
-    background-color: rgba(255,255,255,0.5);
+}
+.content {
+    background-color: rgba(255,255,255,0.9);
+    padding: 1em 5em 5em 5em;
+}
+#big_button {
+    padding-bottom: 4em;
+    padding-top: 1em;
 }
