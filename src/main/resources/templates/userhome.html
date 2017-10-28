@@ -37,13 +37,13 @@
                     </div>
 
                     <div>
-                        <div id="big_button">
+                        <div id="big-button">
                             <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class ="col-md-3">
+                        <div class ="col-md-3 tried-section">
                             <section class="sidebar">
                                 <h2>Beers You've Tried</h2>
                                 <p th:unless="${searchResults} and ${searchResults.size()}">You need to drink some beer!</p>
@@ -68,7 +68,8 @@
 
                       <!--<div class ="row">-->
                           <div class ="col-md-9">
-                              <div  id="map">
+                              <h2 class="text-center">Check Out The Locations!</h2>
+                              <div id="map">
                               </div>
                           </div>
 
