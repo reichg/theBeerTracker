@@ -306,15 +306,21 @@ button:focus {
       padding-left: 1em;
       padding-right: 1em;
     }
-    /*.navbar-brand > img {
-        width: 35px;
+    .content h3 {
+      text-align: center;
     }
-    .footer .navbar-nav .nav-item {
-        text-align: center;
-        width: 100%;
+    .beer-frame {
+      margin: 1em auto;
     }
-    .footer .navbar-nav .nav-item .nav-link {
-        font-size: 0.85em;
-        line-height: 0;
-    }*/
+    .beer-decision {
+      text-align: center;
+    }
+    .decision-btn-container {
+      width: 100%;
+    }
+    .beer-game-btn {
+      display: inline-block;
+      margin: 0.5em;
+      width: 19em;
+    }
 }
