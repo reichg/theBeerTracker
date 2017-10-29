@@ -27,7 +27,11 @@ public interface BeerDao extends CrudRepository<Beer, Integer> {
     @Query(value="SELECT `id`, `abv`, `date_of_creation`, `description`, `name` FROM (SELECT * from `beer` AS b LEFT OUTER JOIN (SELECT DISTINCT `id` AS b_id FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` =:foobar)) AS bt ON b.`id` = bt.`b_id` WHERE `b_id` IS NULL) AS mytable", nativeQuery = true)
     public ArrayList<Beer> getBeersNotTriedByUserId(@Param(value="foobar") int someId);
 
+    @Query(value="SELECT `id` FROM (SELECT * from `beer` AS b LEFT OUTER JOIN (SELECT DISTINCT `id` AS b_id FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` =:foobar)) AS bt ON b.`id` = bt.`b_id` WHERE `b_id` IS NULL) AS mytable", nativeQuery = true)
+    public ArrayList<Integer> getBeerIdsNotTriedByUserId(@Param(value="foobar") int someId);
 
+    @Query(value="SELECT `id` FROM (SELECT * from `beer` AS b LEFT OUTER JOIN (SELECT DISTINCT `id` AS b_id FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` =:foobar)) AS bt ON b.`id` = bt.`b_id` WHERE `b_id` IS NULL) AS mytable WHERE `id`<20", nativeQuery = true)
+    public ArrayList<Integer> getBeerIdsNotTriedByUserIdLimited(@Param(value="foobar") int someId);
 
 //SELECT DISTINCT * FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` = (SELECT `id` FROM user WHERE `user_name` = 'username4' LIMIT 1))
 //SELECT DISTINCT * FROM `beer` WHERE `id` IN (SELECT `beer_id` FROM `beer_drink` WHERE `user_id` = 1)

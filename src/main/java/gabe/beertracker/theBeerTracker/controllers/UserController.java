@@ -2,10 +2,7 @@ package gabe.beertracker.theBeerTracker.controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
-import gabe.beertracker.theBeerTracker.models.data.BeerDao;
-import gabe.beertracker.theBeerTracker.models.data.BeerDrinkDao;
-import gabe.beertracker.theBeerTracker.models.data.LocationDao;
-import gabe.beertracker.theBeerTracker.models.data.UserDao;
+import gabe.beertracker.theBeerTracker.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +36,9 @@ public class UserController {
 
     @Autowired
     private LocationDao locationDao;
+
+    @Autowired
+    private UserGameDao userGameDao;
 
     @RequestMapping(value = "")
     public String index() {
@@ -153,14 +153,16 @@ public class UserController {
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
         //Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
-        Iterable<Beer> allBeers = beerDao.findAll();
 
 
-        ArrayList<Integer> allBeerIds = new ArrayList();
-        ArrayList<Integer> notTriedBeersIds = new ArrayList();
+
+      //  ArrayList<Integer> notTriedBeersIds = beerDao.getBeerIdsNotTriedByUserId(user.getId());  //UNCOMMENT FOR PRODUCTION
+        ArrayList<Integer> notTriedBeersIds = beerDao.getBeerIdsNotTriedByUserIdLimited(user.getId());  //COMMENT FOR PRODUCTION
         Integer randomBeerId = 0;
 
-        //create list of all beer Ids
+//___________________________________
+/*        //create list of all beer Ids
+         ArrayList<Integer> allBeerIds = new ArrayList();
         for (Beer beers : allBeers) {
 
             //_________________!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -182,12 +184,14 @@ public class UserController {
         for (Integer beerId : allBeerIds) {
 
             notTriedBeersIds.add(beerId);
-        }
-
+        }*/
+//______________________
         randomBeerId = notTriedBeersIds.get(new Random().nextInt(notTriedBeersIds.size()));
         Beer randomBeer = beerDao.findOne(randomBeerId);
         model.addAttribute("randomBeer", randomBeer.getName());
         session.setAttribute("beerId",randomBeer.getId());
+        UserGame userGame = new UserGame(randomBeer, storedData );
+        userGameDao.save(userGame);
 
         return "gameplay";
 
