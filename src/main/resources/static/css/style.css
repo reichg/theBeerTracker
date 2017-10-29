@@ -166,6 +166,9 @@ button:focus {
 .beer-game-btn:active {
     transform: translateY(3px);
 }
+.btn-primary:hover {
+  cursor: pointer;
+}
 .decision-btn-container {
   position: relative;
   width: 64%;
