@@ -2,10 +2,7 @@ package gabe.beertracker.theBeerTracker.controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
-import gabe.beertracker.theBeerTracker.models.data.BeerDao;
-import gabe.beertracker.theBeerTracker.models.data.BeerDrinkDao;
-import gabe.beertracker.theBeerTracker.models.data.LocationDao;
-import gabe.beertracker.theBeerTracker.models.data.UserDao;
+import gabe.beertracker.theBeerTracker.models.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +37,9 @@ public class UserController {
     @Autowired
     private LocationDao locationDao;
 
+    @Autowired
+    private UserGameDao userGameDao;
+
     @RequestMapping(value = "")
     public String index() {
 
@@ -56,9 +56,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser,Errors errors, @RequestParam String userName
-                                  , Model model, HttpServletRequest request) {
-        if (errors.hasErrors() ) {
+    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, @RequestParam String userName, Model model, HttpServletRequest request) {
+
+
+        if (errors.hasErrors()) {
             return "register";
         }
 
@@ -115,14 +116,10 @@ public class UserController {
       //  Location userPosition = locationDao.findOne(3);
       //  System.out.println("userPosition.getLatitude()=" + userPosition.getLatitude());
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
-        User user = userDao.findOne(storedData.getId());
-
-        Iterable<Beer> beerList = beerDao.getBeersTriedByUserId(storedData.getId());
-
+        ArrayList<Beer> beerList = beerDao.getBeersTriedByUserIdLast10(storedData.getId());
         model.addAttribute("beer", beer);
-        model.addAttribute("beerList", beerList);
         model.addAttribute("userName", storedData.getUserName());
-        ArrayList<BeerAndOneLocation> filteredBeers = getBeersWithOneLocation(storedData.getId(), userPosition);
+        ArrayList<BeerAndOneLocation> filteredBeers = getBeersWithOneLocation(storedData.getId(), userPosition, beerList);
         model.addAttribute("searchResults", filteredBeers);
         ArrayList<Location> myLocList= BeerAndOneLocation.locationsExtract(filteredBeers);
         final Gson gson = new Gson();
@@ -133,6 +130,16 @@ public class UserController {
         return "userhome";
 
     }
+    @RequestMapping(value = "userhome", method = RequestMethod.POST)
+    public String processHome(HttpServletRequest request, Model model, Beer beer, @RequestParam("beerButton") String beerButton){
+        if (beerButton.equals("go")){
+
+            return  "locations";
+        }
+        return "gameplay";
+    }
+
+
 
     @RequestMapping(value = "gameplay")
     public String gameplay(HttpServletRequest request, Model model, Beer beer) {
@@ -152,14 +159,26 @@ public class UserController {
         model.addAttribute("userName", storedData.getUserName());
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
         //Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
-        Iterable<Beer> allBeers = beerDao.findAll();
 
 
-        ArrayList<Integer> allBeerIds = new ArrayList();
-        ArrayList<Integer> notTriedBeersIds = new ArrayList();
+        UserGame lastUserGame = userGameDao.getLastUserGameByUserId(user.getId());
         Integer randomBeerId = 0;
+        UserGame userGame = new UserGame();
+        Beer randomBeer = new Beer();
+        if (lastUserGame == null || lastUserGame.getDateOfDiscarding() != null || lastUserGame.getBeerDrink() != null){
+            ArrayList<Integer> notTriedBeersIds = beerDao.getBeerIdsNotTriedByUserIdLimited(user.getId());  //COMMENT FOR PRODUCTION
+            randomBeerId = notTriedBeersIds.get(new Random().nextInt(notTriedBeersIds.size()));
+            randomBeer = beerDao.findOne(randomBeerId);
+            userGame = new UserGame(randomBeer, storedData );
+        }
+        //  ArrayList<Integer> notTriedBeersIds = beerDao.getBeerIdsNotTriedByUserId(user.getId());  //UNCOMMENT FOR PRODUCTION
+        else{
+            userGame = lastUserGame;
+        }
 
-        //create list of all beer Ids
+//___________________________________
+/*        //create list of all beer Ids
+         ArrayList<Integer> allBeerIds = new ArrayList();
         for (Beer beers : allBeers) {
 
             //_________________!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -181,28 +200,71 @@ public class UserController {
         for (Integer beerId : allBeerIds) {
 
             notTriedBeersIds.add(beerId);
-        }
-
-        randomBeerId = notTriedBeersIds.get(new Random().nextInt(notTriedBeersIds.size()));
-        Beer randomBeer = beerDao.findOne(randomBeerId);
+        }*/
+//______________________
+        randomBeer = userGame.getBeer();
         model.addAttribute("randomBeer", randomBeer.getName());
         session.setAttribute("beerId",randomBeer.getId());
+        userGameDao.save(userGame);
+        session.setAttribute("userGame",userGame);
 
         return "gameplay";
 
     }
 
+    @RequestMapping(value = "gameplay", method = RequestMethod.POST)
+    public String gameplayProcess(HttpServletRequest request, Model model, Beer beer, @RequestParam("beerButton") String beerButton) {
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return "redirect:/login";
+        }
+        User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session?
+        //User user = userDao.findOne(storedData.getId());
+        Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
+        if (userPosition == null) userPosition = locationDao.findOne(3);
+        session.setAttribute("userPosition", userPosition);
+        Integer randomBeerId      =  (Integer) session.getAttribute("beerId");
+        Beer randomBeer = beerDao.findOne(randomBeerId);
+
+        if (beerButton.equals("yes")){
+            model.addAttribute("randomBeer", randomBeer.getName());
+            session.setAttribute("beerId",randomBeer.getId());
+            model.addAttribute("beer", randomBeer);
+            model.addAttribute("userName", storedData.getUserName());
+           return  "redirect:/locations";
+        }
+
+        if (beerButton.equals("no")){ //game discard
+              UserGame userGame = (UserGame) session.getAttribute("userGame");
+              userGame.setDateOfDiscarding(LocalDateTime.now());
+              userGameDao.save(userGame);
+            return  "redirect:/gameplay";
+        }
+
+
+
+        return "gameplay";
+
+    }
+
+
+
+
+
     // 1
+
     @RequestMapping(value = "locations", method = RequestMethod.GET)
     public String locations(HttpServletRequest request, Model model, Beer beer, @RequestParam String beerName){
+
         HttpSession session = request.getSession(false);
         if (session == null) {
             return "redirect:/login";
         }
         User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
-        User user = userDao.findOne(storedData.getId());
+      //  User user = userDao.findOne(storedData.getId());
 
-        Iterable<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
+        List<Beer> userBeerList = beerDao.getBeersTriedByUserId(storedData.getId());
+
 
         model.addAttribute("beer", beer);
         model.addAttribute("beerList", userBeerList);
@@ -210,6 +272,7 @@ public class UserController {
 //        model.addAttribute("welcome", "Welcome, " + user.getUserName());
 
         Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
+
         model.addAttribute("beerName", storedRandomBeer.getName());
         List<Location> myLocList= storedRandomBeer.getLocations();
         Location userPosition = (Location) session.getAttribute("userPosition"); //take userPosition
@@ -228,21 +291,6 @@ public class UserController {
         if (session == null) {
             return "redirect:/login";
         }
-        User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
-        User user = userDao.findOne(storedData.getId());
-        Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
-        List<Location> locations = storedRandomBeer.getLocations();
-        Location location = locations.get(0);
-        BeerDrink beerDrink = new BeerDrink(LocalDateTime.now() , storedRandomBeer, user, location);
-        beerDrinkDao.save(beerDrink);
-        return "redirect:/userhome";
-
-    }
-
-
-
-
-
 
 
         private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation){
@@ -252,9 +300,39 @@ public class UserController {
             BeerAndOneLocation beerAndOneLocation = new BeerAndOneLocation(beerDrink.getBeer(), userLocation, beerDrink.getLocation() );
             filteredBeers.add(beerAndOneLocation);
         }
+        User storedData = (User)session.getAttribute("loggedInUser"); //should retrieve the stored session?
+        User user = userDao.findOne(storedData.getId());
+        Beer storedRandomBeer = beerDao.findOne((Integer)session.getAttribute("beerId"));
+        List<Location> locations = storedRandomBeer.getLocations();
+        Location location = locations.get(0);
+        UserGame userGame = (UserGame)session.getAttribute("userGame");
+        BeerDrink beerDrink = new BeerDrink(LocalDateTime.now() , storedRandomBeer, user, location);
+        beerDrink.setUserGame(userGame);
+        beerDrinkDao.save(beerDrink);
+        userGame.setBeerDrink(beerDrink);
+        userGameDao.save(userGame);
+
+
+        return "redirect:/userhome";
+
+    }
+
+
+        private ArrayList<BeerAndOneLocation> getBeersWithOneLocation(int userId, Location userLocation, ArrayList<Beer> beerList) {
+        ArrayList<Location> listLoc = locationDao.getLocationsFromBeerDrinksByUserIdLast10(userId);
+            ArrayList<BeerAndOneLocation> filteredBeers = new ArrayList<>();
+
+            for (int i =0; i< beerList.size(); i++){
+                BeerAndOneLocation beerAndOneLocation = new BeerAndOneLocation(beerList.get(i), userLocation, listLoc.get(i));
+                filteredBeers.add(beerAndOneLocation);
+            }
+
+
+
         return (filteredBeers);
     }
 }
+
 
 
 
