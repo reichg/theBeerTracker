@@ -8,6 +8,11 @@ html {
 body {
     font-size: 62.5%; /* 1em = 10px */
 }
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat', sans-serif;
+}
 p {
     font-size: 1.5em;
 }
@@ -44,7 +49,9 @@ button:focus {
 .success {
     color: green;
 }
-
+.navbar-dark .navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+}
 .navbar-brand {
     font-size: 1.8rem;
 }
@@ -72,14 +79,27 @@ button:focus {
     margin-top: 10px;
     margin-bottom: 40px;
 }
-.parallax {
-    background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.4;
-    min-height: 600px;
+.spacer {
+  min-height: 60px;
+}
+.banner-1 {
+    background-image: url("/img/beer-glasses-pouring.jpg");
+    /*opacity: 0.4;
+    min-height: 700px;
     background-attachment: fixed;
-    background-position: center;
+    background-position: 0 60px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
+}
+.banner-1,
+.tint {
+  background-color: black;
+  opacity: 0.7;
+  min-height: 700px;
+  background-attachment: fixed;
+  background-position: 0 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .container {
     width: 100%;
@@ -90,6 +110,19 @@ button:focus {
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
+}
+.title-block {
+  margin-top: 175px;
+  color: white;
+}
+.title-block img {
+  background-color: #545403;
+  height: 225px;
+  padding: 2em;
+  border-radius: 50%;
+}
+.title-block-text {
+
 }
 .content {
     background-color: rgba(240,240,240,0.95);
