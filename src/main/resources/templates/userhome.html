@@ -35,7 +35,10 @@
           </div>
           <div>
             <div id="big-button">
-              <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
+              <form method="post" >
+                <input type="hidden" name="beerButton"  th:value="go" />
+                <button type="button" class="btn btn-primary btn-lg btn-block" onclick="gameplay_red()">Play GAME!</button>
+              </form>
             </div>
           </div>
           <div class="row">

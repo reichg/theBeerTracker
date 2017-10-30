@@ -43,10 +43,15 @@
                     <div class="beer-decision col-md-4">
                         <h3>Do you want this beer?</h3>
                         <div class="decision-btn-container">
-                            <form action="/locations">
+
+
+                            <form method="post">
+                                <input type="hidden" name="beerButton"  th:value="yes" />
                                 <input class="beer-game-btn yes-btn" type="submit" value="Yes! Beer Me!" />
                             </form>
-                            <form action="/gameplay">
+                            <!--<form method="post" action="/gameplay">-->
+                            <form method="post" action="/gameplay">
+                                <input type="hidden" name="beerButton"  th:value="no" />
                                 <input class="beer-game-btn no-btn"  type="submit" value="I want another one." />
                             </form>
                         </div>
