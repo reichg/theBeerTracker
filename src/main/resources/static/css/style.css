@@ -406,6 +406,9 @@ button:focus {
     margin: 0.5em;
     width: 19em;
   }
-  
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
 }
 
