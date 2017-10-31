@@ -43,7 +43,7 @@ button:focus {
 }
 .bottle-background {
     background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.4;
+    opacity: 0.9;
     min-height: 700px;
     background-attachment: fixed;
     background-position: center;
@@ -89,11 +89,7 @@ button:focus {
 .banner-1 {
     background-image: url("/img/beer-glasses-pouring.jpg");
     /*opacity: 0.4;
-    min-height: 700px;
-    background-attachment: fixed;
-    background-position: 0 60px;
-    background-repeat: no-repeat;
-    background-size: cover;*/
+    min-height: 700px;*/
 }
 .banner-1,
 .tint {
