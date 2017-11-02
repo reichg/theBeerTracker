@@ -46,6 +46,11 @@ public class UserController {
         return "index";
     }
 
+    @RequestMapping(value = "about")
+    public String displayAbout() {
+        return "about";
+    }
+
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String dsiplayRegister(Model model) {
         model.addAttribute("title", "Register");
