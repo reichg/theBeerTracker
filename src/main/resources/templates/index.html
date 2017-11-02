@@ -1,25 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>theBeerTracker</title>
-        <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    </head>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>theBeerTracker</title>
+  <link rel="shortcut icon" href="/img/Beer.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
     <body>
 
         <nav th:replace="fragments :: navigation"></nav>
 
         <div id="page-wrapper">
-            <div class="parallax"></div>
+
+            <div class="banner-1">
+                <div class="tint">
+                    <div class="row">
+                        <div class="col-md-1 col-sm-12"></div>
+                        <div class="title-block col-md-4 col-sm-12 text-center">
+
+                          <img src="/img/Beer.ico" />
+
+                            <div class="title-block-text">
+                                <h1>theBeerTracker</h1>
+                                <h4>Discover and track down <br />your new favorite beer!</h4>
+                            </div>
+                            <hr class="yellowline"/>
+                            <div class="title-block-icons">
+                              <i class="fa fa-apple" aria-hidden="true"></i>
+                              <i class="fa fa-android" aria-hidden="true"></i>
+                              <i class="fa fa-windows" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
+              <h2 class="text-center">Great Features!</h2>
+              <hr />
+              <div class="features">
 
-
+              </div>
 
             </div><!-- /.container -->
             <footer th:replace="fragments :: footer"></footer>
