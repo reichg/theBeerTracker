@@ -41,8 +41,9 @@ public class UserController {
     private UserGameDao userGameDao;
 
     @RequestMapping(value = "")
-    public String index() {
-
+    public String index(Model model) {
+    ArrayList<String> beerScores = beerDao.getBeerNamesAndScore();
+    model.addAttribute("beers", beerScores);
         return "index";
     }
 

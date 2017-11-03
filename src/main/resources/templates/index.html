@@ -48,6 +48,12 @@
               </div>
 
             </div><!-- /.container -->
+            <div>
+                <tr th:each="beer : ${beerScores}">
+                    <td th:text="${beer}"></td>
+
+                </tr>
+            </div>
             <footer th:replace="fragments :: footer"></footer>
         </div><!--End page-wrapper-->
 
