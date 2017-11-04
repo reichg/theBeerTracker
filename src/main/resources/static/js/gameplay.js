@@ -1,6 +1,7 @@
 $( document ).ready(function() {
     console.log( "page ready!" );
 
+
     var bottleImages = [
         "amber-beer-bottle-foil-neck.png",
         "amber-beer-bottle-square-etiquette.png",
@@ -14,7 +15,30 @@ $( document ).ready(function() {
         "lt-brown-beer-bottle.png"
     ];
 
-    var rand = Math.floor(Math.random() * bottleImages.length);
-    console.log(rand);
-    document.getElementById('bottle-image').src = '\img\\' + bottleImages[rand];
+    var savedBeer = localStorage.getItem("savedBeer");
+    var savedImage = localStorage.getItem("savedImage");
+    var currentBeer = document.getElementsByClassName('beer-name')[0].outerText;
+
+    console.log(savedImage == null || savedBeer != currentBeer )
+    if(savedImage == null || savedBeer != currentBeer ) {
+      var rand = Math.floor(Math.random() * bottleImages.length);
+      currentImage = '\img\\' + bottleImages[rand];
+      localStorage.setItem("savedImage", (currentImage).toString());
+      console.log('random going')
+    } else {
+      currentImage = savedImage;
+    }
+
+    localStorage.setItem("savedBeer", (currentBeer).toString());
+
+    document.getElementById('bottle-image').src = currentImage;
+
+    var numTimes = localStorage.getItem("visits-Hlfma");
+    if(numTimes == null) {
+      numTimes = 0;
+    } else {
+      numTimes = parseInt(numTimes, 10);
+    }
+    numTimes++;
+    localStorage.setItem("visits-Hlfma", (numTimes).toString(10));
 });
