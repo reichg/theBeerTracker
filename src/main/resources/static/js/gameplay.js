@@ -3,16 +3,16 @@ $( document ).ready(function() {
 
 
     var bottleImages = [
-        "amber-beer-bottle-foil-neck.png",
-        "amber-beer-bottle-square-etiquette.png",
-        "amber-beer-steinie-bottle.png",
-        "brown-beer-bottle.png",
-        //"clear-beer-bottle.png",
-        //"dark-beer-bottle.png",
-        "green-beer-bottle-etiquette.png",
-        "green-beer-bottle-neck-foil.png",
-        "green-beer-bottle.png",
-        "lt-brown-beer-bottle.png"
+      "amber-beer-bottle-foil-neck.png",
+      "amber-beer-bottle-square-etiquette.png",
+      "amber-beer-steinie-bottle.png",
+      "brown-beer-bottle.png",
+      //"clear-beer-bottle.png",
+      //"dark-beer-bottle.png",
+      "green-beer-bottle-etiquette.png",
+      "green-beer-bottle-neck-foil.png",
+      "green-beer-bottle.png",
+      "lt-brown-beer-bottle.png"
     ];
 
     var savedBeer = localStorage.getItem("savedBeer");
@@ -33,12 +33,4 @@ $( document ).ready(function() {
 
     document.getElementById('bottle-image').src = currentImage;
 
-    var numTimes = localStorage.getItem("visits-Hlfma");
-    if(numTimes == null) {
-      numTimes = 0;
-    } else {
-      numTimes = parseInt(numTimes, 10);
-    }
-    numTimes++;
-    localStorage.setItem("visits-Hlfma", (numTimes).toString(10));
 });

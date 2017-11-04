@@ -87,17 +87,27 @@ button:focus {
   min-height: 60px;
 }
 .banner-1 {
-    background-image: url("/img/beer-glasses-pouring.jpg");
+  background-image: url("/img/beer-glasses-pouring.jpg");
 }
-.banner-1,
-.tint {
-  background-color: black;
-  opacity: 0.8;
+.banner-2 {
+  background-image: url("/img/beer-taps2-5.jpg");
+}
+.banner,
+.black-tint,
+.blue-tint {
   min-height: 700px;
   background-attachment: fixed;
   background-position: 0 60px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.black-tint {
+  background-color: black;
+  opacity: 0.7;
+}
+.blue-tint {
+  background-color: #204f98;
+  opacity: 0.7;
 }
 .container {
     width: 100%;
@@ -108,6 +118,45 @@ button:focus {
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
+}
+.beer-points {
+  text-align: center;
+  font-size: 2em;
+  line-height: 4em;
+}
+h4.beer-points {
+  display: inline-block;
+}
+.beer-points img {
+  height: 4em;
+}
+.beer-points img.bottle-left {
+  float: left;
+  margin-right: 3em;
+}
+.beer-points img.bottle-right {
+  float: right;
+  margin-left: 3em;
+}
+.beer-points:nth-of-type(odd) img.bottle-left {
+   -ms-transform: rotate(34deg); /* IE 9 */
+   -webkit-transform: rotate(34deg); /* Chrome, Safari, Opera */
+   transform: rotate(34deg);
+}
+.beer-points:nth-of-type(even) img.bottle-left {
+  -ms-transform: rotate(-50deg); /* IE 9 */
+  -webkit-transform: rotate(-50deg); /* Chrome, Safari, Opera */
+  transform: rotate(-50deg);
+}
+.beer-points:nth-of-type(odd) img.bottle-right {
+   -ms-transform: rotate(-139deg); /* IE 9 */
+   -webkit-transform: rotate(-139deg); /* Chrome, Safari, Opera */
+   transform: rotate(-139deg);
+}
+.beer-points:nth-of-type(even) img.bottle-right {
+  -ms-transform: rotate(-25deg); /* IE 9 */
+  -webkit-transform: rotate(-25deg); /* Chrome, Safari, Opera */
+  transform: rotate(-25deg);
 }
 .title-block {
   margin-top: 175px;
@@ -123,7 +172,7 @@ button:focus {
 .title-block-text {
 
 }
-.title-block hr {
+hr.yellowline {
   color: #e5e823;
   background-color: #e5e823;
   font-size: 3em;
@@ -221,6 +270,9 @@ button:focus {
     display: block;
     margin: 1em;
     width: 12em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-weight: bold;
 }
 .yes-btn {
     background-color: green;
