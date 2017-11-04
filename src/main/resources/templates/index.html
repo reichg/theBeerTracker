@@ -41,18 +41,35 @@
                 </div>
             </div>
             <div class="container">
-              <h2 class="text-center">Great Features!</h2>
-              <hr />
-              <div class="features">
+                <div class ="row">
+                    <div class="col-md-3 col-sm-12">
+                        <h2 class="text-center">Best beers</h2>
+                        <hr />
+                        <div class="features">
+                            <table class="table">
+                                <tr>
+                                    <th>Beer</th>
+                                    <th>Score</th>
 
-              </div>
+                                </tr>
+                                <tr th:each="beer : ${beers}">
+                                    <td th:text="${beer.name}"></td>
+                                    <td th:text="${beer.score}"></td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
 
             </div><!-- /.container -->
             <div>
-                <tr th:each="beer : ${beerScores}">
-                    <td th:text="${beer}"></td>
 
-                </tr>
+
+
             </div>
             <footer th:replace="fragments :: footer"></footer>
         </div><!--End page-wrapper-->

@@ -90,7 +90,7 @@ public interface BeerDao extends CrudRepository<Beer, Integer> {
             "ON bt.id = tab.beer_id\n" +
             "ORDER BY score DESC"
             , nativeQuery = true)
-    public ArrayList<String> getBeerNamesAndScore();
+    public ArrayList<BeerNameAndScoreDao> getBeerNamesAndScore();
 
 
 

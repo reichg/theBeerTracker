@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -40,9 +41,12 @@ public class UserController {
     @Autowired
     private UserGameDao userGameDao;
 
+    @Autowired
+    private BeerNameAndScoreDao beerNameAndScoreDao;
+
     @RequestMapping(value = "")
     public String index(Model model) {
-    ArrayList<String> beerScores = beerDao.getBeerNamesAndScore();
+    ArrayList<BeerNameAndScore> beerScores = beerNameAndScoreDao.getBeerNamesAndScore();
     model.addAttribute("beers", beerScores);
         return "index";
     }

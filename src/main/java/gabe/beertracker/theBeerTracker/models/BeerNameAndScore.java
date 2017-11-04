@@ -1,37 +1,24 @@
 package gabe.beertracker.theBeerTracker.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class BeerNameAndScore {
-    private String beerName;
-    private int score;
-
-
-
-    private int id;
-
-
+    private String name;
+    private Integer score;
+    @Id
+    private Integer id;
 
     public BeerNameAndScore() {
     }
 
-    public BeerNameAndScore(String beerName, Integer score) {
-        this.beerName = beerName;
-        this.score = score;
+    public String getName() {
+        return name;
     }
 
-    public String getBeerName() {
-        return beerName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setBeerName(String beerName) {
-        this.beerName = beerName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getScore() {
@@ -40,5 +27,13 @@ public class BeerNameAndScore {
 
     public void setScore(Integer score) {
         this.score = score;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
