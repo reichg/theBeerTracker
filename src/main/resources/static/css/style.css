@@ -125,6 +125,8 @@ button:focus {
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
+}
+.info-section {
     background-color: rgba(240,240,240,1);
 }
 .table {
