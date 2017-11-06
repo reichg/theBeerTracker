@@ -19,7 +19,7 @@ p {
 .clearfix {
     clear: both;
 }
-.nounderline{
+.nounderline {
     text-decoration: none !important;
 }
 .form-control:focus {
@@ -86,20 +86,27 @@ button:focus {
 .spacer {
   min-height: 60px;
 }
-.banner-1 {
-  background-image: url("/img/beer-glasses-pouring.jpg");
-}
-.banner-2 {
-  background-image: url("/img/beer-taps2-5.jpg");
-}
 .banner,
 .black-tint,
 .blue-tint {
-  min-height: 700px;
   background-attachment: fixed;
   background-position: 0 60px;
   background-repeat: no-repeat;
   background-size: cover;
+}
+.banner-1,
+.black-tint {
+  min-height: 700px;
+}
+.banner-1 {
+  background-image: url("/img/beer-glasses-pouring.jpg");
+}
+.banner-2,
+.blue-tint {
+  min-height: 400px;
+}
+.banner-2 {
+  background-image: url("/img/beer-taps2-5.jpg");
 }
 .black-tint {
   background-color: black;
@@ -118,6 +125,12 @@ button:focus {
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
+}
+.info-section {
+    background-color: rgba(240,240,240,1);
+}
+.table {
+  margin-bottom: 3rem;
 }
 .beer-points {
   text-align: center;
