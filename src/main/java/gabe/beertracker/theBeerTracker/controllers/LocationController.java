@@ -34,6 +34,8 @@ public class LocationController {
         if (session == null) {
             return "redirect:/login";
         }
+        User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session
+        model.addAttribute("userName", storedData.getUserName());
         model.addAttribute("title", "Add location");
         model.addAttribute(new Location());
         return "location";
@@ -46,13 +48,17 @@ public class LocationController {
             return "redirect:/login";
         }
         if (errors.hasErrors()) {
+            User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session
+            model.addAttribute("userName", storedData.getUserName());
              return "location";
         }
 
-        Location existingLocation = locationDao.getLocationByName(newLocation.getName());
+//        Location existingLocation = locationDao.getLocationByName(newLocation.getName());
+        Iterable<Location> locations = locationDao.findAll();
+        Integer index = indexString(locations, newLocation.getName());
 
-
-        if (existingLocation == null) {
+//        if (existingLocation == null) {
+        if (index == null) {
             locationDao.save(newLocation);
             return "redirect:/userhome";
         }
@@ -60,6 +66,19 @@ public class LocationController {
         model.addAttribute("existingName", "Great minds think alike, this location already exists");
         return "redirect:/userhome";
 
+    }
+
+    private static Integer indexString (Iterable<Location> locations, String name){
+        int j =0;
+        for (Location location : locations){
+            if (name.equalsIgnoreCase(location.getName()))
+            {
+                return j;
+            }
+            j++;
+        }
+
+        return null;
     }
 
 }

@@ -230,7 +230,20 @@ hr.yellowline {
     border-radius: 25px;
 
 }
+
+.beer-container {
+    margin: 5em auto;
+    width: 100%;
+    /*max-width: 400px;*/
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 25px;
+
+}
 .login-form {
+    color: black;
+}
+.beer-form {
     color: black;
 }
 .login-button,

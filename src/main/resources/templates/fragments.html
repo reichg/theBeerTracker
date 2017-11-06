@@ -38,6 +38,12 @@
                     <a class="nav-link nav-round-links" th:if="${userName != null}" href="/userhome">USERHOME</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link nav-round-links" th:if="${userName != null}" href="/add-location">ADD LOCATION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link nav-round-links" th:if="${userName != null}" href="/add-beer">ADD BEER</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link nav-round-links" th:if="${userName == null}" href="/login">LOG IN</a>
                 </li>
                 <li class="nav-item">
