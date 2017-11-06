@@ -29,6 +29,9 @@ public interface LocationDao extends CrudRepository<Location, Integer> {
             , nativeQuery = true)
     public ArrayList<Location> getLocationsFromBeerDrinksByUserIdLast10(@Param(value="foobar") int someId);
 
+    @Query(value="SELECT * FROM location WHERE name=:foobar LIMIT 1", nativeQuery = true)
+    public Location getLocationByName(@Param(value="foobar") String somePassedName);
+
 }
 
 //INSERT INTO beer_locations (beer_id, locations_id) VALUES (9, 16)

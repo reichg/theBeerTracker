@@ -1,5 +1,7 @@
 package gabe.beertracker.theBeerTracker.models;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -18,30 +20,31 @@ public class Location {
     @Size(min = 3, max = 45)
     private String name;
 
-    //@NotNull
+    @Min(-180) @Max(180)
     private double latitude;
 
     //@NotNull
+    @Min(-180) @Max(180)
     private double longitude;
-
+    @Size(min = 0, max = 45)
     private String streetNumber;
-
+    @Size(min = 0, max = 255)
     private String route;
-
+    @Size(min = 0, max = 255)
     private String locality;
-
+    @Size(min = 0, max = 255)
     private String administrativeAreaLevel2;
-
+    @Size(min = 0, max = 255)
     private String administrativeAreaLevel1;
-
+    @Size(min = 0, max = 255)
     private String country;
-
+    @Size(min = 0, max = 255)
     private String postalCode;
-
+    @Size(min = 0, max = 255)
     private String description;
-
+    @Size(min = 0, max = 255)
     private String phone;
-
+    @Size(min = 0, max = 255)
     private String webSite;
 
     @NotNull

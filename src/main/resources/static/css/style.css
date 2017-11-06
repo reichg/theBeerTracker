@@ -457,4 +457,6 @@ hr.yellowline {
     margin-right: 0px;
   }
 }
-
+.error {
+    color: red;
+}
