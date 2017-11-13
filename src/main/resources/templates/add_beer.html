@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head>
+        <div th:replace="fragments :: meta"></div>
+        <title>theBeerTracker - Add a location</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
+    </head>
+
+
+
+
+    <body>
+        <nav th:replace="fragments :: navigation"></nav>
+
+        <div id="page-wrapper">
+            <div class="bottle-background">
+                <div class="container">
+                    <div class ="row">
+                        <div class="col-md-9">
+                            <div class="beer-container">
+
+                                <form class="beer-form" method="post" th:object="${beer}">
+                                    <div class="form-group">
+                                        <h2>Add a new Beer</h2>
+                                        <label th:for="name">name</label>
+                                        <input class="form-control" th:field="*{name}" />
+                                        <span th:errors="*{name}" class="error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label th:for="abv">Alcohol By Volume</label>
+                                        <input class="form-control" th:field="*{abv}" />
+                                        <span th:errors="*{abv}" class="error"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label th:for="description">Description</label>
+                                        <input class="form-control" th:field="*{description}" />
+                                        <span th:errors="*{description}" class="error"></span>
+                                    </div>
+                                    <div id ="filter1" >
+                                        <label th:for="allBeerTags">Tags</label>
+                                        <select class="js-example-basic-multiple" name="allBeerTags" multiple="multiple" id="multiple-tags-box" style="width: 100%">
+                                            <option th:each="allTag : ${allBeerTags}"
+                                                    th:text="${allTag.name}"
+                                                    th:value="${allTag.id}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div id ="filter2" >
+                                        <label th:for="locations">Locations</label>
+                                        <select class="js-example-basic-multiple" name="Locations" multiple="multiple" id="multiple-locations-box" style="width: 100%">
+                                            <option th:each="location : ${locations}"
+                                                    th:text="${location.name}"
+                                                    th:value="${location.id}">
+                                            </option>
+                                        </select>
+                                    </div>
+
+
+                                    <input type="hidden" th:value="${locationsForSave}" name="locationsForSave" id="locationsForSave"/>
+                                    <input type="hidden" th:value="${tagsForSave}" name="tagsForSave" id="tagsForSave"/>
+                                    <input class="login-button" type="submit" value="Submit" id="submit" />
+                                    <!--<input type="submit" value="Submit" id="submit" />-->
+                                </form>
+                            </div><!--End beer-container-->
+                        </div>    <!-- end md10-->
+
+                    </div> <!-- end row-->
+
+                </div><!--End container-->
+            </div><!--End bottle-background-->
+            <footer th:replace="fragments :: footer"></footer>
+        </div><!--End page-wrapper-->
+
+        <!-- Bootstrap Script Files -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#multiple-tags-box").select2({
+                    placeholder: "Select search terms",
+                    allowClear: false
+                });
+                $("#multiple-locations-box").select2({
+                    placeholder: "Select location(s)",
+                    allowClear: false
+                });
+/*
+
+                var myData = JSON.parse($("#prefTags").val());
+                $('#multiple-tags-box').val(myData).trigger('change');
+
+            });*/
+            });
+            $("#multiple-tags-box").change(
+                function(e) {
+                    if ($('#multiple-tags-box').select2('val').length == 0){
+                        $('#submit').attr('type', 'hidden');
+                    }
+                    else $('#submit').attr('type', 'submit');
+                });
+            $("#multiple-locations-box").change(
+               function(e) {
+                   if ($('#multiple-locations-box').select2('val').length == 0){
+                         $('#submit').attr('type', 'hidden');
+                        }
+                   else $('#submit').attr('type', 'submit');
+                    });
+
+
+            $('#submit').click(function(e) {
+                $('#tags').val($('#multiple-tags-box').select2('val'));
+                var myval = $('#multiple-tags-box').select2('val');
+                $('#tagsForSave').val(JSON.stringify(myval));
+                myval = $('#multiple-locations-box').select2('val');
+                $('#locationsForSave').val(JSON.stringify(myval));
+
+                //alert(obj);
+
+            });
+
+
+
+        </script>
+    </body>
+</html>

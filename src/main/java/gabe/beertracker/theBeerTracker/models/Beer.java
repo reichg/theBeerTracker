@@ -2,6 +2,7 @@ package gabe.beertracker.theBeerTracker.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class Beer {
     private int id;
 
     @NotNull
-    //@Size(min=3, max=25)
+    @Size(min=3, max=45)
     private String name;
 
     @NotNull

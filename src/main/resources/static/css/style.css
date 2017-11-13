@@ -8,13 +8,18 @@ html {
 body {
     font-size: 62.5%; /* 1em = 10px */
 }
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat', sans-serif;
+}
 p {
     font-size: 1.5em;
 }
 .clearfix {
     clear: both;
 }
-.nounderline{
+.nounderline {
     text-decoration: none !important;
 }
 .form-control:focus {
@@ -27,6 +32,10 @@ p {
 button:focus {
     outline: 3px auto white;
 }
+.row {
+  margin-left: 0px;
+  margin-right: 0px;
+}
 #page-wrapper {
     display: flex;
     flex-direction: column;
@@ -34,7 +43,7 @@ button:focus {
 }
 .bottle-background {
     background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.9;
+    opacity: 0.4;
     min-height: 700px;
     background-attachment: fixed;
     background-position: center;
@@ -44,7 +53,9 @@ button:focus {
 .success {
     color: green;
 }
-
+.navbar-dark .navbar-brand {
+  font-family: 'Montserrat', sans-serif;
+}
 .navbar-brand {
     font-size: 1.8rem;
 }
@@ -72,14 +83,38 @@ button:focus {
     margin-top: 10px;
     margin-bottom: 40px;
 }
-.parallax {
-    background-image: url("/img/beer-assortment.jpeg");
-    opacity: 0.9;
-    min-height: 600px;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.spacer {
+  min-height: 60px;
+}
+.banner,
+.black-tint,
+.blue-tint {
+  background-attachment: fixed;
+  background-position: 0 60px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.banner-1,
+.black-tint {
+  min-height: 700px;
+}
+.banner-1 {
+  background-image: url("/img/beer-glasses-pouring.jpg");
+}
+.banner-2,
+.blue-tint {
+  min-height: 400px;
+}
+.banner-2 {
+  background-image: url("/img/beer-taps2-5.jpg");
+}
+.black-tint {
+  background-color: black;
+  opacity: 0.7;
+}
+.blue-tint {
+  background-color: #204f98;
+  opacity: 0.7;
 }
 .container {
     width: 100%;
@@ -90,6 +125,77 @@ button:focus {
     margin-left: 0;
     margin-right: 0;
     max-width: inherit;
+}
+.info-section {
+    background-color: rgba(240,240,240,1);
+}
+.table {
+  margin-bottom: 3rem;
+}
+.beer-points {
+  text-align: center;
+  font-size: 2em;
+  line-height: 4em;
+}
+h4.beer-points {
+  display: inline-block;
+}
+.beer-points img {
+  height: 4em;
+}
+.beer-points img.bottle-left {
+  float: left;
+  margin-right: 3em;
+}
+.beer-points img.bottle-right {
+  float: right;
+  margin-left: 3em;
+}
+.beer-points:nth-of-type(odd) img.bottle-left {
+   -ms-transform: rotate(34deg); /* IE 9 */
+   -webkit-transform: rotate(34deg); /* Chrome, Safari, Opera */
+   transform: rotate(34deg);
+}
+.beer-points:nth-of-type(even) img.bottle-left {
+  -ms-transform: rotate(-50deg); /* IE 9 */
+  -webkit-transform: rotate(-50deg); /* Chrome, Safari, Opera */
+  transform: rotate(-50deg);
+}
+.beer-points:nth-of-type(odd) img.bottle-right {
+   -ms-transform: rotate(-139deg); /* IE 9 */
+   -webkit-transform: rotate(-139deg); /* Chrome, Safari, Opera */
+   transform: rotate(-139deg);
+}
+.beer-points:nth-of-type(even) img.bottle-right {
+  -ms-transform: rotate(-25deg); /* IE 9 */
+  -webkit-transform: rotate(-25deg); /* Chrome, Safari, Opera */
+  transform: rotate(-25deg);
+}
+.title-block {
+  margin-top: 175px;
+  color: white;
+}
+.title-block img {
+  background-color: #545403;
+  height: 225px;
+  padding: 2em;
+  border-radius: 50%;
+  margin-bottom: 2em;
+}
+.title-block-text {
+
+}
+hr.yellowline {
+  color: #e5e823;
+  background-color: #e5e823;
+  font-size: 3em;
+  height: 4px;
+  width: 5em;
+  border-radius: 2em;
+}
+.title-block-icons i {
+  font-size: 3em;
+  margin: 0 0.5em;
 }
 .content {
     background-color: rgba(240,240,240,0.95);
@@ -137,9 +243,20 @@ button:focus {
     border-radius: 25px;
 
 }
+
+.beer-container {
+    margin: 5em auto;
+    width: 100%;
+    /*max-width: 400px;*/
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 25px;
+
+}
 .login-form {
     color: black;
 }
+<<<<<<< HEAD
 
 #big_button:hover,
 #big_button:focus,
@@ -156,6 +273,11 @@ button:focus {
 
 
 
+=======
+.beer-form {
+    color: black;
+}
+>>>>>>> 6a335c1648aa85a8aece8c30f5853bb87eb8c20a
 .login-button,
 .beer-game-btn {
     border: none;
@@ -187,6 +309,9 @@ button:focus {
 .beer-game-btn:active {
     transform: translateY(3px);
 }
+.btn-primary:hover {
+  cursor: pointer;
+}
 .decision-btn-container {
   position: relative;
   width: 64%;
@@ -195,6 +320,9 @@ button:focus {
     display: block;
     margin: 1em;
     width: 12em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-weight: bold;
 }
 .yes-btn {
     background-color: green;
@@ -308,20 +436,20 @@ button:focus {
 .tried-section {
     border-right: 2px solid black;
 }
-
-
-@media only screen and (max-width: 767px) {
-    .navbar-brand > img {
-        width: 35px;
+/* ATTEMPTING TO CHANGE NAVBAR BREAKPOINT */
+/*
+@media (max-width: 769px) {
+    .navbar-header {
+        float: none;
     }
-    .footer .navbar-nav .nav-item {
-        text-align: center;
-        width: 100%;
+    .navbar-toggle {
+        display: block;
     }
-    .footer .navbar-nav .nav-item .nav-link {
-        font-size: 0.85em;
-        line-height: 0;
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
     }
+<<<<<<< HEAD
 
 
 }
@@ -340,20 +468,71 @@ button:focus {
     .container {
       padding-left: 10px;
       padding-right: 10px;
+=======
+    .navbar-collapse.collapse {
+        display: none!important;
+>>>>>>> 6a335c1648aa85a8aece8c30f5853bb87eb8c20a
     }
-    .content {
-      padding-left: 1em;
-      padding-right: 1em;
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
     }
-    /*.navbar-brand > img {
-        width: 35px;
+    .navbar-nav>li {
+        float: none;
     }
-    .footer .navbar-nav .nav-item {
-        text-align: center;
-        width: 100%;
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
     }
-    .footer .navbar-nav .nav-item .nav-link {
-        font-size: 0.85em;
-        line-height: 0;
-    }*/
+} */
+
+@media only screen and (max-width: 767px) {
+  .navbar-brand > img {
+      width: 35px;
+  }
+  .footer .navbar-nav .nav-item {
+      text-align: center;
+      width: 100%;
+  }
+  .footer .navbar-nav .nav-item .nav-link {
+      font-size: 1.25em;
+      line-height: 0;
+  }
+}
+@media only screen and (max-width: 376px) {
+  .navbar-brand {
+    font-size: 1.5em;
+  }
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .content {
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+  .content h3 {
+    text-align: center;
+  }
+  .beer-frame {
+    margin: 1em auto;
+  }
+  .beer-decision {
+    text-align: center;
+  }
+  .decision-btn-container {
+    width: 100%;
+  }
+  .beer-game-btn {
+    display: inline-block;
+    margin: 0.5em;
+    width: 19em;
+  }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}
+.error {
+    color: red;
 }
