@@ -154,6 +154,10 @@ public class UserController {
         Beer randomBeer = new Beer();
         if (lastUserGame == null || lastUserGame.getDateOfDiscarding() != null || lastUserGame.getBeerDrink() != null) {
             ArrayList<Integer> notTriedBeersIds = beerDao.getBeerIdsNotTriedByUserIdLimited(user.getId());  //COMMENT FOR PRODUCTION
+            if (notTriedBeersIds.size() == 0){
+                return "achievement";
+            }
+
             randomBeerId = notTriedBeersIds.get(new Random().nextInt(notTriedBeersIds.size()));
             randomBeer = beerDao.findOne(randomBeerId);
             userGame = new UserGame(randomBeer, storedData);
