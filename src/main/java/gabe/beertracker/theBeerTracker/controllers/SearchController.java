@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.controllers;
+package gabe.beertracker.theBeerTracker.Controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;

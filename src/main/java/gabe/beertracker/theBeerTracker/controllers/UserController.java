@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.controllers;
+package gabe.beertracker.theBeerTracker.Controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
@@ -45,9 +45,17 @@ public class UserController {
     private BeerNameAndScoreDao beerNameAndScoreDao;
 
     @RequestMapping(value = "")
-    public String index(Model model) {
-    ArrayList<BeerNameAndScore> beerScores = beerNameAndScoreDao.getBeerNamesAndScore();
-    model.addAttribute("beers", beerScores);
+    public String index(HttpServletRequest request, Model model) {
+        ArrayList<BeerNameAndScore> beerScores = beerNameAndScoreDao.getBeerNamesAndScore();
+        model.addAttribute("beers", beerScores);
+
+        HttpSession session = request.getSession(false);
+        // Re-enable this after figure out how to check for VALID current session
+//        if (session == null) {
+//            return "index";
+//        }
+//        User storedData = (User) session.getAttribsredData.getUserName());
+
         return "index";
     }
 
@@ -57,7 +65,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
-    public String dsiplayRegister(Model model) {
+    public String dsiplayRegister(HttpServletRequest request, Model model) {
+
+        HttpSession session = request.getSession(false);
+        // Re-enable this after figure out how to check for VALID current session
+//        if (session != null) {
+//            return "redirect:/userhome"; // if session already exists, redirect to userhome
+//        }
         model.addAttribute("title", "Register");
         model.addAttribute(new User());
 

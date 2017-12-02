@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.controllers;
+package gabe.beertracker.theBeerTracker.Controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
@@ -26,8 +26,12 @@ public class LoginController {
     private BeerDrinkDao beerDrinkDao;
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
-    public String displayLogin() {
+    public String displayLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
 
+//        if (session != null) {
+//            return "redirect:/userhome";  // if session already exists, redirect to userhome
+//        }
         return "login";
     }
 
