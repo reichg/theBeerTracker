@@ -650,7 +650,7 @@ pre code {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .container {
     max-width: 720px;
   }
@@ -681,8 +681,8 @@ pre code {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+  margin-right: 0px; /*modified*/
+  margin-left: 0px; /*modified*/
 }
 
 .no-gutters {
@@ -1069,7 +1069,7 @@ pre code {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .col-md {
     -ms-flex-preferred-size: 0;
     flex-basis: 0;
@@ -1798,7 +1798,7 @@ pre code {
   }
 }
 
-@media (max-width: ($breakpoint-md) - 1) {
+@media (max-width: ($breakpoint-md) - 1) { /*modified*/
   .table-responsive-md {
     display: block;
     width: 100%;
@@ -3742,7 +3742,7 @@ tbody.collapse.show {
   }
 }
 
-@media (max-width: ($breakpoint-md) - 1) {
+@media (max-width: ($breakpoint-md) - 1) { /*modified*/
   .navbar-expand-md > .container,
   .navbar-expand-md > .container-fluid {
     padding-right: 0;
@@ -3750,7 +3750,7 @@ tbody.collapse.show {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .navbar-expand-md {
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
@@ -5908,7 +5908,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .d-md-none {
     display: none !important;
   }
@@ -6347,7 +6347,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .flex-md-row {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
@@ -6728,7 +6728,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .float-md-left {
     float: left !important;
   }
@@ -7436,7 +7436,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .m-md-0 {
     margin: 0 !important;
   }
@@ -8224,7 +8224,7 @@ a.bg-dark:focus, a.bg-dark:hover {
   }
 }
 
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-md) { /*modified*/
   .text-md-left {
     text-align: left !important;
   }

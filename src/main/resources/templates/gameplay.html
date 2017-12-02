@@ -3,7 +3,7 @@
 
 <head>
   <thymeleaf th:replace="fragments :: meta" />
-  <title>theBeerTracker</title>
+  <title th:text="${userName} + '\'s Gameplay'"></title>
 </head>
 
 <body>
