@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.Controllers;
+package gabe.beertracker.theBeerTracker.controllers;
 
 import gabe.beertracker.theBeerTracker.models.*;
 import gabe.beertracker.theBeerTracker.models.data.*;
