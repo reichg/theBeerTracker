@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <thymeleaf th:replace="fragments :: meta" />
-        <title>theBeerTracker - Register</title>
-    </head>
+<head>
+  <thymeleaf th:replace="fragments :: meta" />
+  <title>theBeerTracker - Register</title>
+</head>
 
-    <body>
-        <nav th:replace="fragments :: navigation"></nav>
+<body>
+  <nav th:replace="fragments :: navigation"></nav>
 
-        <div id="page-wrapper">
-            <div class="bottle-background">
-                <div class="container">
-                    <div class="login-container">
-                        <form class="login-form" method="post" th:object="${user}">
-                            <div class="form-group">
-                                <h2>New User</h2>
-                                <label th:for="userName">Username</label>
-                                <input class="form-control" th:field="*{userName}" />
-                                <span th:errors="*{userName}" class="error"></span>
-                                <span th:text="${existingUsername}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="hash">Password</label>
-                                <input class="form-control" th:field="*{hash}" type="password" />
-                                <span th:errors="*{hash}" class="error"></span>
-                            </div>
-                            <!--<div class="form-group">
-                                <label th:for="matchHash">Verify Password</label>
-                                <input class="form-control" th:field="*{matchHash}" />
-                                <span th:errors="*{matchHash}" class="error"></span>
-                            </div>-->
+  <div id="page-wrapper">
+    <div class="bottle-background">
+      <div class="container">
+        <div class="login-container">
+          <form class="login-form" method="post" th:object="${user}">
+            <div class="form-group">
+              <h2>New User</h2>
+              <label th:for="userName">Username</label>
+              <input class="form-control" th:field="*{userName}" />
+              <span th:errors="*{userName}" class="error"></span>
+              <span th:text="${existingUsername}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="hash">Password</label>
+              <input class="form-control" th:field="*{hash}" type="password" />
+              <span th:errors="*{hash}" class="error"></span>
+            </div>
+            <!--<div class="form-group">
+            <label th:for="matchHash">Verify Password</label>
+            <input class="form-control" th:field="*{matchHash}" />
+            <span th:errors="*{matchHash}" class="error"></span>
+            </div>-->
 
-                            <input class="login-button" type="submit" value="Register" />
-                        </form>
-                    </div><!--End login-container-->
-                </div><!--End container-->
-            </div><!--End bottle-background-->
-            <footer th:replace="fragments :: footer"></footer>
-        </div><!--End page-wrapper-->
+          <input class="login-button" type="submit" value="Register" />
+          </form>
+        </div><!--End login-container-->
+      </div><!--End container-->
+    </div><!--End bottle-background-->
+  <footer th:replace="fragments :: footer"></footer>
+  </div><!--End page-wrapper-->
 
-        <thymeleaf th:replace="fragments :: js-bootstrap" />
-    </body>
+<thymeleaf th:replace="fragments :: js-bootstrap" />
+</body>
 </html>

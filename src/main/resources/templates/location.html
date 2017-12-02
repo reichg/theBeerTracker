@@ -1,89 +1,84 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-    <head>
-        <thymeleaf th:replace="fragments :: meta" />
-        <title>theBeerTracker - Add a location</title>
-    </head>
+<head>
+  <thymeleaf th:replace="fragments :: meta" />
+  <title>theBeerTracker - Add a location</title>
+</head>
 
 
+<body>
+  <nav th:replace="fragments :: navigation"></nav>
 
+  <div id="page-wrapper">
+    <div class="bottle-background">
+      <div class="container">
+        <div class="login-container">
+          <form class="login-form" method="post" th:object="${location}">
+            <div class="form-group">
+              <h2>New Location</h2>
+              <label th:for="name">name</label>
+              <input class="form-control" th:field="*{name}" />
+              <span th:errors="*{name}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="latitude">Latitude</label>
+              <input class="form-control" th:field="*{latitude}" />
+              <span th:errors="*{latitude}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="longitude">Longitude</label>
+              <input class="form-control" th:field="*{longitude}" />
+              <span th:errors="*{longitude}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="streetNumber">Street Number</label>
+              <input class="form-control" th:field="*{streetNumber}" />
+              <span th:errors="*{streetNumber}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="administrativeAreaLevel2">City/Town</label>
+              <input class="form-control" th:field="*{administrativeAreaLevel2}" />
+              <span th:errors="*{administrativeAreaLevel2}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="administrativeAreaLevel1">State</label>
+              <input class="form-control" th:field="*{administrativeAreaLevel1}" />
+              <span th:errors="*{administrativeAreaLevel1}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="country">Country</label>
+              <input class="form-control" th:field="*{country}" />
+              <span th:errors="*{country}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="postalCode">Postal code</label>
+              <input class="form-control" th:field="*{postalCode}" />
+              <span th:errors="*{postalCode}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="description">Description</label>
+                <input class="form-control" th:field="*{description}" />
+                <span th:errors="*{description}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="phone">Phone</label>
+              <input class="form-control" th:field="*{phone}" />
+              <span th:errors="*{phone}" class="error"></span>
+            </div>
+            <div class="form-group">
+              <label th:for="webSite">webSite</label>
+              <input class="form-control" th:field="*{webSite}" />
+              <span th:errors="*{webSite}" class="error"></span>
+            </div>
 
-    <body>
-        <nav th:replace="fragments :: navigation"></nav>
+            <input class="login-button" type="submit" value="Submit" />
+          </form>
+        </div><!--End login-container-->
+      </div><!--End container-->
+    </div><!--End bottle-background-->
+    <footer th:replace="fragments :: footer"></footer>
+  </div><!--End page-wrapper-->
 
-        <div id="page-wrapper">
-            <div class="bottle-background">
-                <div class="container">
-                    <div class="login-container">
-                        <form class="login-form" method="post" th:object="${location}">
-                            <div class="form-group">
-                                <h2>New Location</h2>
-                                <label th:for="name">name</label>
-                                <input class="form-control" th:field="*{name}" />
-                                <span th:errors="*{name}" class="error"></span>
-
-
-
-                            </div>
-                            <div class="form-group">
-                                <label th:for="latitude">Latitude</label>
-                                <input class="form-control" th:field="*{latitude}" />
-                                <span th:errors="*{latitude}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="longitude">Longitude</label>
-                                <input class="form-control" th:field="*{longitude}" />
-                                <span th:errors="*{longitude}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="streetNumber">Street Number</label>
-                                <input class="form-control" th:field="*{streetNumber}" />
-                                <span th:errors="*{streetNumber}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="administrativeAreaLevel2">City/Town</label>
-                                <input class="form-control" th:field="*{administrativeAreaLevel2}" />
-                                <span th:errors="*{administrativeAreaLevel2}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="administrativeAreaLevel1">State</label>
-                                <input class="form-control" th:field="*{administrativeAreaLevel1}" />
-                                <span th:errors="*{administrativeAreaLevel1}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="country">Country</label>
-                                <input class="form-control" th:field="*{country}" />
-                                <span th:errors="*{country}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="postalCode">Postal code</label>
-                                <input class="form-control" th:field="*{postalCode}" />
-                                <span th:errors="*{postalCode}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="description">Description</label>
-                                <input class="form-control" th:field="*{description}" />
-                                <span th:errors="*{description}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="phone">Phone</label>
-                                <input class="form-control" th:field="*{phone}" />
-                                <span th:errors="*{phone}" class="error"></span>
-                            </div>
-                            <div class="form-group">
-                                <label th:for="webSite">webSite</label>
-                                <input class="form-control" th:field="*{webSite}" />
-                                <span th:errors="*{webSite}" class="error"></span>
-                            </div>
-
-                            <input class="login-button" type="submit" value="Submit" />
-                        </form>
-                    </div><!--End login-container-->
-                </div><!--End container-->
-            </div><!--End bottle-background-->
-            <footer th:replace="fragments :: footer"></footer>
-        </div><!--End page-wrapper-->
-
-        <thymeleaf th:replace="fragments :: js-bootstrap" />
-    </body>
+  <thymeleaf th:replace="fragments :: js-bootstrap" />
+</body>
 </html>

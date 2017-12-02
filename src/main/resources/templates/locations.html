@@ -2,60 +2,55 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head>
-    <thymeleaf th:replace="fragments :: meta" />
-    <title>theBeerTracker</title>
+  <thymeleaf th:replace="fragments :: meta" />
+  <title>theBeerTracker</title>
 </head>
 
 <body>
 
-<nav th:replace="fragments :: navigation"></nav>
+  <nav th:replace="fragments :: navigation"></nav>
 
-<div id="page-wrapper">
+  <div id="page-wrapper">
     <div class="bottle-background">
-        <div class="container">
-            <div class="content">
-                <div th:replace="fragments :: breadcrumbs"></div>
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-8">
-                        <h3>Locations for <span th:text="${beerName}">Your Beer</span></h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="beer-frame-sm col-md-2 col-sm-12">
-
-                        <div class="beer-image-container">
-                            <h5 class="beer-name" th:text="${beerName}">Name of Beer</h5>
-                            <img id="bottle-image" />
-                        </div>
-                            <form method="post" >
-                                <!--<input class="beer-game-btn yes-btn found-btn"  onclick="gameplay_red()" type="submit" value="I Drank It"/>-->
-                                <input class="beer-game-btn yes-btn found-btn"  type="submit" value="I Drank It"/>
-                            </form>
-                    </div>
-
-                    <div class="map col-md-9">
-
-                        <div id="map">
-
-                        </div>
-
-                    </div>
-                </div>
-            </div><!-- end content -->
-        </div><!-- /.container -->
+      <div class="container">
+        <div class="content">
+          <div th:replace="fragments :: breadcrumbs"></div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-8">
+              <h3>Locations for <span th:text="${beerName}">Your Beer</span></h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="beer-frame-sm col-md-2 col-sm-12">
+              <div class="beer-image-container">
+                <h5 class="beer-name" th:text="${beerName}">Name of Beer</h5>
+                <img id="bottle-image" />
+              </div>
+              <form method="post" >
+                <!--<input class="beer-game-btn yes-btn found-btn"  onclick="gameplay_red()" type="submit" value="I Drank It"/>-->
+                <input class="beer-game-btn yes-btn found-btn"  type="submit" value="I Drank It"/>
+              </form>
+            </div>
+            <div class="map col-md-9">
+              <div id="map">
+              </div>
+            </div>
+          </div>
+        </div><!-- end content -->
+      </div><!-- /.container -->
     </div><!-- end bottle-background -->
     <footer th:replace="fragments :: footer"></footer>
-</div><!--End page-wrapper-->
+  </div><!--End page-wrapper-->
 
-<input type="hidden" th:value="${locations}" id="locations" />
-<input type="hidden" th:value="${userLocation}" id="userLocation" />
+  <input type="hidden" th:value="${locations}" id="locations" />
+  <input type="hidden" th:value="${userLocation}" id="userLocation" />
 
-<thymeleaf th:replace="fragments :: js-bootstrap" />
-<script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap"></script>
+  <thymeleaf th:replace="fragments :: js-bootstrap" />
+  <script async='async' defer='defer' src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIWLPDbglXWLa4RutJew14eb3pHVu_kUs&amp;callback=initMap"></script>
 
-<script type="text/javascript" th:src="@{/js/only_map.js}"></script>
-<script src="/js/gameplay.js"></script>
+  <script type="text/javascript" th:src="@{/js/only_map.js}"></script>
+  <script src="/js/gameplay.js"></script>
 
 
 </body>

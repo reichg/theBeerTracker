@@ -7,20 +7,17 @@
 </head>
 
 <body>
-    <nav th:replace="fragments :: navigation"></nav>
+  <nav th:replace="fragments :: navigation"></nav>
 
-    <div id="page-wrapper">
-        <div></div>
-            <div class="container">
+  <div id="page-wrapper">
+    <div></div>
+    <div class="container">
+      <h2 class="text-center"> You've made a wrong turn!</h2>
+    </div><!--End container-->
+    <footer th:replace="fragments :: footer"></footer>
+  </div><!--End page-wrapper-->
 
-                <h2 class="text-center"> You've made a wrong turn!</h2>
-
-
-            </div><!--End container-->
-        <footer th:replace="fragments :: footer"></footer>
-    </div><!--End page-wrapper-->
-
-    <thymeleaf th:replace="fragments :: js-bootstrap" />
+  <thymeleaf th:replace="fragments :: js-bootstrap" />
 
 </body>
 </html>

@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
-    <head>
-        <thymeleaf th:replace="fragments :: meta" />
-        <title>theBeerTracker - Login</title>
+<head>
+  <thymeleaf th:replace="fragments :: meta" />
+  <title>theBeerTracker - Login</title>
+</head>
 
-    </head>
+<body>
+  <nav th:replace="fragments :: navigation"></nav>
+  <div id="page-wrapper">
+    <div class="bottle-background">
+      <div class="container">
+        <div class="login-container">
+          <form class="login-form" method="post" th:object="${user}">
+            <div class="form-group">
+              <h2>Login</h2>
+              <label>Username</label>
+              <input class="form-control" type="text" name="userName" />
+              <p th:text="${registerSuccess}" class="success"></p>
+              <p th:text="${unameError}" class="error"></p>
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input class="form-control" type="password" name="password"/>
+              <p th:text="${pwdError}" class="error"></p>
+            </div>
 
-    <body>
-        <nav th:replace="fragments :: navigation"></nav>
-        <div id="page-wrapper">
-            <div class="bottle-background">
-                <div class="container">
-                    <div class="login-container">
-                        <form class="login-form" method="post" th:object="${user}">
-                            <div class="form-group">
-                                <h2>Login</h2>
-                                <label>Username</label>
-                                <input class="form-control" type="text" name="userName" />
-                                <p th:text="${registerSuccess}" class="success"></p>
-                                <p th:text="${unameError}" class="error"></p>
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input class="form-control" type="password" name="password"/>
-                                <p th:text="${pwdError}" class="error"></p>
-                            </div>
-
-                            <input class="login-button" type="submit" value="Login" />
-                            <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
-                        </form>
-                    </div><!--End login-container-->
-                </div><!--End container-->
-            </div><!--End bottle-background-->
-            <footer th:replace="fragments :: footer"></footer>
-        </div><!--End page-wrapper-->
+            <input class="login-button" type="submit" value="Login" />
+            <input type="hidden" th:value="${myPosition}" name="myPosition" id="myPosition"/>
+          </form>
+        </div><!--End login-container-->
+      </div><!--End container-->
+    </div><!--End bottle-background-->
+    <footer th:replace="fragments :: footer"></footer>
+  </div><!--End page-wrapper-->
 
 
-        <thymeleaf th:replace="fragments :: js-bootstrap" />
-        <script type="text/javascript" th:src="@{/js/user_location.js}"></script>
-    </body>
+  <thymeleaf th:replace="fragments :: js-bootstrap" />
+  <script type="text/javascript" th:src="@{/js/user_location.js}"></script>
+</body>
 </html>
