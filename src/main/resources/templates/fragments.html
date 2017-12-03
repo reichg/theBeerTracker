@@ -23,7 +23,10 @@
       theBeerTracker
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <!--<span class="navbar-toggler-icon"></span>-->
+      <div class="line-1 no-animation"></div>
+      <div class="line-2 no-animation"></div>
+      <div class="line-3 no-animation"></div>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
       <ul class="navbar-nav">
@@ -50,6 +53,19 @@
         </li>
       </ul>
     </div>
+
+    <script>
+        document.getElementsByClassName('navbar-toggler')[0].addEventListener('click', animateLines);
+        function animateLines() {
+            this.classList.toggle('active');
+            var divs = this.querySelectorAll('div');
+
+            divs.forEach(function(div) {
+                div.classList.remove('no-animation');
+            });
+        }
+    </script>
+
   </nav>
 
 

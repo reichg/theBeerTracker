@@ -42,7 +42,13 @@ p {
 /* NAVBAR */
 .navbar-dark .navbar-brand {
     font-family: $base-font;
+
+    &:hover {
+        color: #838351;
+    }
 }
+
+
 .navbar-brand {
     font-size: 1.8rem;
 
@@ -61,6 +67,133 @@ p {
 
 .navbar-toggler:hover {
     cursor: pointer;
+}
+
+
+$menu-icon-line-height: 2px;
+$menu-icon-line-space: 6.4px;
+$menu-icon-line-offsetY: $menu-icon-line-height + $menu-icon-line-space;
+$menu-icon-height: (3*$menu-icon-line-height) + (2*$menu-icon-line-space);
+$cubic-bezier-in: cubic-bezier(0.30,1,0.70,1);
+$cubic-bezier-out: cubic-bezier(1,0.70,1,0.30);
+
+.navbar-toggler {
+    height: 40px;
+    width: 56px;
+    padding: 0 0.95rem;
+
+    .line-1, .line-2, .line-3 {
+        height: 2px;
+        width: 100%;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.3);
+        transition: background-color .2s ease-in-out;
+    }
+    .line-1 {
+        animation: animate-line-1-rev .7s ease-in-out;
+    }
+    .line-2 {
+        margin: $menu-icon-line-space 0;
+        animation: animate-line-2-rev .7s ease-in-out;
+    }
+    .line-3 {
+        animation: animate-line-3-rev .7s ease-in-out;
+    }
+
+    &.active {
+
+        .line-1,
+        .line-2,
+        .line-3 {
+            background-color: #fff;
+        }
+
+
+        .line-1 {
+            animation: animate-line-1 .7s $cubic-bezier-in forwards;
+        }
+        .line-2 {
+            animation: animate-line-2 .7s $cubic-bezier-in forwards;
+        }
+        .line-3 {
+            animation: animate-line-3 .7s $cubic-bezier-in forwards;
+        }
+    }
+}
+
+.no-animation {
+    -webkit-animation: none !important;
+    animation: none !important;
+}
+
+@keyframes animate-line-1 {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(0, $menu-icon-line-offsetY, 0) rotate(0);
+    }
+
+    100% {
+        transform: translate3d(0, $menu-icon-line-offsetY, 0) rotate(45deg);
+    }
+}
+@keyframes animate-line-2 {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+@keyframes animate-line-3 {
+    0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate3d(0, -$menu-icon-line-offsetY, 0) rotate(0);
+    }
+
+    100% {
+        transform: translate3d(0, -$menu-icon-line-offsetY, 0) rotate(135deg);
+    }
+}
+@keyframes animate-line-1-rev {
+    0% {
+        transform: translate3d(0, $menu-icon-line-offsetY, 0) rotate(45deg);
+    }
+    50% {
+        transform: translate3d(0, $menu-icon-line-offsetY, 0) rotate(0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
+}
+@keyframes animate-line-2-rev {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+@keyframes animate-line-3-rev {
+    0% {
+        transform: translate3d(0, -$menu-icon-line-offsetY, 0) rotate(135deg);
+    }
+    50% {
+        transform: translate3d(0, -$menu-icon-line-offsetY, 0) rotate(0);
+    }
+
+    100% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+    }
 }
 
 .nav-round-links {
@@ -302,12 +435,15 @@ button:focus {
 
 .login-button {
     border: none;
-    border-radius: 30px;
+    //border-radius: 30px;
+    border-radius: 6px;
     padding: 8px 30px;
-    margin-left: .15rem;
-    margin-right: .15rem;
+    margin: 0.75rem .15rem 0rem;
+    //margin-left: .15rem;
+    //margin-right: .15rem;
     font-size: 1rem;
-    min-width: 6rem;
+    //min-width: 21rem;
+    width: 100%;
     text-align: center;
     background-color: #aaa;
     @include transform-ease(0.3);
@@ -348,9 +484,11 @@ button:focus {
 
 .login-button:hover {
     cursor: pointer;
-    border: 2px solid #444;
+    border: 2px solid #07b12e;
     padding: 6px 28px;
-    background-color: #777;
+    //background-color: #777;
+    background-color: #07b12e;
+    transition: background-color 2500ms linear;
 }
 
 .beer-game-btn {
