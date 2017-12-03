@@ -35,3 +35,10 @@
   -ms-transform: rotate($rotate + deg);
   transform: rotate($rotate + deg);
 }
+
+@mixin transform-ease($ease: 1) {
+  -webkit-transition: -webkit-transform $ease + s ease;
+  -moz-transition: -moz-transform $ease + s ease;
+  -o-transition: -o-transform $ease + s ease;
+  transition: transform $ease + s ease;
+}

@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.Controllers;
+package gabe.beertracker.theBeerTracker.controllers;
 
 import gabe.beertracker.theBeerTracker.models.User;
 import org.springframework.stereotype.Controller;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 
 @Controller
 public class AboutController {
@@ -17,12 +17,14 @@ public class AboutController {
     public String aboutDisplay(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "about";
+
+        if (session != null && session.getAttribute("loggedInUser") != null) {
+            User storedData = (User) session.getAttribute("loggedInUser");
+            model.addAttribute("userName", storedData.getUserName());
         }
-        User storedData = (User) session.getAttribute("loggedInUser");
-        model.addAttribute("userName", storedData.getUserName());
+
         model.addAttribute("version", "Version: 0.0.1-a (11/13/17)");
+
         return "about";
     }
 }

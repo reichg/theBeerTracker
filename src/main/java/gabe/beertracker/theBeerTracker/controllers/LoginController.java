@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.Controllers;
+package gabe.beertracker.theBeerTracker.controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
@@ -27,11 +27,13 @@ public class LoginController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String displayLogin(HttpServletRequest request) {
+
         HttpSession session = request.getSession(false);
 
-//        if (session != null) {
-//            return "redirect:/userhome";  // if session already exists, redirect to userhome
-//        }
+        if (session != null && session.getAttribute("loggedInUser") != null) {
+            return "redirect:/userhome";
+        }
+
         return "login";
     }
 

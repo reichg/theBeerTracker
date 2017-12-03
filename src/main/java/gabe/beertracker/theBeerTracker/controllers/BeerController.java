@@ -40,7 +40,8 @@ public class BeerController {
     @RequestMapping(value = "add-beer", method = RequestMethod.GET)
     public String displayAddBeer(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            session.invalidate();
             return "redirect:/login";
         }
         User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session

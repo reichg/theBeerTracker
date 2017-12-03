@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.Controllers;
+package gabe.beertracker.theBeerTracker.controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
@@ -50,28 +50,28 @@ public class UserController {
         model.addAttribute("beers", beerScores);
 
         HttpSession session = request.getSession(false);
-        // Re-enable this after figure out how to check for VALID current session
-//        if (session == null) {
-//            return "index";
-//        }
-//        User storedData = (User) session.getAttribsredData.getUserName());
+        if (session != null && session.getAttribute("loggedInUser") != null) {
+            User storedData = (User) session.getAttribute("loggedInUser");
+            model.addAttribute("userName", storedData.getUserName());
+        }
 
         return "index";
     }
 
-    @RequestMapping(value = "about")
-    public String displayAbout() {
-        return "about";
-    }
+    // @RequestMapping(value = "about")
+    // public String displayAbout() {
+    //     return "about";
+    // }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String dsiplayRegister(HttpServletRequest request, Model model) {
 
         HttpSession session = request.getSession(false);
-        // Re-enable this after figure out how to check for VALID current session
-//        if (session != null) {
-//            return "redirect:/userhome"; // if session already exists, redirect to userhome
-//        }
+
+        if (session != null && session.getAttribute("loggedInUser") != null) {
+            return "redirect:/userhome";
+        }
+
         model.addAttribute("title", "Register");
         model.addAttribute(new User());
 
@@ -107,7 +107,8 @@ public class UserController {
     @RequestMapping(value = "userhome")
     public String displayHome(HttpServletRequest request, Model model, Beer beer) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            session.invalidate();
             return "redirect:/login";
         }
 
@@ -255,10 +256,13 @@ public class UserController {
     // 1
     @RequestMapping(value = "locations")
     public String locations(HttpServletRequest request, Model model, Beer beer) {
+
         HttpSession session = request.getSession(false);
-        if (session == null) {
+
+        if (session == null || session.getAttribute("loggedInUser") == null) {
             return "redirect:/login";
         }
+
         User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session?
         //  User user = userDao.findOne(storedData.getId());
 

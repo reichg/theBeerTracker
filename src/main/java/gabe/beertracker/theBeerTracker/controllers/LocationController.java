@@ -1,4 +1,4 @@
-package gabe.beertracker.theBeerTracker.Controllers;
+package gabe.beertracker.theBeerTracker.controllers;
 
 import com.google.gson.Gson;
 import gabe.beertracker.theBeerTracker.models.*;
@@ -31,7 +31,8 @@ public class LocationController {
     @RequestMapping(value = "add-location", method = RequestMethod.GET)
     public String displayAddLocation(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
-        if (session == null) {
+        if (session == null || session.getAttribute("loggedInUser") == null) {
+            session.invalidate();
             return "redirect:/login";
         }
         User storedData = (User) session.getAttribute("loggedInUser"); //should retrieve the stored session
