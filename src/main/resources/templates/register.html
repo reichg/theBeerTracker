@@ -16,13 +16,13 @@
             <div class="form-group">
               <h2>New User</h2>
               <label th:for="userName">Username</label>
-              <input class="form-control" th:field="*{userName}" required />
+              <input class="form-control" th:field="*{userName}" />
               <span th:errors="*{userName}" class="error"></span>
               <span th:text="${existingUsername}" class="error"></span>
             </div>
             <div class="form-group">
               <label th:for="hash">Password</label>
-              <input class="form-control" th:field="*{hash}" type="password" required />
+              <input class="form-control" th:field="*{hash}" type="password" />
               <span th:errors="*{hash}" class="error"></span>
             </div>
             <!--<div class="form-group">

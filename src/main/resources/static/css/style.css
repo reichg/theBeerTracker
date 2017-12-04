@@ -7258,38 +7258,13 @@ a.text-dark:focus, a.text-dark:hover {
 .invisible {
   visibility: hidden !important; }
 
-html, body {
-  height: 100%; }
-
-html {
-  font-size: 16px; }
-
-body {
-  font-size: 62.5%;
-  /* 1em = 10px */ }
-
-h1, h2, h3 {
-  font-family: "Montserrat", sans-serif; }
-
-p {
-  font-size: 1.5em; }
-
-.clearfix {
-  clear: both; }
-
-.nounderline {
-  text-decoration: none !important; }
-
-@media only screen and (max-width: 376px) {
-  .row {
-    margin-left: 0px;
-    margin-right: 0px; } }
-
 /* NAVBAR */
 .navbar-dark .navbar-brand {
-  font-family: "Montserrat", sans-serif; }
+  font-family: "Montserrat", sans-serif;
+  transition: color 0.5s; }
   .navbar-dark .navbar-brand:hover {
-    color: #838351; }
+    color: #838351;
+    transition: color 1s; }
 
 .navbar-brand {
   font-size: 1.8rem; }
@@ -7340,45 +7315,77 @@ p {
 
 @keyframes animate-line-1 {
   0% {
+    -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 0, 0) rotate(0deg);
     transform: translate3d(0, 0, 0) rotate(0deg); }
   50% {
-    transform: translate3d(0, 8.4px, 0) rotate(0); }
+    -webkit-transform: translate3d(0, 8.4px, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 8.4px, 0) rotate(0deg);
+    transform: translate3d(0, 8.4px, 0) rotate(0deg); }
   100% {
+    -webkit-transform: translate3d(0, 8.4px, 0) rotate(45deg);
+    -ms-transform: translate3d(0, 8.4px, 0) rotate(45deg);
     transform: translate3d(0, 8.4px, 0) rotate(45deg); } }
 @keyframes animate-line-2 {
   0% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
     transform: scale(1);
     opacity: 1; }
   100% {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
     transform: scale(0);
     opacity: 0; } }
 @keyframes animate-line-3 {
   0% {
+    -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 0, 0) rotate(0deg);
     transform: translate3d(0, 0, 0) rotate(0deg); }
   50% {
-    transform: translate3d(0, -8.4px, 0) rotate(0); }
+    -webkit-transform: translate3d(0, -8.4px, 0) rotate(0deg);
+    -ms-transform: translate3d(0, -8.4px, 0) rotate(0deg);
+    transform: translate3d(0, -8.4px, 0) rotate(0deg); }
   100% {
+    -webkit-transform: translate3d(0, -8.4px, 0) rotate(135deg);
+    -ms-transform: translate3d(0, -8.4px, 0) rotate(135deg);
     transform: translate3d(0, -8.4px, 0) rotate(135deg); } }
 @keyframes animate-line-1-rev {
   0% {
+    -webkit-transform: translate3d(0, 8.4px, 0) rotate(45deg);
+    -ms-transform: translate3d(0, 8.4px, 0) rotate(45deg);
     transform: translate3d(0, 8.4px, 0) rotate(45deg); }
   50% {
-    transform: translate3d(0, 8.4px, 0) rotate(0); }
+    -webkit-transform: translate3d(0, 8.4px, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 8.4px, 0) rotate(0deg);
+    transform: translate3d(0, 8.4px, 0) rotate(0deg); }
   100% {
+    -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 0, 0) rotate(0deg);
     transform: translate3d(0, 0, 0) rotate(0deg); } }
 @keyframes animate-line-2-rev {
   0% {
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
     transform: scale(0);
     opacity: 0; }
   100% {
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
     transform: scale(1);
     opacity: 1; } }
 @keyframes animate-line-3-rev {
   0% {
+    -webkit-transform: translate3d(0, -8.4px, 0) rotate(135deg);
+    -ms-transform: translate3d(0, -8.4px, 0) rotate(135deg);
     transform: translate3d(0, -8.4px, 0) rotate(135deg); }
   50% {
-    transform: translate3d(0, -8.4px, 0) rotate(0); }
+    -webkit-transform: translate3d(0, -8.4px, 0) rotate(0deg);
+    -ms-transform: translate3d(0, -8.4px, 0) rotate(0deg);
+    transform: translate3d(0, -8.4px, 0) rotate(0deg); }
   100% {
+    -webkit-transform: translate3d(0, 0, 0) rotate(0deg);
+    -ms-transform: translate3d(0, 0, 0) rotate(0deg);
     transform: translate3d(0, 0, 0) rotate(0deg); } }
 .nav-round-links {
   border-radius: 30px;
@@ -7390,6 +7397,33 @@ p {
   text-align: center; }
   .nav-round-links:hover {
     background-color: #838351; }
+
+html, body {
+  height: 100%; }
+
+html {
+  font-size: 16px; }
+
+body {
+  font-size: 62.5%;
+  /* 1em = 10px */ }
+
+h1, h2, h3 {
+  font-family: "Montserrat", sans-serif; }
+
+p {
+  font-size: 1.5em; }
+
+.clearfix {
+  clear: both; }
+
+.nounderline {
+  text-decoration: none !important; }
+
+@media only screen and (max-width: 376px) {
+  .row {
+    margin-left: 0px;
+    margin-right: 0px; } }
 
 /* */
 #page-wrapper {
@@ -7418,7 +7452,7 @@ p {
 
 .banner-1,
 .black-tint {
-  min-height: 700px; }
+  min-height: 750px; }
 
 .banner-1 {
   background-image: url("/img/beer-glasses-pouring.jpg"); }
@@ -7443,7 +7477,7 @@ p {
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   width: 100%;
-  padding: 80px 40px 0px;
+  padding: 60px 40px 0px;
   margin-left: 0;
   margin-right: 0;
   max-width: inherit; }
@@ -7554,7 +7588,7 @@ button:focus {
   min-height: 60px; }
 
 .login-container {
-  margin: 5em auto;
+  margin: 10em auto;
   width: 50%;
   max-width: 400px;
   background-color: #fff;

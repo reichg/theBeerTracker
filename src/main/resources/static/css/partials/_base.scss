@@ -30,7 +30,7 @@
   justify-content: space-around;
 }
 
-@mixin transform-rotate($rotate: 90) {
+@mixin transform-rotate($rotate: 0) {
   -webkit-transform: rotate($rotate + deg);
   -ms-transform: rotate($rotate + deg);
   transform: rotate($rotate + deg);
@@ -41,4 +41,16 @@
   -moz-transition: -moz-transform $ease + s ease;
   -o-transition: -o-transform $ease + s ease;
   transition: transform $ease + s ease;
+}
+
+@mixin transform-scale($scale: 1) {
+  -webkit-transform: scale($scale);
+  -ms-transform: scale($scale);
+  transform: scale($scale);
+}
+
+@mixin transform-translate3d_rotate($tx:0, $ty:0, $tz:0, $rotate:0) {
+  -webkit-transform: translate3d($tx, $ty, $tz) rotate($rotate + deg);
+  -ms-transform: translate3d($tx, $ty, $tz) rotate($rotate + deg);
+  transform: translate3d($tx, $ty, $tz) rotate($rotate + deg);
 }
