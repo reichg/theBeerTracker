@@ -87,7 +87,7 @@ public class User {
     public User(String hash, String userName) {
         this();
         this.hash = hash;
-        //this.matchHash = matchHash;
+        this.matchHash = null;
         this.userName = userName;
 
     }
@@ -111,11 +111,11 @@ public class User {
     public String getMatchHash() { return matchHash; }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.trim();
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.trim();
     }
 
     public void setHash(String hash) {
@@ -125,7 +125,7 @@ public class User {
     public void setMatchHash(String matchHash) { this.matchHash = matchHash; }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.userName = userName.trim();
     }
 
     public String getFirstName() {

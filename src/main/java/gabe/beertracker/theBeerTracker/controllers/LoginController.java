@@ -42,7 +42,7 @@ public class LoginController {
     public String processLogin(Model model, @RequestParam String userName, @RequestParam String password
       , @RequestParam Optional<String> myPosition , HttpServletRequest request)
     {
-        User retrievedUser = userDao.getUserByUsername(userName);
+        User retrievedUser = userDao.getUserByUsername(userName.trim());
         HttpSession session = request.getSession(false);    //the boolean doesn't auto create, but I can check if null then create session below
         if(session == null) {
             session = request.getSession();

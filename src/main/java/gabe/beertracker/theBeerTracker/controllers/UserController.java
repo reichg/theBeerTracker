@@ -80,25 +80,28 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, @RequestParam String userName, Model model, HttpServletRequest request) {
+    public String processRegister(@ModelAttribute @Valid User newUser, Errors errors, @RequestParam String userName, String hash, String matchHash, Model model, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
             return "register";
         }
 
-        User existingUser = userDao.getUserByUsername(userName);
+        User existingUser = userDao.getUserByUsername(userName.trim());
 
 
-        if (existingUser == null) {
+        if(!hash.equals(matchHash)) {
+            model.addAttribute("noHashMatch", hash);
+            model.addAttribute("noHashMatch", "Passwords do not match");
+        } else if (existingUser == null) {
             model.addAttribute("userName", userName);
             HttpSession session = request.getSession();   // the boolean makes it create a new one if it's missing
             session.setAttribute("loggedInUser", newUser); //should add the newUser to the session
-            //model.addAttribute("registerSuccess", "You have successfully registered, please login");
             userDao.save(newUser);
             return "redirect:/userhome";
+        } else {
+            model.addAttribute("existingUsername", "Great minds think alike, username already exists");
         }
 
-        model.addAttribute("existingUsername", "Great minds think alike, username already exists");
         return "register";
 
     }
@@ -108,7 +111,8 @@ public class UserController {
     public String displayHome(HttpServletRequest request, Model model, Beer beer) {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("loggedInUser") == null) {
-            session.invalidate();
+            System.out.println("No session or user");
+            System.out.println("session invalidated");
             return "redirect:/login";
         }
 

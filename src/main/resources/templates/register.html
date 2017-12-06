@@ -16,23 +16,44 @@
             <div class="form-group">
               <h2>New User</h2>
               <label th:for="userName">Username</label>
-              <input class="form-control" th:field="*{userName}" />
+              <input id="userName" name="userName" class="form-control" th:field="*{userName}" />
               <span th:errors="*{userName}" class="error"></span>
               <span th:text="${existingUsername}" class="error"></span>
             </div>
             <div class="form-group">
               <label th:for="hash">Password</label>
-              <input class="form-control" th:field="*{hash}" type="password" />
+              <input id="hash" name="hash" class="form-control" th:field="*{hash}" type="password" />
               <span th:errors="*{hash}" class="error"></span>
             </div>
-            <!--<div class="form-group">
-            <label th:for="matchHash">Verify Password</label>
-            <input class="form-control" th:field="*{matchHash}" />
-            <span th:errors="*{matchHash}" class="error"></span>
-            </div>-->
-
-          <input class="login-button" type="submit" value="Register" />
+            <div class="form-group">
+              <label th:for="matchHash">Verify Password</label>
+              <input id="matchHash" name="matchHash" class="form-control" th:field="*{matchHash}" type="password" />
+              <span th:errors="*{matchHash}" class="error"></span>
+              <span th:text="${noHashMatch}" class="error" id="errNoHashMatch"></span>
+            </div>
+            <input class="login-button" type="submit" value="Register" onclick="return validate(event)" />
           </form>
+          <script>
+            function validate(e) {
+              var hash = document.getElementById('hash').value;
+              var confirmHash = document.getElementById('matchHash').value;
+              var errMsg = "Passwords do not match",
+                  clearMsg = "";
+
+              document.querySelectorAll('.error').forEach(function(el) {
+                    el.textContent = clearMsg;
+              });
+           
+              if(hash != confirmHash){
+                  e.preventDefault();
+                  console.log('hello');
+                  document.getElementById('errNoHashMatch').textContent = errMsg;
+                  return false;
+              }
+              return true;
+            }
+
+          </script>
         </div><!--End login-container-->
       </div><!--End container-->
     </div><!--End bottle-background-->

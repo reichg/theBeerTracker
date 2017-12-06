@@ -52,10 +52,6 @@ p {
 
 .bottle-background {
     background: url("/img/beer-assortment.jpeg") no-repeat fixed center;
-    //background-image: url("/img/beer-assortment.jpeg");
-    //background-attachment: fixed;
-    //background-position: center;
-    //background-repeat: no-repeat;
     opacity: 0.4;
     min-height: 700px;
     background-size: cover;
@@ -211,17 +207,17 @@ h4.beer-points {
 }
 
 
+/* */
 
 
-
-.form-control {
-    color: #222629;
-
-    &:focus {
-        border-color: #FF0000;
-        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
-    }
-}
+//.form-control {
+//    color: #222629;
+//
+//    &:focus {
+//        border-color: #FF0000;
+//        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+//    }
+//}
 
 :focus {
     outline: none;
@@ -268,14 +264,10 @@ button:focus {
 
 .login-button {
     border: none;
-    //border-radius: 30px;
     border-radius: 6px;
     padding: 8px 30px;
     margin: 0.75rem .15rem 0rem;
-    //margin-left: .15rem;
-    //margin-right: .15rem;
     font-size: 1rem;
-    //min-width: 21rem;
     width: 100%;
     text-align: center;
     background-color: #aaa;

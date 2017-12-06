@@ -33,20 +33,20 @@
                 <table class="table" style="max-width: 400px">
                   <tr>
                     <th>Name</th>
-                    <th>Description</th>
                     <th>ABV</th>
+                    <!--<th>Description</th>-->
                   </tr>
 
                   <tr th:each="beer : ${searchResults}">
                     <td th:text="${beer.name}"></td>
-                    <td th:text="${beer.description}"></td>
+                    <!--<td th:text="${beer.description}"></td>-->
                     <td th:text="${beer.abv}"></td>
                   </tr>
                 </table>
               </section>
             </div>
 
-            <!--<div class ="row">-->
+            <!--<div class="row">-->
             <div class ="col-md-9">
               <h2 class="text-center">Check Out The Locations!</h2>
               <div id="map"></div>
